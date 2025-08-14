@@ -1,0 +1,3 @@
+Is a tile an object, is a level an object or is it contained in the scene?
+
+City building, TD tower, enemies, etc... 

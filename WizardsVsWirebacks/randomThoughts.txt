@@ -1,0 +1,18 @@
+
+/ -------------------------
+Camera mechanic in main city. 
+
+// APPROACH 1 - fucked it up last time in other project
+
+public class Camera
+
+	Matrix Follow(Rectangle target, Vector2 screenSize) 
+
+		return Matrix(-target) // Use matrix transform in spritebatch -> translation matrix on tilemap according to (reverse) player input.
+		// Or just do _spriteBatch.Begin(TranslationMatrix = -matrix)
+		//   - this is more elegant, but it might be better practice to try to only have one (or as little spritebatch begins and ends as possible)
+		//       -> Just apply translation on Tilemap (and gameobjects) draw vector?. Consider interaction with UI.
+	
+/ -------------------------
+
+Keyboard navigation of city? - mouse necessity?

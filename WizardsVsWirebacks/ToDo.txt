@@ -1,0 +1,25 @@
+1. UI Elements
+	
+	- Analyze current code-only gum approach in SlimeMaster game
+		- I don't like the code for it honestly. 
+		- Observe class patterns and so on.
+		- Look through Gum yt tutorial to see if the codegen would be a viable way of implementing the following. Tool seems powerful.
+			- First 3 videos are inner workings of gum components
+	Title screen
+	City tiles 
+		- City overview
+			- Hover on tile? - Difficulty
+			- Click on tile? - Level preview
+		- Right side column for buildings
+			- Drag and drop, right click for info window
+	Tower defense level per tile
+		- Transition
+		- Right side column for tiles. Similar drag and drop, info. 
+
+2. Functionality
+	
+	City building - secondary. Can leave and just focus on tower defense as a foundation? Or do both - doesn't matter
+		- Buildings, tiles (environment), 
+	Tower defense 
+		- Towers, path (waypoints), enemies, waves.
+		- Tilemaps

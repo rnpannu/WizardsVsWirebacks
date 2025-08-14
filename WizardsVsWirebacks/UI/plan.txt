@@ -1,0 +1,21 @@
+Figure out codegen
+
+Do we need 1:1 UI classes corresponding to each scene?
+
+What component / object classes are created
+
+
+// --- GUM studying ---
+
+First chapter (Intro tutorials) gives good understanding of gum elements, components, and screens
+
+Gum project needs to be in Content folder
+	- Set output of files to "Copy if newer". [DONE]
+	- 	<ItemGroup>
+		<None Update="Content\GumProject\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		</ItemGroup>
+
+Gum generates a folder called "Screens" - find out how we will make this interact with our scene implementation - as it is part of the graphics library
+

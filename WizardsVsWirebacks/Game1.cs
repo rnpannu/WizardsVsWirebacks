@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-//using Microsoft.Xna.Framework.Graphics;
-//using Microsoft.Xna.Framework.Input;
-//using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using Gum.Wireframe;
 using GumRuntime;
 using MonoGameGum;
 using MonoGameLibrary;
 //using WizardsVsWirebacks.Screens;
-//using MonoGameGum.Forms.Controls;
+using MonoGameGum.Forms.Controls;
 
 // TODO: Scene management, UI management, tile drag and drop
 namespace WizardsVsWirebacks
@@ -91,15 +91,15 @@ namespace WizardsVsWirebacks
             //_themeSong = Content.Load<Song>("audio/theme");
         }
 
-        //protected override void Update(GameTime gameTime)
-        //{
-        //    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-        //        Exit();
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
 
-        //    // TODO: Add your update logic here
+            // TODO: Add your update logic here
 
-        //    base.Update(gameTime);
-        //}
+            base.Update(gameTime);
+        }
 
         //protected override void Draw(GameTime gameTime)
         //{

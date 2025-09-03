@@ -1,0 +1,33 @@
+
+
+Basically UI is gonna be a whole fuckin university course.
+	- Start with the basics can flesh them out later
+		- So far I'm attempting to link the code from the snake tutorial with the code generated from the project (with and without .gumx project linked)
+		- Going to ask around in the Monogame discord for more advanced resources / examples of project source code
+
+
+/ -------------------------
+Camera mechanic in main city. 
+
+// APPROACH 1 - fucked it up last time in other project
+
+public class Camera
+
+	Matrix Follow(Rectangle target, Vector2 screenSize) 
+
+		return Matrix(-target) // Use matrix transform in spritebatch -> translation matrix on tilemap according to (reverse) player input.
+		// Or just do _spriteBatch.Begin(TranslationMatrix = -matrix)
+		//   - this is more elegant, but it might be better practice to try to only have one (or as little spritebatch begins and ends as possible)
+		//       -> Just apply translation on Tilemap (and gameobjects) draw vector?. Consider interaction with UI.
+	
+/ -------------------------
+
+Keyboard navigation of city? - mouse necessity?
+
+ToDo:
+
+	- Try to have a building project with a working rudimentary title screen and city screen and associated scene classes. Can view city with basic tilemap layout
+	- Figure out event handling to process screen transitions + work with tilemap.
+
+Later on:
+	- Dragging and dropping buildings, towers etc....

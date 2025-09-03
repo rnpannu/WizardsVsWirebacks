@@ -1,0 +1,57 @@
+
+
+/ ----------------- OLD --------------
+
+1. UI Elements
+	//
+	- Analyze current code-only gum approach in SlimeMaster game
+		- I don't like the code for it honestly. 
+		- Observe class patterns and so on.
+		- Look through Gum yt tutorial to see if the codegen would be a viable way of implementing the following. Tool seems powerful.
+			- First 3 videos are inner workings of gum components
+
+		
+	Title screen
+	City tiles 
+		- City overview
+			- Hover on tile? - Difficulty
+			- Click on tile? - Level preview
+		- Right side column for buildings
+			- Drag and drop, right click for info window
+	Tower defense level per tile
+		- Transition
+		- Right side column for tiles. Similar drag and drop, info. 
+
+2. Functionality
+	
+	City building - secondary. Can leave and just focus on tower defense as a foundation? Or do both - doesn't matter
+		- Buildings, tiles (environment), 
+	Tower defense 
+		- Towers, path (waypoints), enemies, waves.
+		- Tilemaps
+
+/ ----------------- OLD --------------
+
+/ ----------------- 09/02 --------------
+
+1. City Scene
+
+	Want to use LDtk's "super simple export" as a basic image editor -> json/xml pipeline. Minimal complex tool integration & fiddling.
+		- Have to write parser for json files
+			- Review current approach with Ryan, manual texture atlas definition and tilemap creation might be a little rudimentary
+		
+		Currently from what I can see the super simple export exports a png per layer, a csv for intgrid layers, and a json file with level info and entity behaviour(waypoints). 
+			- How do we handle the tile based city format; placing buildings that snap to 16x16 tiles.   
+			- Save and load system that interacts with the intgrid? - Could be on to something
+
+ADVANCED
+	- How to handle drawing walls on the perimeter of a captured city tile collection.
+
+
+	- Monkey city is very barebones with its city building. The only differening tiles are water vs land. Mountain tiles are converted into basic city and so on. 
+	  A lot of the city building content revolves around pvp monkey v monkey. Since we're not doing that what are some ways we can introduce engaging systems in
+	  the city 
+
+
+
+

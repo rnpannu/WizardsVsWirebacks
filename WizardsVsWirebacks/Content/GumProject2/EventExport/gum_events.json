@@ -1,0 +1,1462 @@
+{
+  "UserEvents": {
+    "12e91d9e1b76dc9ad431a02b197f8a2322f8cdd948307762034fd9e851c757d9": [
+      {
+        "NewName": "Buttons/TitleScreenButton (Container).SpriteInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T16:53:02.6965883Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenNineSliceButton",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-15T16:58:23.5684108Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenNineSliceButton (Container).NineSliceInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T16:58:27.5222374Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "Buttons/TitleScreenNineSliceButton (Container).NineSlice NineSliceInstance in Buttons/TitleScreenNineSliceButton (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T16:59:51.1853481Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenNineSliceButton (Container).NineSliceInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:00:35.9399771Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "Buttons/TitleScreenNineSliceButton (Container).NineSlice NineSliceInstance in Buttons/TitleScreenNineSliceButton (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:02:24.9861566Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenNineSliceButton (Container).NineSliceInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:02:47.6134815Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenBoxInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:05:00.7854647Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenButtonInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:05:10.7804658Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenButtonInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:05:12.9190488Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenButton (Container).SpriteInstance1",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:12:45.661092Z"
+      },
+      {
+        "NewName": "TitleScreen.SpriteInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:13:22.322139Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "Buttons/TitleScreenButton (Container).Sprite SpriteInstance1 in Buttons/TitleScreenButton (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:13:25.9162784Z"
+      },
+      {
+        "NewName": "TitleScreen.SpriteInstance2",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:16:52.3959176Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenBoxInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:28:08.7238694Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenButton (Container).SpriteInstance1",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:42:06.8962381Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Sprite SpriteInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:42:54.4899175Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenButtonCopy",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-15T17:43:15.2573923Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "Buttons/TitleScreenButtonCopy",
+        "ElementType": "Components",
+        "EventType": 1,
+        "TimestampUtc": "2025-08-15T17:43:29.6544323Z"
+      },
+      {
+        "NewName": "Buttons/TitleScreenButton1",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-15T17:43:37.4870762Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenButton1Instance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:44:12.8880948Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Buttons/TitleScreenButton TitleScreenButtonInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:44:41.0527809Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenButton1Instance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:44:48.2279637Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Sprite SpriteInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:47:51.5584292Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Sprite SpriteInstance2 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:47:55.4318968Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Buttons/TitleScreenButton TitleScreenButtonInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:48:16.9313173Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenButton1Instance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:48:22.0181488Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Buttons/TitleScreenButton TitleScreenButtonInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T17:49:31.8674004Z"
+      },
+      {
+        "NewName": "Text/TitleText",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-15T17:50:27.586679Z"
+      },
+      {
+        "NewName": "Text/TitleText (Container).TextInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T17:50:34.2788534Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "Text/TitleText (Container).Text TextInstance in Text/TitleText (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T18:11:27.9451774Z"
+      },
+      {
+        "NewName": "Text/TitleText (Container).TextInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T18:11:31.8552357Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleTextInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-15T18:17:07.8558191Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Nineslices/TitleScreenBox TitleScreenBoxInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-15T18:17:10.5355533Z"
+      },
+      {
+        "NewName": "step1",
+        "OldName": "1",
+        "ElementType": "Components",
+        "EventType": 3,
+        "TimestampUtc": "2025-08-15T18:23:43.7717102Z"
+      },
+      {
+        "NewName": "step2",
+        "OldName": "2",
+        "ElementType": "Components",
+        "EventType": 3,
+        "TimestampUtc": "2025-08-15T18:23:51.6389319Z"
+      },
+      {
+        "NewName": "step3",
+        "OldName": "3",
+        "ElementType": "Components",
+        "EventType": 3,
+        "TimestampUtc": "2025-08-15T18:23:58.5441055Z"
+      },
+      {
+        "NewName": "step4",
+        "OldName": "4",
+        "ElementType": "Components",
+        "EventType": 3,
+        "TimestampUtc": "2025-08-15T18:24:03.9853898Z"
+      },
+      {
+        "NewName": "step5",
+        "OldName": "5",
+        "ElementType": "Components",
+        "EventType": 3,
+        "TimestampUtc": "2025-08-15T18:24:10.7093699Z"
+      },
+      {
+        "NewName": "step6",
+        "OldName": "6",
+        "ElementType": "Components",
+        "EventType": 3,
+        "TimestampUtc": "2025-08-15T18:24:15.6888227Z"
+      },
+      {
+        "NewName": "TitleScreen",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-28T15:36:00.7466602Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T15:36:19.1385066Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonStandardInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T15:36:50.0254698Z"
+      },
+      {
+        "NewName": "TitleScreen.StackPanelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T16:21:38.6069987Z"
+      },
+      {
+        "NewName": "TitleScreen.LabelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T16:22:36.8042124Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonStandard ButtonStandardInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T17:14:27.1102098Z"
+      },
+      {
+        "NewName": "CityScreen",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-28T17:15:02.0712577Z"
+      },
+      {
+        "NewName": "CityScreen.StackPanelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T17:15:34.9402543Z"
+      },
+      {
+        "NewName": "CityScreen.LabelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T17:15:35.0502279Z"
+      },
+      {
+        "NewName": "CityScreen.ButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T17:15:40.9701837Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 1,
+        "TimestampUtc": "2025-08-28T17:36:21.3677798Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "CityScreen",
+        "ElementType": "Screens",
+        "EventType": 1,
+        "TimestampUtc": "2025-08-28T17:40:54.0282509Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonStandardInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T17:42:02.7896034Z"
+      },
+      {
+        "NewName": "TitleScreen",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-28T19:00:49.8970388Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:01:34.9395056Z"
+      },
+      {
+        "NewName": "CityScreen",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-28T19:04:33.6555371Z"
+      },
+      {
+        "NewName": "CityScreen.ButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:04:36.933099Z"
+      },
+      {
+        "NewName": "TitleScreen.PanelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:09:10.3216439Z"
+      },
+      {
+        "NewName": "TitleScreen.MenuInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:09:53.3790864Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Panel PanelInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:09:59.0669273Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Menu MenuInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:10:18.7621013Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/Menu",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-28T19:11:07.4987821Z"
+      },
+      {
+        "NewName": "CityScreen.MenuInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:16:10.2669998Z"
+      },
+      {
+        "NewName": "CityScreen.ButtonStandardInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:18:07.9182449Z"
+      },
+      {
+        "NewName": "TitleScreen.MenuInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:18:43.0217719Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonStandard ButtonStandardInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:18:55.6712098Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:18:57.6277164Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonStandardInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:19:00.4263956Z"
+      },
+      {
+        "NewName": "TitleScreen.LabelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:20:05.9984768Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/TitleMenu",
+        "OldName": "WizardsVsWirebacks/Menu",
+        "ElementType": "Components",
+        "EventType": 2,
+        "TimestampUtc": "2025-08-28T19:22:00.5159799Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleMenuInstance",
+        "OldName": "TitleScreen.MenuInstance",
+        "ElementType": "Screens",
+        "EventType": 7,
+        "TimestampUtc": "2025-08-28T19:22:19.9801042Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Label LabelInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:25:41.0835647Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.WizardsVsWirebacks/TitleMenu TitleMenuInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:26:01.5293976Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleMenuInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:26:52.4855053Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonStandard ButtonStandardInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:27:02.5577464Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonStandard ButtonStandardInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:27:05.0082254Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/ButtonStandard",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-28T19:29:17.8378726Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/TitleButtonStandard",
+        "OldName": "WizardsVsWirebacks/ButtonStandard",
+        "ElementType": "Components",
+        "EventType": 2,
+        "TimestampUtc": "2025-08-28T19:29:29.2095029Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/TitleMenu (Container).TitleButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:29:56.8795669Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "CityScreen.WizardsVsWirebacks/TitleMenu MenuInstance in CityScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:30:38.6902894Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "CityScreen.Controls/ButtonStandard ButtonStandardInstance in CityScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:30:38.8449685Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "CityScreen.Controls/ButtonStandard ButtonStandardInstance1 in CityScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:30:38.8545643Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "WizardsVsWirebacks/TitleMenu (Container).WizardsVsWirebacks/TitleButtonStandard TitleButtonStandardInstance in WizardsVsWirebacks/TitleMenu (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:31:50.4215952Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:31:54.3564214Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonContainer",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:36:05.3865282Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonContainer",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:47:42.2676013Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonConfirmInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:47:42.4324648Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonDenyInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:47:42.5266553Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/TitleButtonStandard (Container).Background1",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:49:50.4639151Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "WizardsVsWirebacks/TitleButtonStandard (Container).Text TextInstance in WizardsVsWirebacks/TitleButtonStandard (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:50:53.6512112Z"
+      },
+      {
+        "NewName": "DemoScreenGum.TitleButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:51:09.5986507Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleButtonStandardInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:51:14.8518895Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.WizardsVsWirebacks/TitleButtonStandard TitleButtonStandardInstance in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:52:20.8517113Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.WizardsVsWirebacks/TitleButtonStandard TitleButtonStandardInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:53:31.9972034Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleButtonStandardInstance",
+        "OldName": "TitleScreen.TitleButtonStandardInstance1",
+        "ElementType": "Screens",
+        "EventType": 7,
+        "TimestampUtc": "2025-08-28T19:53:48.7875251Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Container ButtonContainer in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:57:00.915444Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonConfirm ButtonConfirmInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:57:01.0710936Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonDeny ButtonDenyInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:57:01.0829148Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.WizardsVsWirebacks/TitleButtonStandard TitleButtonStandardInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T19:57:01.0974553Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonContainer",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:57:04.1636773Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonContainer",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:57:17.2053211Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonConfirmInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:57:17.2943924Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonDenyInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:57:17.381081Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonContainer",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:57:25.1210673Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonConfirmInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:57:25.2300853Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonDenyInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:57:25.3533996Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleButtonStandardInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T19:58:05.7768307Z"
+      },
+      {
+        "NewName": "TitleScreen.DemoSettingsMenu",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:02:47.372602Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.WizardsVsWirebacks/TitleMenu TitleMenuInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:02:56.4801986Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonConfirm ButtonConfirmInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:02:56.5847117Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonDeny ButtonDenyInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:02:56.6404949Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Container ButtonContainer in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:02:56.6533138Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Container DemoSettingsMenu in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:07.4200098Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.NineSlice Background in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:07.658462Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Container MenuTitle in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:07.7501322Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Container MenuItems in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:07.8262381Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Text TitleText in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:07.9060104Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Elements/DividerHorizontal DividerInstance in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:07.9844131Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/Label ResolutionLabel in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.0578181Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/ListBox ResolutionBox in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.1303205Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/ButtonStandard DetectResolutionsButton in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.2177157Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/CheckBox FullScreenCheckbox in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.2833824Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Elements/DividerHorizontal DividerInstance1 in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.3642871Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/Label MusicLabel in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.45007Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/Slider MusicSlider in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.5263926Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/Label SoundLabel in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.590285Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/Slider SoundSlider in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.6701854Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Elements/DividerHorizontal DividerInstance2 in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.7421433Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/Label ControlLabel in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.8075943Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/RadioButton RadioButtonInstance in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.8766138Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/RadioButton RadioButtonInstance1 in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:08.9504205Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/RadioButton RadioButtonInstance2 in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:09.0084609Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Elements/DividerHorizontal DividerInstance3 in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:09.0751611Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/Label DifficultyLabel in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:09.1328633Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/ComboBox ComboBoxInstance in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:09.1973958Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Container ButtonContainer in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:09.2636268Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/ButtonConfirm ButtonConfirmInstance in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:09.3213695Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "DemoScreenGum.Controls/ButtonDeny ButtonDenyInstance in DemoScreenGum",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:09.3732087Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Container DemoSettingsMenu in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:03:15.3440852Z"
+      },
+      {
+        "NewName": "TitleScreen.DemoSettingsMenu",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:17.7947777Z"
+      },
+      {
+        "NewName": "TitleScreen.Background",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:17.8935957Z"
+      },
+      {
+        "NewName": "TitleScreen.MenuTitle",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.0394777Z"
+      },
+      {
+        "NewName": "TitleScreen.MenuItems",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.1618879Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleText",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.2450695Z"
+      },
+      {
+        "NewName": "TitleScreen.DividerInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.326495Z"
+      },
+      {
+        "NewName": "TitleScreen.ResolutionLabel",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.4103145Z"
+      },
+      {
+        "NewName": "TitleScreen.ResolutionBox",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.5322033Z"
+      },
+      {
+        "NewName": "TitleScreen.DetectResolutionsButton",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.6324696Z"
+      },
+      {
+        "NewName": "TitleScreen.FullScreenCheckbox",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:18.8632481Z"
+      },
+      {
+        "NewName": "TitleScreen.DividerInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.0217657Z"
+      },
+      {
+        "NewName": "TitleScreen.MusicLabel",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.1619883Z"
+      },
+      {
+        "NewName": "TitleScreen.MusicSlider",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.252655Z"
+      },
+      {
+        "NewName": "TitleScreen.SoundLabel",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.3824809Z"
+      },
+      {
+        "NewName": "TitleScreen.SoundSlider",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.5201018Z"
+      },
+      {
+        "NewName": "TitleScreen.DividerInstance2",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.6061524Z"
+      },
+      {
+        "NewName": "TitleScreen.ControlLabel",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.7051423Z"
+      },
+      {
+        "NewName": "TitleScreen.RadioButtonInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.8809768Z"
+      },
+      {
+        "NewName": "TitleScreen.RadioButtonInstance1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:19.9875322Z"
+      },
+      {
+        "NewName": "TitleScreen.RadioButtonInstance2",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:20.1848977Z"
+      },
+      {
+        "NewName": "TitleScreen.DividerInstance3",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:20.3280816Z"
+      },
+      {
+        "NewName": "TitleScreen.DifficultyLabel",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:20.4422345Z"
+      },
+      {
+        "NewName": "TitleScreen.ComboBoxInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:20.5586143Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonContainer",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:20.6589348Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonConfirmInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:20.7681143Z"
+      },
+      {
+        "NewName": "TitleScreen.ButtonDenyInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-28T20:03:20.8652433Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Container MenuTitle in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:46.6497168Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Container MenuItems in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:46.6814775Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Text TitleText in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:46.812311Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Elements/DividerHorizontal DividerInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:46.8453706Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Label ResolutionLabel in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:46.9270063Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ListBox ResolutionBox in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:46.9518302Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonStandard DetectResolutionsButton in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:46.9898251Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/CheckBox FullScreenCheckbox in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.0273463Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Elements/DividerHorizontal DividerInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.0524005Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Label MusicLabel in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.0898982Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Slider MusicSlider in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.1110193Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Label SoundLabel in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.1608384Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Slider SoundSlider in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.2316002Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Elements/DividerHorizontal DividerInstance2 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.2601676Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Label ControlLabel in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.2768765Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/RadioButton RadioButtonInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.3099861Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/RadioButton RadioButtonInstance1 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.3297748Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/RadioButton RadioButtonInstance2 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.3532386Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Elements/DividerHorizontal DividerInstance3 in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.3697833Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Label DifficultyLabel in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.3896878Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ComboBox ComboBoxInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.4099464Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Container ButtonContainer in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.4298973Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonConfirm ButtonConfirmInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.4433805Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonDeny ButtonDenyInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-28T20:06:47.5022055Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonConfirm ButtonConfirmInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-29T16:31:10.8168587Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ButtonDeny ButtonDenyInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-29T16:31:14.5870159Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/TitleButtonStandard1",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-29T16:31:36.0680679Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleButtonStandard1Instance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T16:33:20.8960931Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/Label",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-29T16:50:27.1154562Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/TitleMenu (Container).LabelInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T16:50:34.225984Z"
+      },
+      {
+        "NewName": "TitleScreen.LabelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T16:50:44.1998536Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "WizardsVsWirebacks/Label",
+        "ElementType": "Components",
+        "EventType": 1,
+        "TimestampUtc": "2025-08-29T16:51:56.4531709Z"
+      },
+      {
+        "NewName": "TitleScreen.ScrollViewerInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T16:55:34.9602332Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ScrollViewer ScrollViewerInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-29T16:55:53.9384171Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/Label",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-08-29T16:58:15.9088315Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/TitleScreenLabel",
+        "OldName": "WizardsVsWirebacks/Label",
+        "ElementType": "Components",
+        "EventType": 2,
+        "TimestampUtc": "2025-08-29T16:58:29.2415917Z"
+      },
+      {
+        "NewName": "TitleScreen.TitleScreenLabelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T16:58:54.4633106Z"
+      },
+      {
+        "NewName": "TitleScreen.StackPanelInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T17:00:03.5329387Z"
+      },
+      {
+        "NewName": "TitleScreen.ComboBoxInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T17:00:31.5891509Z"
+      },
+      {
+        "NewName": "TitleScreen.TextInstance",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2025-08-29T17:00:56.4981097Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/ComboBox ComboBoxInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-29T17:01:03.3797012Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.Controls/Label LabelInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-29T17:01:14.7101499Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "TitleScreen.WizardsVsWirebacks/TitleScreenLabel TitleScreenLabelInstance in TitleScreen",
+        "ElementType": "Screens",
+        "EventType": 6,
+        "TimestampUtc": "2025-08-29T17:01:17.661708Z"
+      }
+    ]
+  }
+}

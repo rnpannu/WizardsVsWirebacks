@@ -25,12 +25,11 @@ namespace WizardsVsWirebacks
 
         public static GraphicalUiElement Root;
 
-        public static int CityWidth { get; set; }
-        public static int CityHeight { get; set; }
-        public static int CityTileSize { get; set; }
+
+
         public GameManager() : base("Wizards vs Wirebacks", 1280, 720, false)
         {
-
+            
         }
         public void InitializeGum()
         {
@@ -41,8 +40,6 @@ namespace WizardsVsWirebacks
 
             
             base.Initialize();
-
-
 
         }
 

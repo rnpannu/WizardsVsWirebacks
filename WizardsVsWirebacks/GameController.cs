@@ -14,27 +14,50 @@ public static class GameController
 
     public static bool MoveUp()
     {
-        return s_keyboard.WasKeyJustPressed(Keys.Up) ||
-            s_keyboard.WasKeyJustPressed(Keys.W);
+        return s_keyboard.IsKeyDown(Keys.Up) ||
+            s_keyboard.IsKeyDown(Keys.W);
     }
 
     public static bool MoveDown()
     {
-        return s_keyboard.WasKeyJustPressed(Keys.Down) ||
-            s_keyboard.WasKeyJustPressed(Keys.S);
+        return s_keyboard.IsKeyDown(Keys.Down) ||
+            s_keyboard.IsKeyDown(Keys.S);
     }
 
     public static bool MoveLeft()
     {
-        return s_keyboard.WasKeyJustPressed(Keys.Left) ||
-               s_keyboard.WasKeyJustPressed(Keys.A);
+        return s_keyboard.IsKeyDown(Keys.Left) ||
+               s_keyboard.IsKeyDown(Keys.A);
     }
 
     public static bool MoveRight()
     {
-        return s_keyboard.WasKeyJustPressed(Keys.Right) ||
-               s_keyboard.WasKeyJustPressed(Keys.D);
+        return s_keyboard.IsKeyDown(Keys.Right) ||
+               s_keyboard.IsKeyDown(Keys.D);
     }
+    //public static bool MoveUp()
+    //{
+    //    return s_keyboard.WasKeyJustPressed(Keys.Up) ||
+    //        s_keyboard.WasKeyJustPressed(Keys.W);
+    //}
+
+    //public static bool MoveDown()
+    //{
+    //    return s_keyboard.WasKeyJustPressed(Keys.Down) ||
+    //        s_keyboard.WasKeyJustPressed(Keys.S);
+    //}
+
+    //public static bool MoveLeft()
+    //{
+    //    return s_keyboard.WasKeyJustPressed(Keys.Left) ||
+    //           s_keyboard.WasKeyJustPressed(Keys.A);
+    //}
+
+    //public static bool MoveRight()
+    //{
+    //    return s_keyboard.WasKeyJustPressed(Keys.Right) ||
+    //           s_keyboard.WasKeyJustPressed(Keys.D);
+    //}
 
     public static bool Pause()
     {
@@ -46,6 +69,14 @@ public static class GameController
         return s_keyboard.WasKeyJustPressed(Keys.Enter);
     }
 
+    public static bool ZoomIn()
+    {
+        return s_mouse.ScrollWheelDelta > 0;
+    }
+    public static bool ZoomOut()
+    {
+        return s_mouse.ScrollWheelDelta < 0;
+    }
     public static Point MousePosition()
     {
         return s_mouse.Position;

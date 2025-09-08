@@ -28,6 +28,11 @@ public static class CityInputManager
         {
             _cameraDirection.Normalize();
         }
+
+        if (GameController.ZoomIn())
+        {
+            //CityScale.
+        }
     }
 
 

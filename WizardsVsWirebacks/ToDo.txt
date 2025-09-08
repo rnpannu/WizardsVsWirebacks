@@ -1,9 +1,21 @@
+/ ---------------- 09 / 08 ------------
+	
+	Texture swapping. Fully combining everything into one atlas and draw call is likely impractical. 
+	However I do think we should optimize our texture swapping a little bit into a few dedicated calls:
+		1 backgrounds
+		2 objects
+		3 UI
+
+	How to apply camera translation to cursor tile finding logic 
+	How do we apply camera translation to background and game objects, but not UI?
+
 / ---------------- 09 / 05 ------------
 
-	- Camera system - zoom into city?
+	- Camera system - zoom into city? - DONE (more or less, should later add camera smoothing to make it feel less locked - also because lerping is very cool and we should learn how to do it)
 	- Drag and drop UI stack panel
 	- Towers! - UML time?
-	- 
+	- Implement proper logging system
+		- Similar to old project: https://youtu.be/l9e8PJskYnI?si=7KzSJYUQdqGg416U
 
 
 / ---------------- 09 / 04 -------------
@@ -30,11 +42,9 @@
 		Currently from what I can see the super simple export exports a png per layer, a csv for intgrid layers, and a json file with level info and entity behaviour(waypoints). 
 			- How do we handle the tile based city format; placing buildings that snap to 16x16 tiles.   
 			- Save and load system that interacts with the intgrid? - Could be on to something
+			- How to handle drawing walls on the perimeter of a captured city tile collection.
 
 ADVANCED
-	- How to handle drawing walls on the perimeter of a captured city tile collection.
-
-
 	- Monkey city is very barebones with its city building. The only differening tiles are water vs land. Mountain tiles are converted into basic city and so on. 
 	  A lot of the city building content revolves around pvp monkey v monkey. Since we're not doing that what are some ways we can introduce engaging systems in
 	  the city 

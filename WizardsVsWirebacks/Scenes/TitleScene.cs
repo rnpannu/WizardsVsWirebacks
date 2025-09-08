@@ -60,6 +60,7 @@ public class TitleScene : Scene
             Core.ChangeScene(new CityScene());
         }
 
+        // Scrolling background
         float offset = _scrollSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         _backgroundOffset.X -= offset;
         _backgroundOffset.Y -= offset;

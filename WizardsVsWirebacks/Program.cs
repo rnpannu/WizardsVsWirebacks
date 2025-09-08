@@ -1,2 +1,2 @@
-﻿using var game = new WizardsVsWirebacks.Game1();
+﻿using var game = new WizardsVsWirebacks.GameManager();
 game.Run();

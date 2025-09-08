@@ -12,19 +12,23 @@ using WizardsVsWirebacks.Screens;
 using WizardsVsWirebacks.Scenes;
 using System;
 
+// THIS IS THE GAME 1 CLASS
+
+
 // TODO: Scene management, UI management, tile drag and drop
 namespace WizardsVsWirebacks
 {
-    public class Game1 : Core
+    public class GameManager : Core
     {
-        // Setup documentation FLAG: S
+
         GumService GumUI => GumService.Default;
 
-        // Codegen Video FLAG: C
         public static GraphicalUiElement Root;
 
-
-        public Game1() : base("Wizards vs Wirebacks", 1280, 720, false)
+        public static int CityWidth { get; set; }
+        public static int CityHeight { get; set; }
+        public static int CityTileSize { get; set; }
+        public GameManager() : base("Wizards vs Wirebacks", 1280, 720, false)
         {
 
         }
@@ -56,35 +60,13 @@ namespace WizardsVsWirebacks
             ChangeScene(new TitleScene());
         }
 
+
+
         protected override void LoadContent()
         {
 
             //_themeSong = Content.Load<Song>("audio/theme");
         }
-
-        //public void UpdateUI(GameTime gameTime)
-        //{
-        //    //S
-        //    GumUI.Update(gameTime);
-
-        //    //C
-        //    // Global MonoGameGum update - background processes
-        //    //GumService.Default.Update(this, gameTime);
-
-        //    // To create a common method on both "Screen" classes we create an interface and then each screen
-        //    // implements the interface (MonogameGumScreen) which allows a polymorphic update call
-        //    // This is where we put our logic for the keypresses in the screen to keep the logic in there. (strategy pattern)
-        //    //var convertedRoot = (IMonoGameGumScreen)Root;
-        //    //convertedRoot.Update(gameTime);
-        //}
-        //protected override void Update(GameTime gameTime)
-        //{
-        //    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-        //        Exit();
-
-        //    // TODO: Add your update logic here
-        //    UpdateUI(gameTime);
-        //    base.Update(gameTime);
         }
 
 

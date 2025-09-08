@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <RollForward>Major</RollForward>
     <PublishReadyToRun>false</PublishReadyToRun>
@@ -40,6 +40,7 @@
 	</ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\" />
+    <Folder Include="Content\Tilemaps\" />
     <Folder Include="GameObjects\" />
     <Folder Include="UI\" />
   </ItemGroup>

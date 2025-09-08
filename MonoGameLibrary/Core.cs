@@ -37,6 +37,14 @@ public class Core : Game
     public static bool ExitOnEscape { get; set; }
 
     public static AudioController Audio { get; private set; }
+
+    public static int Width { get; private set; }
+    public static int Height { get; private set; }
+
+    public static bool Vsync { get; private set; } = true;
+
+    public static float DT, FPS;
+
     /// <summary>
     /// Creates a new Core instance.
     /// </summary>
@@ -56,7 +64,10 @@ public class Core : Game
         Graphics = new GraphicsDeviceManager(this);
 
         Graphics.PreferredBackBufferWidth = width;
+        Width = width;
         Graphics.PreferredBackBufferHeight = height;
+        Height = height;
+        Graphics.SynchronizeWithVerticalRetrace = Vsync;
         Graphics.IsFullScreen = fullScreen;
         Graphics.ApplyChanges();
 
@@ -92,6 +103,9 @@ public class Core : Game
     }
     protected override void Update(GameTime gameTime)
     {
+        DT = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        FPS = (float)(1 / DT);
+
         Input.Update(gameTime);
 
         Audio.Update();
@@ -99,6 +113,7 @@ public class Core : Game
         {
             Exit();
         }
+
 
         if(s_nextScene != null)
         {

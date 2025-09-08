@@ -1,3 +1,15 @@
+// ------------------- 09/04 --------------------------
+
+Navigation - global world scale for zoom with scroll wheel?
+	- Maybe boot up monkey city web to see how it functions
+		-  ive only played the mobile game so idk how it would look on the desktop
+	- How to highlight current city block
+
+
+	- Stack panel on right side for towers, drag and drop 
+		- Eligibility check 
+
+	- Ui on click associated with each tile? maybe instead a 
 
 
 Basically UI is gonna be a whole fuckin university course.
@@ -31,3 +43,56 @@ ToDo:
 
 Later on:
 	- Dragging and dropping buildings, towers etc....
+
+
+
+
+
+
+
+
+
+
+{
+    public static class Drawing
+    {
+        public static GraphicsDeviceManager graphics;
+        public static SpriteBatch spriteBatch;
+
+
+        public static int width { get; private set; }
+        public static int height { get; private set; }
+
+        public static string title = "Monogame Test Project";
+
+        public static bool vsych { get; private set; } = true;
+
+        public static float dt, fps;
+
+        //dummy texture
+        public static Texture2D rect;
+
+        public static void Initialize(Game1 g)
+        {
+            width = 1280;
+            height = 720;
+            graphics = new GraphicsDeviceManager(g);
+            graphics.PreferredBackBufferWidth = width;
+            graphics.PreferredBackBufferHeight = height;
+            graphics.SynchronizeWithVerticalRetrace = vsych;
+            graphics.ApplyChanges();
+
+            spriteBatch = new SpriteBatch(g.GraphicsDevice);
+
+
+        }
+
+        public static void Update(GameTime gameTime, Game1 g)
+        {
+            dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            fps = (float) (1 / dt);
+        }
+    }
+
+
+}

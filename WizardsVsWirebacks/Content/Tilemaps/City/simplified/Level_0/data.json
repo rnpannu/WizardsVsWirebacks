@@ -1,0 +1,16 @@
+{
+	"identifier": "Level_0",
+	"uniqueIdentifer": "c246a260-8560-11f0-bc1b-310c0f44ebee",
+	"x": 0,
+	"y": 0,
+	"width": 1280,
+	"height": 720,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"Background.png",
+		"City.png"
+	],
+	"entities" : {}
+}

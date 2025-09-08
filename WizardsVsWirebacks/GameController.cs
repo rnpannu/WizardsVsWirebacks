@@ -9,6 +9,9 @@ namespace WizardsVsWirebacks;
 public static class GameController
 {
     private static KeyboardInfo s_keyboard => Core.Input.Keyboard;
+
+    private static MouseInfo s_mouse => Core.Input.Mouse;
+
     public static bool MoveUp()
     {
         return s_keyboard.WasKeyJustPressed(Keys.Up) ||
@@ -41,6 +44,11 @@ public static class GameController
     public static bool Action()
     {
         return s_keyboard.WasKeyJustPressed(Keys.Enter);
+    }
+
+    public static Point MousePosition()
+    {
+        return s_mouse.Position;
     }
 }
 

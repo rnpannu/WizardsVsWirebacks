@@ -7,6 +7,7 @@ using MonoGameLibrary;
 using RenderingLibrary.Graphics;
 using System;
 using System.Linq;
+using WizardsVsWirebacks.Scenes;
 
 namespace WizardsVsWirebacks.Screens
 {
@@ -19,6 +20,7 @@ namespace WizardsVsWirebacks.Screens
                 GumService.Default.Root.Children.Clear();
                 var screen = new CityScreen();
                 screen.AddToRoot();
+                Core.ChangeScene(new CityScene());
             };
 
             TitleButtonStandard1Instance.Click += (_, _) =>

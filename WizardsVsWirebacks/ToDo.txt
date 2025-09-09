@@ -9,6 +9,9 @@
 	How to apply camera translation to cursor tile finding logic 
 	How do we apply camera translation to background and game objects, but not UI?
 
+	Other things to do:
+		Get connections to 
+
 / ---------------- 09 / 05 ------------
 
 	- Camera system - zoom into city? - DONE (more or less, should later add camera smoothing to make it feel less locked - also because lerping is very cool and we should learn how to do it)

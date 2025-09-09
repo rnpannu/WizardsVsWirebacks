@@ -1,4 +1,4 @@
-//Code for Controls/ButtonStandard (Container)
+//Code for Controls/KeyboardKey (Container)
 using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
@@ -12,7 +12,7 @@ using RenderingLibrary.Graphics;
 using System.Linq;
 
 namespace WizardsVsWirebacks.Components.Controls;
-partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
+partial class KeyboardKey : MonoGameGum.Forms.Controls.Button
 {
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void RegisterRuntimeType()
@@ -20,14 +20,13 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         var template = new MonoGameGum.Forms.VisualTemplate((vm, createForms) =>
         {
             var visual = new MonoGameGum.GueDeriving.ContainerRuntime();
-            var element = ObjectFinder.Self.GetElementSave("Controls/ButtonStandard");
+            var element = ObjectFinder.Self.GetElementSave("Controls/KeyboardKey");
             element.SetGraphicalUiElement(visual, RenderingLibrary.SystemManagers.Default);
-            if(createForms) visual.FormsControlAsObject = new ButtonStandard(visual);
+            if(createForms) visual.FormsControlAsObject = new KeyboardKey(visual);
             return visual;
         });
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(ButtonStandard)] = template;
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(MonoGameGum.Forms.Controls.Button)] = template;
-        ElementSaveExtensions.RegisterGueInstantiation("Controls/ButtonStandard", () => 
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(KeyboardKey)] = template;
+        ElementSaveExtensions.RegisterGueInstantiation("Controls/KeyboardKey", () => 
         {
             var gue = template.CreateContent(null, true) as InteractiveGue;
             return gue;
@@ -39,8 +38,8 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         Disabled,
         Highlighted,
         Pushed,
-        HighlightedFocused,
         Focused,
+        HighlightedFocused,
         DisabledFocused,
     }
 
@@ -69,12 +68,19 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         }
     }
     public NineSliceRuntime Background { get; protected set; }
+    public TextRuntime TextInstance { get; protected set; }
     public NineSliceRuntime FocusedIndicator { get; protected set; }
 
-    public ButtonStandard(InteractiveGue visual) : base(visual)
+    public string Text
+    {
+        get => TextInstance.Text;
+        set => TextInstance.Text = value;
+    }
+
+    public KeyboardKey(InteractiveGue visual) : base(visual)
     {
     }
-    public ButtonStandard()
+    public KeyboardKey()
     {
 
 
@@ -84,6 +90,7 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
     {
         base.ReactToVisualChanged();
         Background = this.Visual?.GetGraphicalUiElementByName("Background") as NineSliceRuntime;
+        TextInstance = this.Visual?.GetGraphicalUiElementByName("TextInstance") as TextRuntime;
         FocusedIndicator = this.Visual?.GetGraphicalUiElementByName("FocusedIndicator") as NineSliceRuntime;
         CustomInitialize();
     }

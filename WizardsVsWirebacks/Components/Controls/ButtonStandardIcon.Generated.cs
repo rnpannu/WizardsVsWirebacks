@@ -1,7 +1,8 @@
-//Code for Controls/ButtonStandard (Container)
+//Code for Controls/ButtonStandardIcon (Container)
 using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
+using WizardsVsWirebacks.Components.Elements;
 using Gum.Converters;
 using Gum.DataTypes;
 using Gum.Managers;
@@ -12,7 +13,7 @@ using RenderingLibrary.Graphics;
 using System.Linq;
 
 namespace WizardsVsWirebacks.Components.Controls;
-partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
+partial class ButtonStandardIcon : MonoGameGum.Forms.Controls.Button
 {
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void RegisterRuntimeType()
@@ -20,14 +21,13 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         var template = new MonoGameGum.Forms.VisualTemplate((vm, createForms) =>
         {
             var visual = new MonoGameGum.GueDeriving.ContainerRuntime();
-            var element = ObjectFinder.Self.GetElementSave("Controls/ButtonStandard");
+            var element = ObjectFinder.Self.GetElementSave("Controls/ButtonStandardIcon");
             element.SetGraphicalUiElement(visual, RenderingLibrary.SystemManagers.Default);
-            if(createForms) visual.FormsControlAsObject = new ButtonStandard(visual);
+            if(createForms) visual.FormsControlAsObject = new ButtonStandardIcon(visual);
             return visual;
         });
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(ButtonStandard)] = template;
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(MonoGameGum.Forms.Controls.Button)] = template;
-        ElementSaveExtensions.RegisterGueInstantiation("Controls/ButtonStandard", () => 
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(ButtonStandardIcon)] = template;
+        ElementSaveExtensions.RegisterGueInstantiation("Controls/ButtonStandardIcon", () => 
         {
             var gue = template.CreateContent(null, true) as InteractiveGue;
             return gue;
@@ -69,12 +69,26 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         }
     }
     public NineSliceRuntime Background { get; protected set; }
+    public TextRuntime TextInstance { get; protected set; }
+    public Icon Icon { get; protected set; }
     public NineSliceRuntime FocusedIndicator { get; protected set; }
 
-    public ButtonStandard(InteractiveGue visual) : base(visual)
+    public Icon.IconCategory? ButtonIcon
+    {
+        get => Icon.IconCategoryState;
+        set => Icon.IconCategoryState = value;
+    }
+
+    public string ButtonDisplayText
+    {
+        get => TextInstance.Text;
+        set => TextInstance.Text = value;
+    }
+
+    public ButtonStandardIcon(InteractiveGue visual) : base(visual)
     {
     }
-    public ButtonStandard()
+    public ButtonStandardIcon()
     {
 
 
@@ -84,6 +98,8 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
     {
         base.ReactToVisualChanged();
         Background = this.Visual?.GetGraphicalUiElementByName("Background") as NineSliceRuntime;
+        TextInstance = this.Visual?.GetGraphicalUiElementByName("TextInstance") as TextRuntime;
+        Icon = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<Icon>(this.Visual,"Icon");
         FocusedIndicator = this.Visual?.GetGraphicalUiElementByName("FocusedIndicator") as NineSliceRuntime;
         CustomInitialize();
     }

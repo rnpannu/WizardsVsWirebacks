@@ -172,6 +172,7 @@ public class CityScene : Scene
 
 
         Core.SpriteBatch.End();
+        GumService.Default.Draw();
         base.Draw(gameTime);
     }
 

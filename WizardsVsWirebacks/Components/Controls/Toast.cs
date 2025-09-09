@@ -7,9 +7,9 @@ using RenderingLibrary.Graphics;
 
 using System.Linq;
 
-namespace WizardsVsWirebacks.Components.WizardsVsWirebacks
+namespace WizardsVsWirebacks.Components.Controls
 {
-    partial class ListBox
+    partial class Toast
     {
         partial void CustomInitialize()
         {

@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ComponentSave xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>Elements/Icon</Name>
+  <Name>WizardsVsWirebacks/BuildingPanel/BuildingPaneIcon</Name>
   <BaseType>Container</BaseType>
   <State>
     <Name>Default</Name>
     <Variable>
       <Type>float</Type>
       <Name>Height</Name>
-      <Value xsi:type="xsd:float">32</Value>
+      <Value xsi:type="xsd:float">0</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>HeightUnits</Name>
-      <Value xsi:type="xsd:int">0</Value>
+      <Value xsi:type="xsd:int">4</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -42,7 +42,7 @@
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>IconSprite.HeightUnits</Name>
-      <Value xsi:type="xsd:int">1</Value>
+      <Value xsi:type="xsd:int">3</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -67,13 +67,13 @@
     <Variable>
       <Type>int</Type>
       <Name>IconSprite.TextureLeft</Name>
-      <Value xsi:type="xsd:int">224</Value>
+      <Value xsi:type="xsd:int">256</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>int</Type>
       <Name>IconSprite.TextureTop</Name>
-      <Value xsi:type="xsd:int">0</Value>
+      <Value xsi:type="xsd:int">64</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -91,7 +91,7 @@
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>IconSprite.WidthUnits</Name>
-      <Value xsi:type="xsd:int">1</Value>
+      <Value xsi:type="xsd:int">3</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -140,23 +140,25 @@
     <Variable>
       <Type>float</Type>
       <Name>Width</Name>
-      <Value xsi:type="xsd:float">32</Value>
+      <Value xsi:type="xsd:float">0</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>WidthUnits</Name>
-      <Value xsi:type="xsd:int">0</Value>
-      <SetsValue>true</SetsValue>
-    </Variable>
-    <Variable>
-      <Type>WvW</Type>
-      <Name>WvWState</Name>
+      <Value xsi:type="xsd:int">4</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <VariableList xsi:type="VariableListSaveOfString">
       <Type>string</Type>
       <Name>IconSprite.AnimationFrames</Name>
+      <IsFile>false</IsFile>
+      <IsHiddenInPropertyGrid>false</IsHiddenInPropertyGrid>
+      <Value />
+    </VariableList>
+    <VariableList xsi:type="VariableListSaveOfString">
+      <Type>string</Type>
+      <Name>IconSprite.VariableReferences</Name>
       <IsFile>false</IsFile>
       <IsHiddenInPropertyGrid>false</IsHiddenInPropertyGrid>
       <Value />
@@ -2551,13 +2553,13 @@
       <Variable>
         <Type>int</Type>
         <Name>IconSprite.TextureLeft</Name>
-        <Value xsi:type="xsd:int">224</Value>
+        <Value xsi:type="xsd:int">256</Value>
         <SetsValue>true</SetsValue>
       </Variable>
       <Variable>
         <Type>int</Type>
         <Name>IconSprite.TextureTop</Name>
-        <Value xsi:type="xsd:int">0</Value>
+        <Value xsi:type="xsd:int">64</Value>
         <SetsValue>true</SetsValue>
       </Variable>
       <Variable>
@@ -2585,13 +2587,13 @@
       <Variable>
         <Type>int</Type>
         <Name>IconSprite.TextureLeft</Name>
-        <Value xsi:type="xsd:int">240</Value>
+        <Value xsi:type="xsd:int">272</Value>
         <SetsValue>true</SetsValue>
       </Variable>
       <Variable>
         <Type>int</Type>
         <Name>IconSprite.TextureTop</Name>
-        <Value xsi:type="xsd:int">0</Value>
+        <Value xsi:type="xsd:int">64</Value>
         <SetsValue>true</SetsValue>
       </Variable>
       <Variable>
@@ -2607,12 +2609,6 @@
         <Category>States and Visibility</Category>
         <SetsValue>true</SetsValue>
       </Variable>
-    </State>
-  </Category>
-  <Category>
-    <Name>WvW</Name>
-    <State>
-      <Name>BuildingPaneUpArrow</Name>
     </State>
   </Category>
   <Instance>

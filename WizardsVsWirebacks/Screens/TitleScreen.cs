@@ -28,6 +28,10 @@ namespace WizardsVsWirebacks.Screens
                 GumService.Default.Root.Children.Clear();
                 //Core.Exit();
                 //Core.Audio.PlaySoundEffect(null);
+
+                var screen = new DemoScreenGum();
+                screen.AddToRoot();
+                //Core.ChangeScene(new CityScene());
             }
             ;
             

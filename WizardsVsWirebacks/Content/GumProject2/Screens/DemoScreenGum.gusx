@@ -1079,7 +1079,7 @@
     <Variable>
       <Type>float</Type>
       <Name>ShowToastButton.X</Name>
-      <Value xsi:type="xsd:float">788</Value>
+      <Value xsi:type="xsd:float">47</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -1097,7 +1097,7 @@
     <Variable>
       <Type>float</Type>
       <Name>ShowToastButton.Y</Name>
-      <Value xsi:type="xsd:float">16</Value>
+      <Value xsi:type="xsd:float">25</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -1223,13 +1223,13 @@
     <Variable>
       <Type>float</Type>
       <Name>TreeViewInstance.X</Name>
-      <Value xsi:type="xsd:float">783</Value>
+      <Value xsi:type="xsd:float">47</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>float</Type>
       <Name>TreeViewInstance.Y</Name>
-      <Value xsi:type="xsd:float">50</Value>
+      <Value xsi:type="xsd:float">79</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>

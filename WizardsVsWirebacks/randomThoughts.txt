@@ -1,3 +1,8 @@
+//// ------------------- 09/04 --------------------------
+    - Cannot set source file for texture coordinates by state?
+    - How to reference Iconcategory in Gum
+
+
 // ------------------- 09/04 --------------------------
 
 Navigation - global world scale for zoom with scroll wheel?

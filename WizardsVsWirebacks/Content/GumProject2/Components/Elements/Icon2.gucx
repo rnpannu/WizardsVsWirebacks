@@ -1,30 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ComponentSave xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>Elements/Icon</Name>
+  <Name>Elements/Icon2</Name>
   <BaseType>Container</BaseType>
   <State>
     <Name>Default</Name>
     <Variable>
       <Type>float</Type>
       <Name>Height</Name>
-      <Value xsi:type="xsd:float">32</Value>
+      <Value xsi:type="xsd:float">0</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>HeightUnits</Name>
-      <Value xsi:type="xsd:int">0</Value>
+      <Value xsi:type="xsd:int">4</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>IconCategory</Type>
       <Name>IconCategoryState</Name>
       <SetsValue>false</SetsValue>
-    </Variable>
-    <Variable>
-      <Name>IconSprite.AnimationFrames</Name>
-      <Value xsi:type="ArrayOfString" />
-      <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>ColorCategory</Type>
@@ -42,14 +37,14 @@
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>IconSprite.HeightUnits</Name>
-      <Value xsi:type="xsd:int">1</Value>
+      <Value xsi:type="xsd:int">3</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <IsFile>true</IsFile>
       <Type>string</Type>
       <Name>IconSprite.SourceFile</Name>
-      <Value xsi:type="xsd:string">MediavelUI\Mediavel.png</Value>
+      <Value xsi:type="xsd:string">UISpriteSheet.png</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -61,13 +56,13 @@
     <Variable>
       <Type>int</Type>
       <Name>IconSprite.TextureHeight</Name>
-      <Value xsi:type="xsd:int">16</Value>
+      <Value xsi:type="xsd:int">32</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>int</Type>
       <Name>IconSprite.TextureLeft</Name>
-      <Value xsi:type="xsd:int">224</Value>
+      <Value xsi:type="xsd:int">288</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -79,7 +74,7 @@
     <Variable>
       <Type>int</Type>
       <Name>IconSprite.TextureWidth</Name>
-      <Value xsi:type="xsd:int">16</Value>
+      <Value xsi:type="xsd:int">32</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -91,7 +86,7 @@
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>IconSprite.WidthUnits</Name>
-      <Value xsi:type="xsd:int">1</Value>
+      <Value xsi:type="xsd:int">3</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -140,13 +135,13 @@
     <Variable>
       <Type>float</Type>
       <Name>Width</Name>
-      <Value xsi:type="xsd:float">32</Value>
+      <Value xsi:type="xsd:float">0</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
       <Type>DimensionUnitType</Type>
       <Name>WidthUnits</Name>
-      <Value xsi:type="xsd:int">0</Value>
+      <Value xsi:type="xsd:int">4</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -2537,74 +2532,6 @@
         <Type>bool</Type>
         <Name>IconSprite.Visible</Name>
         <Value xsi:type="xsd:boolean">true</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-    </State>
-    <State>
-      <Name>WvWArrowUp</Name>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureHeight</Name>
-        <Value xsi:type="xsd:int">16</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureLeft</Name>
-        <Value xsi:type="xsd:int">224</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureTop</Name>
-        <Value xsi:type="xsd:int">0</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureWidth</Name>
-        <Value xsi:type="xsd:int">16</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>bool</Type>
-        <Name>IconSprite.Visible</Name>
-        <Value xsi:type="xsd:boolean">true</Value>
-        <Category>States and Visibility</Category>
-        <SetsValue>true</SetsValue>
-      </Variable>
-    </State>
-    <State>
-      <Name>WvWArrowDown</Name>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureHeight</Name>
-        <Value xsi:type="xsd:int">16</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureLeft</Name>
-        <Value xsi:type="xsd:int">240</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureTop</Name>
-        <Value xsi:type="xsd:int">0</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>int</Type>
-        <Name>IconSprite.TextureWidth</Name>
-        <Value xsi:type="xsd:int">16</Value>
-        <SetsValue>true</SetsValue>
-      </Variable>
-      <Variable>
-        <Type>bool</Type>
-        <Name>IconSprite.Visible</Name>
-        <Value xsi:type="xsd:boolean">true</Value>
-        <Category>States and Visibility</Category>
         <SetsValue>true</SetsValue>
       </Variable>
     </State>

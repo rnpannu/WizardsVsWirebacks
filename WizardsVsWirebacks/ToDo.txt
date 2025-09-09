@@ -1,3 +1,8 @@
+/ ---------------- 09 / 09 ------------
+	Learning how referencing works in Gum is going to be very important
+		- May have cooked current project
+		- Standard controls are messed up now, god help us all
+
 / ---------------- 09 / 08 ------------
 	
 	Texture swapping. Fully combining everything into one atlas and draw call is likely impractical. 

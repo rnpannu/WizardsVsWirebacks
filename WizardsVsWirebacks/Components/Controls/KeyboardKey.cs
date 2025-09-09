@@ -7,9 +7,9 @@ using RenderingLibrary.Graphics;
 
 using System.Linq;
 
-namespace WizardsVsWirebacks.Components.WizardsVsWirebacks
+namespace WizardsVsWirebacks.Components.Controls
 {
-    partial class BuildingPanel
+    partial class KeyboardKey
     {
         partial void CustomInitialize()
         {

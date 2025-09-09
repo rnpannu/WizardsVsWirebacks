@@ -1,4 +1,4 @@
-//Code for Controls/ButtonStandard (Container)
+//Code for Controls/MenuItem (Container)
 using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
@@ -12,7 +12,7 @@ using RenderingLibrary.Graphics;
 using System.Linq;
 
 namespace WizardsVsWirebacks.Components.Controls;
-partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
+partial class MenuItem : MonoGameGum.Forms.Controls.MenuItem
 {
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void RegisterRuntimeType()
@@ -20,48 +20,46 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         var template = new MonoGameGum.Forms.VisualTemplate((vm, createForms) =>
         {
             var visual = new MonoGameGum.GueDeriving.ContainerRuntime();
-            var element = ObjectFinder.Self.GetElementSave("Controls/ButtonStandard");
+            var element = ObjectFinder.Self.GetElementSave("Controls/MenuItem");
             element.SetGraphicalUiElement(visual, RenderingLibrary.SystemManagers.Default);
-            if(createForms) visual.FormsControlAsObject = new ButtonStandard(visual);
+            if(createForms) visual.FormsControlAsObject = new MenuItem(visual);
             return visual;
         });
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(ButtonStandard)] = template;
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(MonoGameGum.Forms.Controls.Button)] = template;
-        ElementSaveExtensions.RegisterGueInstantiation("Controls/ButtonStandard", () => 
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(MenuItem)] = template;
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(MonoGameGum.Forms.Controls.MenuItem)] = template;
+        ElementSaveExtensions.RegisterGueInstantiation("Controls/MenuItem", () => 
         {
             var gue = template.CreateContent(null, true) as InteractiveGue;
             return gue;
         });
     }
-    public enum ButtonCategory
+    public enum MenuItemCategory
     {
         Enabled,
-        Disabled,
         Highlighted,
-        Pushed,
-        HighlightedFocused,
+        Selected,
         Focused,
-        DisabledFocused,
+        Disabled,
     }
 
-    ButtonCategory? _buttonCategoryState;
-    public ButtonCategory? ButtonCategoryState
+    MenuItemCategory? _menuItemCategoryState;
+    public MenuItemCategory? MenuItemCategoryState
     {
-        get => _buttonCategoryState;
+        get => _menuItemCategoryState;
         set
         {
-            _buttonCategoryState = value;
+            _menuItemCategoryState = value;
             if(value != null)
             {
-                if(Visual.Categories.ContainsKey("ButtonCategory"))
+                if(Visual.Categories.ContainsKey("MenuItemCategory"))
                 {
-                    var category = Visual.Categories["ButtonCategory"];
+                    var category = Visual.Categories["MenuItemCategory"];
                     var state = category.States.Find(item => item.Name == value.ToString());
                     this.Visual.ApplyState(state);
                 }
                 else
                 {
-                    var category = ((Gum.DataTypes.ElementSave)this.Visual.Tag).Categories.FirstOrDefault(item => item.Name == "ButtonCategory");
+                    var category = ((Gum.DataTypes.ElementSave)this.Visual.Tag).Categories.FirstOrDefault(item => item.Name == "MenuItemCategory");
                     var state = category.States.Find(item => item.Name == value.ToString());
                     this.Visual.ApplyState(state);
                 }
@@ -69,12 +67,14 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         }
     }
     public NineSliceRuntime Background { get; protected set; }
-    public NineSliceRuntime FocusedIndicator { get; protected set; }
+    public TextRuntime TextInstance { get; protected set; }
+    public TextRuntime SubmenuIndicatorInstance { get; protected set; }
+    public ContainerRuntime ContainerInstance { get; protected set; }
 
-    public ButtonStandard(InteractiveGue visual) : base(visual)
+    public MenuItem(InteractiveGue visual) : base(visual)
     {
     }
-    public ButtonStandard()
+    public MenuItem()
     {
 
 
@@ -84,7 +84,9 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
     {
         base.ReactToVisualChanged();
         Background = this.Visual?.GetGraphicalUiElementByName("Background") as NineSliceRuntime;
-        FocusedIndicator = this.Visual?.GetGraphicalUiElementByName("FocusedIndicator") as NineSliceRuntime;
+        TextInstance = this.Visual?.GetGraphicalUiElementByName("TextInstance") as TextRuntime;
+        SubmenuIndicatorInstance = this.Visual?.GetGraphicalUiElementByName("SubmenuIndicatorInstance") as TextRuntime;
+        ContainerInstance = this.Visual?.GetGraphicalUiElementByName("ContainerInstance") as ContainerRuntime;
         CustomInitialize();
     }
     //Not assigning variables because Object Instantiation Type is set to By Name rather than Fully In Code

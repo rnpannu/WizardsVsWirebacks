@@ -4,5 +4,10 @@
   <State>
     <Name>Default</Name>
   </State>
+  <Instance>
+    <Name>BuildingPaneInstance</Name>
+    <BaseType>WizardsVsWirebacks/BuildingPanel/BuildingPane</BaseType>
+    <DefinedByBase>false</DefinedByBase>
+  </Instance>
   <Behaviors />
 </ScreenSave>

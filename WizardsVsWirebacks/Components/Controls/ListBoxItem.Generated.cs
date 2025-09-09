@@ -1,4 +1,4 @@
-//Code for Controls/ButtonStandard (Container)
+//Code for Controls/ListBoxItem (Container)
 using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
@@ -12,7 +12,7 @@ using RenderingLibrary.Graphics;
 using System.Linq;
 
 namespace WizardsVsWirebacks.Components.Controls;
-partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
+partial class ListBoxItem : MonoGameGum.Forms.Controls.ListBoxItem
 {
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void RegisterRuntimeType()
@@ -20,48 +20,45 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         var template = new MonoGameGum.Forms.VisualTemplate((vm, createForms) =>
         {
             var visual = new MonoGameGum.GueDeriving.ContainerRuntime();
-            var element = ObjectFinder.Self.GetElementSave("Controls/ButtonStandard");
+            var element = ObjectFinder.Self.GetElementSave("Controls/ListBoxItem");
             element.SetGraphicalUiElement(visual, RenderingLibrary.SystemManagers.Default);
-            if(createForms) visual.FormsControlAsObject = new ButtonStandard(visual);
+            if(createForms) visual.FormsControlAsObject = new ListBoxItem(visual);
             return visual;
         });
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(ButtonStandard)] = template;
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(MonoGameGum.Forms.Controls.Button)] = template;
-        ElementSaveExtensions.RegisterGueInstantiation("Controls/ButtonStandard", () => 
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(ListBoxItem)] = template;
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(MonoGameGum.Forms.Controls.ListBoxItem)] = template;
+        ElementSaveExtensions.RegisterGueInstantiation("Controls/ListBoxItem", () => 
         {
             var gue = template.CreateContent(null, true) as InteractiveGue;
             return gue;
         });
     }
-    public enum ButtonCategory
+    public enum ListBoxItemCategory
     {
         Enabled,
-        Disabled,
         Highlighted,
-        Pushed,
-        HighlightedFocused,
+        Selected,
         Focused,
-        DisabledFocused,
     }
 
-    ButtonCategory? _buttonCategoryState;
-    public ButtonCategory? ButtonCategoryState
+    ListBoxItemCategory? _listBoxItemCategoryState;
+    public ListBoxItemCategory? ListBoxItemCategoryState
     {
-        get => _buttonCategoryState;
+        get => _listBoxItemCategoryState;
         set
         {
-            _buttonCategoryState = value;
+            _listBoxItemCategoryState = value;
             if(value != null)
             {
-                if(Visual.Categories.ContainsKey("ButtonCategory"))
+                if(Visual.Categories.ContainsKey("ListBoxItemCategory"))
                 {
-                    var category = Visual.Categories["ButtonCategory"];
+                    var category = Visual.Categories["ListBoxItemCategory"];
                     var state = category.States.Find(item => item.Name == value.ToString());
                     this.Visual.ApplyState(state);
                 }
                 else
                 {
-                    var category = ((Gum.DataTypes.ElementSave)this.Visual.Tag).Categories.FirstOrDefault(item => item.Name == "ButtonCategory");
+                    var category = ((Gum.DataTypes.ElementSave)this.Visual.Tag).Categories.FirstOrDefault(item => item.Name == "ListBoxItemCategory");
                     var state = category.States.Find(item => item.Name == value.ToString());
                     this.Visual.ApplyState(state);
                 }
@@ -69,12 +66,19 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
         }
     }
     public NineSliceRuntime Background { get; protected set; }
+    public TextRuntime TextInstance { get; protected set; }
     public NineSliceRuntime FocusedIndicator { get; protected set; }
 
-    public ButtonStandard(InteractiveGue visual) : base(visual)
+    public string ListItemDisplayText
+    {
+        get => TextInstance.Text;
+        set => TextInstance.Text = value;
+    }
+
+    public ListBoxItem(InteractiveGue visual) : base(visual)
     {
     }
-    public ButtonStandard()
+    public ListBoxItem()
     {
 
 
@@ -84,6 +88,7 @@ partial class ButtonStandard : MonoGameGum.Forms.Controls.Button
     {
         base.ReactToVisualChanged();
         Background = this.Visual?.GetGraphicalUiElementByName("Background") as NineSliceRuntime;
+        TextInstance = this.Visual?.GetGraphicalUiElementByName("TextInstance") as TextRuntime;
         FocusedIndicator = this.Visual?.GetGraphicalUiElementByName("FocusedIndicator") as NineSliceRuntime;
         CustomInitialize();
     }

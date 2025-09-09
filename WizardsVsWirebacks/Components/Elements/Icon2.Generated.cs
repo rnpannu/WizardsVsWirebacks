@@ -1,4 +1,4 @@
-//Code for Elements/Icon (Container)
+//Code for Elements/Icon2 (Container)
 using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
@@ -12,7 +12,7 @@ using RenderingLibrary.Graphics;
 using System.Linq;
 
 namespace WizardsVsWirebacks.Components.Elements;
-partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
+partial class Icon2 : MonoGameGum.Forms.Controls.FrameworkElement
 {
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void RegisterRuntimeType()
@@ -20,13 +20,13 @@ partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
         var template = new MonoGameGum.Forms.VisualTemplate((vm, createForms) =>
         {
             var visual = new MonoGameGum.GueDeriving.ContainerRuntime();
-            var element = ObjectFinder.Self.GetElementSave("Elements/Icon");
+            var element = ObjectFinder.Self.GetElementSave("Elements/Icon2");
             element.SetGraphicalUiElement(visual, RenderingLibrary.SystemManagers.Default);
-            if(createForms) visual.FormsControlAsObject = new Icon(visual);
+            if(createForms) visual.FormsControlAsObject = new Icon2(visual);
             return visual;
         });
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(Icon)] = template;
-        ElementSaveExtensions.RegisterGueInstantiation("Elements/Icon", () => 
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(Icon2)] = template;
+        ElementSaveExtensions.RegisterGueInstantiation("Elements/Icon2", () => 
         {
             var gue = template.CreateContent(null, true) as InteractiveGue;
             return gue;
@@ -106,8 +106,6 @@ partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
         UserRemove,
         Warning,
         Wrench,
-        WvWArrowUp,
-        WvWArrowDown,
     }
     public enum WvW
     {
@@ -166,10 +164,10 @@ partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
     public SpriteRuntime IconSprite { get; protected set; }
 
 
-    public Icon(InteractiveGue visual) : base(visual)
+    public Icon2(InteractiveGue visual) : base(visual)
     {
     }
-    public Icon()
+    public Icon2()
     {
 
 

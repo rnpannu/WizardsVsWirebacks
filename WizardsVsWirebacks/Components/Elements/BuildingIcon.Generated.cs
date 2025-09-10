@@ -1,4 +1,4 @@
-//Code for Elements/Icon (Container)
+//Code for Elements/BuildingIcon (Container)
 using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
@@ -12,7 +12,7 @@ using RenderingLibrary.Graphics;
 using System.Linq;
 
 namespace WizardsVsWirebacks.Components.Elements;
-partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
+partial class BuildingIcon : MonoGameGum.Forms.Controls.FrameworkElement
 {
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void RegisterRuntimeType()
@@ -20,13 +20,13 @@ partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
         var template = new MonoGameGum.Forms.VisualTemplate((vm, createForms) =>
         {
             var visual = new MonoGameGum.GueDeriving.ContainerRuntime();
-            var element = ObjectFinder.Self.GetElementSave("Elements/Icon");
+            var element = ObjectFinder.Self.GetElementSave("Elements/BuildingIcon");
             element.SetGraphicalUiElement(visual, RenderingLibrary.SystemManagers.Default);
-            if(createForms) visual.FormsControlAsObject = new Icon(visual);
+            if(createForms) visual.FormsControlAsObject = new BuildingIcon(visual);
             return visual;
         });
-        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(Icon)] = template;
-        ElementSaveExtensions.RegisterGueInstantiation("Elements/Icon", () => 
+        MonoGameGum.Forms.Controls.FrameworkElement.DefaultFormsTemplates[typeof(BuildingIcon)] = template;
+        ElementSaveExtensions.RegisterGueInstantiation("Elements/BuildingIcon", () => 
         {
             var gue = template.CreateContent(null, true) as InteractiveGue;
             return gue;
@@ -108,12 +108,6 @@ partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
         Wrench,
         WvWArrowUp,
         WvWArrowDown,
-        BuildingIcon,
-        BuildingIconPushed,
-    }
-    public enum WvW
-    {
-        BuildingPaneUpArrow,
     }
 
     IconCategory? _iconCategoryState;
@@ -140,38 +134,13 @@ partial class Icon : MonoGameGum.Forms.Controls.FrameworkElement
             }
         }
     }
-
-    WvW? _wvWState;
-    public WvW? WvWState
-    {
-        get => _wvWState;
-        set
-        {
-            _wvWState = value;
-            if(value != null)
-            {
-                if(Visual.Categories.ContainsKey("WvW"))
-                {
-                    var category = Visual.Categories["WvW"];
-                    var state = category.States.Find(item => item.Name == value.ToString());
-                    this.Visual.ApplyState(state);
-                }
-                else
-                {
-                    var category = ((Gum.DataTypes.ElementSave)this.Visual.Tag).Categories.FirstOrDefault(item => item.Name == "WvW");
-                    var state = category.States.Find(item => item.Name == value.ToString());
-                    this.Visual.ApplyState(state);
-                }
-            }
-        }
-    }
     public SpriteRuntime IconSprite { get; protected set; }
 
 
-    public Icon(InteractiveGue visual) : base(visual)
+    public BuildingIcon(InteractiveGue visual) : base(visual)
     {
     }
-    public Icon()
+    public BuildingIcon()
     {
 
 

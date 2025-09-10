@@ -3,6 +3,7 @@ using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
 using WizardsVsWirebacks.Components.WizardsVsWirebacks.BuildingPanel;
+using WizardsVsWirebacks.Components.Controls;
 using Gum.Converters;
 using Gum.DataTypes;
 using Gum.Managers;
@@ -34,10 +35,11 @@ partial class BuildingPane : MonoGameGum.Forms.Controls.FrameworkElement
         });
     }
     public NineSliceRuntime Background { get; protected set; }
-    public CityScrollBar CityScrollBarInstance { get; protected set; }
+    public CityScrollBar VerticalScrollBarInstance { get; protected set; }
     public ContainerRuntime ClipContainerInstance { get; protected set; }
     public ContainerRuntime InnerPanelInstance { get; protected set; }
     public NineSliceRuntime FocusedIndicator { get; protected set; }
+    public BuildingButtonIcon1 BuildingButtonIcon1Instance { get; protected set; }
 
     public BuildingPane(InteractiveGue visual) : base(visual)
     {
@@ -52,10 +54,11 @@ partial class BuildingPane : MonoGameGum.Forms.Controls.FrameworkElement
     {
         base.ReactToVisualChanged();
         Background = this.Visual?.GetGraphicalUiElementByName("Background") as NineSliceRuntime;
-        CityScrollBarInstance = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<CityScrollBar>(this.Visual,"CityScrollBarInstance");
+        VerticalScrollBarInstance = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<CityScrollBar>(this.Visual,"VerticalScrollBarInstance");
         ClipContainerInstance = this.Visual?.GetGraphicalUiElementByName("ClipContainerInstance") as ContainerRuntime;
         InnerPanelInstance = this.Visual?.GetGraphicalUiElementByName("InnerPanelInstance") as ContainerRuntime;
         FocusedIndicator = this.Visual?.GetGraphicalUiElementByName("FocusedIndicator") as NineSliceRuntime;
+        BuildingButtonIcon1Instance = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<BuildingButtonIcon1>(this.Visual,"BuildingButtonIcon1Instance");
         CustomInitialize();
     }
     //Not assigning variables because Object Instantiation Type is set to By Name rather than Fully In Code

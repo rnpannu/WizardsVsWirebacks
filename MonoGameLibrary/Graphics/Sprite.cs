@@ -48,6 +48,10 @@ public class Sprite
     {
         Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
     }
+    public void Draw(SpriteBatch spriteBatch, Rectangle destRect)
+    {
+        Region.Draw(spriteBatch, destRect, Color);
+    }
 
 
 }

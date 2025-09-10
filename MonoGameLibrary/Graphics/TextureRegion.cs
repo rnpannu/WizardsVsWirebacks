@@ -27,9 +27,18 @@ public  class TextureRegion
         SourceRectangle = new Rectangle(x, y, width, height);
     }
 
-    public void Draw(SpriteBatch spriteBatch, Microsoft.Xna.Framework.Vector2 position, Color color)
+    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color)
     {
         Draw(spriteBatch, position, color, 0.0f, Vector2.Zero, Vector2.One, SpriteEffects.None, 0.0f);
+    }
+    public void Draw(SpriteBatch spriteBatch, Rectangle destRect, Color color)
+    {
+        // Bad, idc
+        spriteBatch.Draw(
+            Texture,
+            destRect,
+            color
+        );
     }
 
     public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth)
@@ -60,4 +69,5 @@ public  class TextureRegion
             layerDepth
         );
     }
+
 }

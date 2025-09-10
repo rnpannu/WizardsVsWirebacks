@@ -39,7 +39,6 @@
 		</None>
 	</ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\images\" />
     <Folder Include="Content\Tilemaps\" />
     <Folder Include="GameObjects\" />
     <Folder Include="UI\" />

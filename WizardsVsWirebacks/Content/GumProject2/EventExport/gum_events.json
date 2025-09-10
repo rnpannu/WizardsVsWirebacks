@@ -1421,6 +1421,90 @@
         "ElementType": "Components",
         "EventType": 7,
         "TimestampUtc": "2025-09-09T19:47:13.343927Z"
+      },
+      {
+        "NewName": "Controls/TreeViewItem1",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-09-10T15:03:40.9714925Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/BuildingPanel/BuildingPane (Container).TreeViewItem1Instance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-09-10T15:03:44.4329012Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "WizardsVsWirebacks/BuildingPanel/BuildingPane (Container).Controls/TreeViewItem1 TreeViewItem1Instance in WizardsVsWirebacks/BuildingPanel/BuildingPane (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-09-10T15:04:06.6562787Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/BuildingPanel/BuildingPane (Container).VerticalScrollBarInstance",
+        "OldName": "WizardsVsWirebacks/BuildingPanel/BuildingPane (Container).CityScrollBarInstance",
+        "ElementType": "Components",
+        "EventType": 7,
+        "TimestampUtc": "2025-09-10T15:05:39.9494111Z"
+      },
+      {
+        "NewName": "Elements/Icon3",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-09-10T15:08:55.4130575Z"
+      },
+      {
+        "NewName": "Elements/BuildingIcon",
+        "OldName": "Elements/Icon3",
+        "ElementType": "Components",
+        "EventType": 2,
+        "TimestampUtc": "2025-09-10T15:09:09.0922024Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/BuildingPanel/BuildingPane (Container).BuildingIconInstance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-09-10T15:10:17.711614Z"
+      },
+      {
+        "NewName": "Controls/ButtonIcon2",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-09-10T15:12:35.8160034Z"
+      },
+      {
+        "NewName": null,
+        "OldName": "WizardsVsWirebacks/BuildingPanel/BuildingPane (Container).Elements/BuildingIcon BuildingIconInstance in WizardsVsWirebacks/BuildingPanel/BuildingPane (Container)",
+        "ElementType": "Components",
+        "EventType": 6,
+        "TimestampUtc": "2025-09-10T15:13:01.02848Z"
+      },
+      {
+        "NewName": "Controls/BuildingButtonIcon",
+        "OldName": "Controls/ButtonIcon2",
+        "ElementType": "Components",
+        "EventType": 2,
+        "TimestampUtc": "2025-09-10T15:13:27.4071954Z"
+      },
+      {
+        "NewName": "Controls/BuildingButtonIcon1",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 0,
+        "TimestampUtc": "2025-09-10T15:17:02.6150118Z"
+      },
+      {
+        "NewName": "WizardsVsWirebacks/BuildingPanel/BuildingPane (Container).BuildingButtonIcon1Instance",
+        "OldName": null,
+        "ElementType": "Components",
+        "EventType": 5,
+        "TimestampUtc": "2025-09-10T15:17:14.5925832Z"
       }
     ]
   }

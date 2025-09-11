@@ -14,11 +14,23 @@ using System.Text;
 using System.Threading.Tasks;
 using ToolsUtilities;
 using WizardsVsWirebacks.Screens;
+using WizardsVsWirebacks.GameObjects;
 
 namespace WizardsVsWirebacks.Scenes;
 
 public class CityScene : Scene
-{
+{   
+    // TODO: todo
+    
+    // ! Urgent
+    // ? Question
+    // * High priority
+    // ~ Medium priority
+    // ` Low priority
+    // & Potential improvement
+    
+    // TODO: Add a pause screen complete with exit to main menu and a button to another options panel
+    // Next, implement an options panel
     private enum GameState
     {
         Playing,
@@ -28,7 +40,7 @@ public class CityScene : Scene
     private GameState _gameState;
 
     private Camera _camera;
-
+    
     private Texture2D _background;
 
     // 1:1 with IntGrid csv file
@@ -40,28 +52,28 @@ public class CityScene : Scene
     // Gum 
     private CityScreen _UI;
 
-    // Not currently used
+    // ? Ongoing, how to best use these?
     private Tilemap _tileMap;
     private TextureAtlas _atlas;
 
+    // TODO: Design an extensible building management helper. New class(es)?
+    /*private Dictionary<int, Building> _iconMap = new Dictionary<int, Building>();
+    private List<Building> _buildings;*/
+    
     //private Building _building;
     private Sprite _buildingIcon;
-
-
-
+    
     // Scene globals
-
     public static float CityWorldScale { get; set; } = 2.0f;
     public static int CityTileSize { get; set; }
     public static int CityWidth { get; set; }
     public static int CityHeight { get; set; }
     public static int CityWidthPx => CityTileSize * CityWidth; // How do these lambdas impact performance with every frame calculations, what does the compiler optimize?
     public static int CityHeightPx => CityTileSize * CityHeight;
-
-
+    
     private int _cursorPosX;
     private int _cursorPosY;
-
+    
     /// <summary>
     /// Expression-bodied properties:
     /// The => lambda syntax creates read-only computed properties using expression body syntax(introduced in C# 6.0). These properties:
@@ -72,18 +84,15 @@ public class CityScene : Scene
     private int CursorTileX => Math.Max(0, Math.Min(_cursorPosX, Core.Width - 1)) / CityTileSize;
     private int CursorTileY => Math.Max(0, Math.Min(_cursorPosY, Core.Height - 1)) / CityTileSize;
 
-    /// <summary>
-    /// ----------------------------- INITIALIZATION Logic -----------------------------------
-    /// </summary>
-    /// 
 
-    // Gum logic
+    //1. ----------------------------- INITIALIZATION Logic -----------------------------------
+    //1. Gum logic
     private void InitializeUI()
     {
         _UI = new CityScreen();
         _UI.AddToRoot();
-
     }
+    //1. Main initialize
     public override void Initialize()
     {
         base.Initialize();
@@ -93,13 +102,13 @@ public class CityScene : Scene
         _camera.SetBounds();
     }
 
-    /// <summary>
-    /// Parse intgrid csv file 
-    /// </summary>
+    //1. ----------------------------- End INITIALIZATION Logic -----------------------------------
+    //2. ----------------------------------- LOAD Logic -------------------------------------------
+    // 2. Parse intgrid csv file 
     private void LoadIntGrid()
     {
         _captureStatusVisual.Add(1, Color.Green); //Captured
-        _captureStatusVisual.Add(2, Color.Red); //Uncaptured
+        _captureStatusVisual.Add(2, Color.Red); //Uncaptured 
 
         // Create a copy of the csv
         string basePath = "..\\..\\..\\Content\\Tilemaps\\City\\simplified\\Level_0\\";
@@ -115,7 +124,7 @@ public class CityScene : Scene
         }
         else Console.Out.WriteLine("Save already exists");
 
-        // Parse csv -> Could improve with serialization / deserialization (Streams) - make more robust
+        // ~ Parse csv -> Could improve with serialization / deserialization (Streams) - make more robust
         CityHeight = lines.Length;
         for (int i = 0; i < CityHeight; i++)
         {
@@ -135,39 +144,40 @@ public class CityScene : Scene
         }
 
     }
-
+    
+    // 2. Main LoadContent()
     public override void LoadContent()
     {
         _background = Content.Load<Texture2D>("Tilemaps/City/simplified/Level_0/Background");
-
         _atlas = TextureAtlas.FromFile(Content, "images/objectAtlas-definition.xml");
         _buildingIcon = _atlas.CreateSprite("buildingIcon-1");
         _buildingIcon.Scale = new Vector2(1.0f / CityWorldScale, 1.0f / CityWorldScale);
 
         LoadIntGrid();
     }
+    //2. ----------------------------- END LOAD Logic ----------------------------------
 
-    /// <summary>
-    /// ----------------------------- UPDATE Logic -----------------------------------
-    /// </summary>
+    // 3. ----------------------------- UPDATE Logic -----------------------------------
+    // 3. All actively updating input assessment
+    private void HandleInput()
+    {
+        CityInputManager.Update();
+        _cursorPosX = GameController.MousePosition().X / (int)CityWorldScale;
+        _cursorPosY = GameController.MousePosition().Y / (int)CityWorldScale;
+    }
+    // 3.0 Main update call
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        CityInputManager.Update();
+        HandleInput();
         _camera.Update();
-
-        // Update cursor position, hope this means CursorTile property is up do date when demanded
-        _cursorPosX = GameController.MousePosition().X / (int)CityWorldScale;
-        _cursorPosY = GameController.MousePosition().Y / (int)CityWorldScale;
-
-
+        
         GumService.Default.Update(gameTime);
     }
-
-
-    /// <summary>
-    /// ----------------------------- DRAW Logic -----------------------------------
-    /// </summary>
+    // 3. ----------------------------- End UPDATE Logic -----------------------------
+    
+    // 4. ----------------------------- DRAW Logic -----------------------------------
+    // 4. Main Draw call
     public override void Draw(GameTime gameTime)
     {
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
@@ -181,8 +191,7 @@ public class CityScene : Scene
         pixelTexture = new Texture2D(Core.GraphicsDevice, 1, 1);
         pixelTexture.SetData(new[] { Color.White });
 
-        // Might be worth putting in a CursorTileXPx property?
-        // Might be worth putting in a comment priority JSON system - similar to log levels
+        // ` Might be worth putting in a CursorTileXPx property?
         Rectangle highlightRect = new Rectangle(CursorTileX * CityTileSize, CursorTileY * CityTileSize, CityTileSize, CityTileSize);
 
 
@@ -194,8 +203,12 @@ public class CityScene : Scene
             _buildingIcon.Color = Color.White * 0.5f; 
             Core.SpriteBatch.Draw(pixelTexture, highlightRect, Color.White * 0.5f);
             _buildingIcon.Draw(Core.SpriteBatch, new Vector2(CursorTileX * CityTileSize, CursorTileY * CityTileSize + 1));
-            //_buildingIcon.Draw(Core.SpriteBatch, new Vector2(CursorTileX, CursorTileY));
-        }
+            
+        // TODO: Handle Drag & Drop + Building creation
+        } /*else if (_UI.BuildingIconReleased)
+        {
+            
+        }*/
         else
         {
             Color currentCol = _captureStatusVisual[_captureGrid[CursorTileX, CursorTileY]];
@@ -213,7 +226,7 @@ public class CityScene : Scene
 
         base.Draw(gameTime);
     }
-
+    //4. Show every intgrid entry
     public void HightlightIntgridCells()
     {
 
@@ -231,6 +244,6 @@ public class CityScene : Scene
             }
         }
     }
-
+    // 4. ----------------------------- End DRAW Logic -----------------------------------
 }
 

@@ -5,7 +5,7 @@
     // Might be worth putting in a comment priority JSON system - similar to log levels
 	// General thoughts from team on how to organize our work, github branches, customizing with JSONS (like vscode), seeing what visual studio can do
 
-	// For myself - make comments a smaller font?
+	// Better comments extension - question - potential improvement
 
 
 / ---------------- 09 / 09 ------------

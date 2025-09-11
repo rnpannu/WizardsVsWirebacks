@@ -17,6 +17,7 @@ public class TextureAtlas
 {
     private Dictionary<string, TextureRegion> _regions;
 
+    public int numBuildings { get; private set; }
     public Texture2D Texture { get; set; }
 
     public Dictionary<string, Animation> _animations;
@@ -104,10 +105,12 @@ public class TextureAtlas
                 var regions = root.Element("Regions")?.Elements("Region");
 
                 List<string> tempNames1 = [];
+                string lastBuildingName = "";
                 if (regions != null)
                 {
                     foreach (var region in regions)
                     {
+                        
                         string name = region.Attribute("name")?.Value;
                         int x = int.Parse(region.Attribute("x")?.Value ?? "0");
                         int y = int.Parse(region.Attribute("y")?.Value ?? "0");
@@ -117,6 +120,11 @@ public class TextureAtlas
                         if (!string.IsNullOrEmpty(name))
                         {
                             //Console.Out.WriteLine("Add region: " + name);
+                            string buildingName = name.Split("-")[1];
+                            if (name.Contains("building") && lastBuildingName != buildingName)
+                            {
+                                atlas.numBuildings++;
+                            }
                             atlas.AddRegion(name, x, y, width, height);
                             tempNames1.Add(name);
                         }

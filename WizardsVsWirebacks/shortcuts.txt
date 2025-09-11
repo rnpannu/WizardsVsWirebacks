@@ -1,0 +1,29 @@
+﻿Add or remove caret  - CTR + ALT + CLICK
+ADD RECTANGULAR SELECTION ON MOUSE DRAG - CTRL ALT SHIFT CLI
+
+
+RUN - CTRL F5
+
+DEBUG - ALT F5
+
+Zen mode - shift space
+
+terminal - Ctrl Alt 1 
+
+toggle ui - ctrl shift f12
+
+file explorer - 
+
+solution explorer - ctrl alt L
+
+toggle comments - /// comments collapse by ctrl alt x, y to expand
+
+full screen mode - alt shift enter
+
+alt instert - generate a variety of things
+
+alt enter - contextual completion
+
+ctrl shift r - refactor
+
+ctrl shift space - scroll through function overloads

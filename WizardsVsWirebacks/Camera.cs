@@ -34,9 +34,11 @@ class Camera
     public void SetBounds()
     {
 
-        Console.Out.WriteLine("Outbuffer: " + CityScene.CityTileSize.ToString() + " Inbuffer: " + _origin.X.ToString());
-        _minPos = new Vector2((CityScene.CityTileSize / 2) + _origin.X, (CityScene.CityTileSize / 2) + _origin.Y); // half a tile out + half the sprite in?
-        _maxPos = new Vector2(CityScene.CityWidthPx  - (CityScene.CityTileSize / 2) - _origin.X, CityScene.CityHeightPx - (CityScene.CityTileSize / 2) - _origin.Y); // makes no sense
+        // Console.Out.WriteLine("Outbuffer: " + CityScene.CityTileSize.ToString() + " Inbuffer: " + _origin.X.ToString());
+        // idk what i was on when writing this
+        _minPos = new Vector2((CityScene.CityTileSize / 2) + _origin.X, (CityScene.CityTileSize / 2) + _origin.Y); 
+        _maxPos = new Vector2(CityScene.CityWidthPx  - (CityScene.CityTileSize / 2) - _origin.X,
+            CityScene.CityHeightPx - (CityScene.CityTileSize / 2) - _origin.Y); // makes no sense
     }
 
     public void CalculateTranslation()
@@ -51,7 +53,7 @@ class Camera
     }
     public void Update()
     {
-        _position += CityInputManager.CameraDirection * GameManager.DT * SPEED;
+        _position += CityScene.CameraDirection * GameManager.DT * SPEED;
 
         _position = Vector2.Clamp(_position, _minPos, _maxPos);
         CalculateTranslation();

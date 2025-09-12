@@ -77,6 +77,15 @@ public static class GameController
     {
         return s_mouse.ScrollWheelDelta < 0;
     }
+    
+    public static bool M1Released()
+    {
+        return s_mouse.WasButtonJustReleased(MouseButton.Left);
+    }
+    public static bool IsM1Down()
+    {
+        return s_mouse.IsButtonDown(MouseButton.Left);
+    }
     public static Point MousePosition()
     {
         return s_mouse.Position;

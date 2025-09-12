@@ -1,3 +1,4 @@
+using System;
 using Gum.Converters;
 using Gum.DataTypes;
 using Gum.Managers;
@@ -15,19 +16,16 @@ namespace WizardsVsWirebacks.Screens
         public bool BuildingIconPushed { get; set; } = false;
         public bool BuildingIconReleased { get; set; } = false;
 
-        public int selectedTowerType { get; set; } = 0;
+        public int SelectedTowerType { get; set; } = 0;
+        /*public bool IconHovered => BuildingPaneInstance.BuildingButtonIcon1Instance.IsFocused;*/
+
         partial void CustomInitialize()
         {
             BuildingPaneInstance.BuildingButtonIcon1Instance.Push += (_, _) =>
             {
                 BuildingIconPushed = true;
-                selectedTowerType = 1;
-            };
-
-            BuildingPaneInstance.BuildingButtonIcon1Instance.Click += (_, _) =>
-            {
-                BuildingIconReleased = true;
-                selectedTowerType = 0;
+                SelectedTowerType = 1;
+                Console.Out.WriteLine("Button pushed");
             };
             //ButtonStandardInstance.Click += (_, _) =>
             //{

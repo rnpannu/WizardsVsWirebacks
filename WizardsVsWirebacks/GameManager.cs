@@ -16,6 +16,7 @@ using System;
 
 
 // TODO: Scene management, UI management, tile drag and drop
+// TODO: Create autotiling + source tile conversion scheme / engine
 namespace WizardsVsWirebacks
 {
     public class GameManager : Core

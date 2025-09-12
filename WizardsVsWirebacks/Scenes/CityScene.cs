@@ -20,14 +20,14 @@ namespace WizardsVsWirebacks.Scenes;
 
 public class CityScene : Scene
 {   
-    // TODO: todo
+    // TODO: todo, have to do
     
-    // ! Urgent
+    // ! Urgent, breaking the system
     // ? Question
-    // * High priority
-    // ~ Medium priority
-    // ` Low priority
-    // & Potential improvement
+    // * High priority, important fucntionality
+    // ~ Medium priority, good task to do
+    // ` Low priority, do it if you have time / want to
+    // & Potential improvement, refactoring or change of approach
     
     // TODO: Add a pause screen complete with exit to main menu and a button to another options panel
     // Next, implement an options panel
@@ -40,6 +40,8 @@ public class CityScene : Scene
     private GameState _gameState;
 
     private Camera _camera;
+    private static Vector2 _cameraDirection;
+    public static Vector2 CameraDirection => _cameraDirection;
     
     private Texture2D _background;
 
@@ -103,7 +105,7 @@ public class CityScene : Scene
     }
 
     //1. ----------------------------- End INITIALIZATION Logic -----------------------------------
-    //2. ----------------------------------- LOAD Logic -------------------------------------------
+    // 2. ----------------------------------- LOAD Logic -------------------------------------------
     // 2. Parse intgrid csv file 
     private void LoadIntGrid()
     {
@@ -124,7 +126,7 @@ public class CityScene : Scene
         }
         else Console.Out.WriteLine("Save already exists");
 
-        // ~ Parse csv -> Could improve with serialization / deserialization (Streams) - make more robust
+        // ` Parse csv -> Could improve with serialization / deserialization (Streams) - make more robust
         CityHeight = lines.Length;
         for (int i = 0; i < CityHeight; i++)
         {
@@ -161,9 +163,37 @@ public class CityScene : Scene
     // 3. All actively updating input assessment
     private void HandleInput()
     {
-        CityInputManager.Update();
+        // & Should we encapsulate input handling in another class?
+        _cameraDirection = Vector2.Zero;
+        
         _cursorPosX = GameController.MousePosition().X / (int)CityWorldScale;
         _cursorPosY = GameController.MousePosition().Y / (int)CityWorldScale;
+        
+        if (GameController.MoveUp()) _cameraDirection.Y--;
+        if (GameController.MoveDown()) _cameraDirection.Y++;
+        if (GameController.MoveLeft()) _cameraDirection.X--;
+        if (GameController.MoveRight()) _cameraDirection.X++;
+
+        if(_cameraDirection != Vector2.Zero)
+        {
+            _cameraDirection.Normalize();
+        }
+        
+        if (_UI.BuildingIconPushed)
+        {
+            
+            if (GameController.M1Released())
+            {
+                Vector2 releasePosition = new Vector2(CursorTileX, CursorTileY);
+                Console.Out.WriteLine("Drag and drop at position: " + releasePosition.ToString());
+                
+                // * stuff to do here
+                //building = new Building();
+                //buildings.Add(building);
+
+                _UI.BuildingIconPushed = false;
+            }
+        }
     }
     // 3.0 Main update call
     public override void Update(GameTime gameTime)
@@ -198,8 +228,8 @@ public class CityScene : Scene
         // If dragging and dropping building draw building icon instead
         if (_UI.BuildingIconPushed)
         {
-            // TODO: Generate overloads for draw calls?
-            // How tf to highlight todos?
+            // ? Generate overloads for draw calls?
+            
             _buildingIcon.Color = Color.White * 0.5f; 
             Core.SpriteBatch.Draw(pixelTexture, highlightRect, Color.White * 0.5f);
             _buildingIcon.Draw(Core.SpriteBatch, new Vector2(CursorTileX * CityTileSize, CursorTileY * CityTileSize + 1));

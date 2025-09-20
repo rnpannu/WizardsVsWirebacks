@@ -28,7 +28,7 @@ namespace WizardsVsWirebacks
 
 
 
-        public GameManager() : base("Wizards vs Wirebacks", 1280, 720, false)
+        public GameManager() : base("Wizards vs Wirebacks", 1600, 1024, false)
         {
             
         }

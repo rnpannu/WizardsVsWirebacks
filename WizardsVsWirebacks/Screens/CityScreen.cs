@@ -25,7 +25,7 @@ namespace WizardsVsWirebacks.Screens
             {
                 BuildingIconPushed = true;
                 SelectedTowerType = 1;
-                Console.Out.WriteLine("Button pushed");
+                Console.Out.WriteLine("Button pushed"); 
             };
             //ButtonStandardInstance.Click += (_, _) =>
             //{

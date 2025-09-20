@@ -12,6 +12,7 @@ namespace WizardsVsWirebacks;
 
 class Camera
 {
+    
     public Vector2 _position;
     public Vector2 _origin;
     public Matrix _transform;
@@ -43,6 +44,10 @@ class Camera
 
     public void CalculateTranslation()
     {
+        // TODO: Incorporate a delay / camera smoothing to the camera navigation - current system looks a little jagged as it perfectly follows WASD movement
+        // to do the delay define a constant and multiply it by delta time.
+        //    - https://youtu.be/YJB1QnEmlTs?si=OVT4WDeNhagwLxVe
+        
         // Clamping is currently disabled as map size = window size and the camera would just not move at all
 
         float dx = (Core.Width / 2) - _position.X;

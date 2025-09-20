@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using ToolsUtilities;
@@ -25,12 +26,11 @@ public class CityScene : Scene
     // ! Urgent, breaking the system
     // ? Question
     // * High priority, important fucntionality
-    // ~ Medium priority, good task to do
-    // ` Low priority, do it if you have time / want to
-    // & Potential improvement, refactoring or change of approach
     
     // TODO: Add a pause screen complete with exit to main menu and a button to another options panel
-    // Next, implement an options panel
+    // Next, implement an options panel.
+    // Also make all gum elements independent of screen size (relative not absolute)
+    // Also hide the city buildings panel behind a button like monkey city.
     private enum GameState
     {
         Playing,
@@ -87,14 +87,14 @@ public class CityScene : Scene
     private int CursorTileY => Math.Max(0, Math.Min(_cursorPosY, Core.Height - 1)) / CityTileSize;
 
 
-    //1. ----------------------------- INITIALIZATION Logic -----------------------------------
-    //1. Gum logic
+
+
     private void InitializeUI()
     {
         _UI = new CityScreen();
         _UI.AddToRoot();
     }
-    //1. Main initialize
+
     public override void Initialize()
     {
         base.Initialize();
@@ -104,8 +104,7 @@ public class CityScene : Scene
         _camera.SetBounds();
     }
 
-    //1. ----------------------------- End INITIALIZATION Logic -----------------------------------
-    // 2. ----------------------------------- LOAD Logic -------------------------------------------
+
     // 2. Parse intgrid csv file 
     private void LoadIntGrid()
     {
@@ -113,10 +112,19 @@ public class CityScene : Scene
         _captureStatusVisual.Add(2, Color.Red); //Uncaptured 
 
         // Create a copy of the csv
-        string basePath = "..\\..\\..\\Content\\Tilemaps\\City\\simplified\\Level_0\\";
+
+        string basePath = "";
+        if (RuntimeInformation.IsOSPlatform((OSPlatform.Windows)))
+        {
+            basePath = "../../../Content/Tilemaps/City/simplified/Level_0/";
+            
+        } else if (RuntimeInformation.IsOSPlatform((OSPlatform.Linux)))
+        {
+            basePath = Path.Combine("Content", "Tilemaps", "City", "simplified", "Level_0");
+        }
+        
         string cityFile = Path.Combine(basePath, "City.csv");
         string coreSaveFile = Path.Combine(basePath, "CoreSave.csv");
-
         string[] lines = File.ReadAllLines(cityFile);
 
         if (!File.Exists(coreSaveFile))
@@ -147,7 +155,6 @@ public class CityScene : Scene
 
     }
     
-    // 2. Main LoadContent()
     public override void LoadContent()
     {
         _background = Content.Load<Texture2D>("Tilemaps/City/simplified/Level_0/Background");
@@ -157,13 +164,10 @@ public class CityScene : Scene
 
         LoadIntGrid();
     }
-    //2. ----------------------------- END LOAD Logic ----------------------------------
 
-    // 3. ----------------------------- UPDATE Logic -----------------------------------
-    // 3. All actively updating input assessment
     private void HandleInput()
     {
-        // & Should we encapsulate input handling in another class?
+
         _cameraDirection = Vector2.Zero;
         
         _cursorPosX = GameController.MousePosition().X / (int)CityWorldScale;
@@ -195,7 +199,7 @@ public class CityScene : Scene
             }
         }
     }
-    // 3.0 Main update call
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -204,10 +208,7 @@ public class CityScene : Scene
         
         GumService.Default.Update(gameTime);
     }
-    // 3. ----------------------------- End UPDATE Logic -----------------------------
-    
-    // 4. ----------------------------- DRAW Logic -----------------------------------
-    // 4. Main Draw call
+
     public override void Draw(GameTime gameTime)
     {
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
@@ -274,6 +275,6 @@ public class CityScene : Scene
             }
         }
     }
-    // 4. ----------------------------- End DRAW Logic -----------------------------------
+
 }
 

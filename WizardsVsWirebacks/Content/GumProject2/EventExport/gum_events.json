@@ -329,6 +329,20 @@
         "ElementType": "Components",
         "EventType": 5,
         "TimestampUtc": "2025-09-10T15:17:14.5925832Z"
+      },
+      {
+        "NewName": "CityScreen1",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 0,
+        "TimestampUtc": "2025-09-20T23:50:16.3471758Z"
+      },
+      {
+        "NewName": "LevelScreen",
+        "OldName": "CityScreen1",
+        "ElementType": "Screens",
+        "EventType": 2,
+        "TimestampUtc": "2025-09-20T23:50:28.5013313Z"
       }
     ]
   }

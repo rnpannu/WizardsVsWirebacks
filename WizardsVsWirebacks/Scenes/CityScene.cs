@@ -182,6 +182,10 @@ public class CityScene : Scene
         {
             _cameraDirection.Normalize();
         }
+
+        if (GameController.M1Clicked() && _captureGrid[CursorTileX, CursorTileY] == 2) {
+          Core.ChangeScene(new LevelScene());
+        }
         
         if (_UI.BuildingIconPushed)
         {
@@ -197,6 +201,7 @@ public class CityScene : Scene
 
                 _UI.BuildingIconPushed = false;
             }
+
         }
     }
 

@@ -3,6 +3,7 @@ using GumRuntime;
 using MonoGameGum;
 using MonoGameGum.GueDeriving;
 using WizardsVsWirebacks.Components.WizardsVsWirebacks.BuildingPanel;
+using WizardsVsWirebacks.Components.Controls;
 using Gum.Converters;
 using Gum.DataTypes;
 using Gum.Managers;
@@ -38,6 +39,7 @@ partial class CityScreen : MonoGameGum.Forms.Controls.FrameworkElement
         });
     }
     public BuildingPane BuildingPaneInstance { get; protected set; }
+    public DragonCostBar DragonCostBarInstance { get; protected set; }
 
     public CityScreen(InteractiveGue visual) : base(visual)
     {
@@ -52,6 +54,7 @@ partial class CityScreen : MonoGameGum.Forms.Controls.FrameworkElement
     {
         base.ReactToVisualChanged();
         BuildingPaneInstance = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<BuildingPane>(this.Visual,"BuildingPaneInstance");
+        DragonCostBarInstance = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<DragonCostBar>(this.Visual,"DragonCostBarInstance");
         CustomInitialize();
     }
     //Not assigning variables because Object Instantiation Type is set to By Name rather than Fully In Code

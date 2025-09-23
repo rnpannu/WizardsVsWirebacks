@@ -1,3 +1,17 @@
+    just dotnet watch and edit and save your files ( hot reload)
+    or use your ide’s integration
+    
+    // Static means shared across all instances of a class, but we're only going to have one instance of
+    // City scene, does this indicate anything? Don't want to overuse 
+    
+        /// <summary>
+        /// Expression-bodied properties:
+        /// The => lambda syntax creates read-only computed properties using expression body syntax(introduced in C# 6.0). These properties:
+        /// Have no setter (read-only)
+        /// Calculate their values on-demand based on the underlying fields
+        /// Are essentially shorthand for { get { return _cursorPosX* CityTileSize; } }
+        /// </summary>
+
 //// ------------------- 09/04 --------------------------
     - Cannot set source file for texture coordinates by state?
     - How to reference Iconcategory in Gum

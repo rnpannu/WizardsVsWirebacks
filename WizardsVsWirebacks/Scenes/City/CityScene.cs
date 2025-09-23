@@ -31,6 +31,31 @@ public class CityScene : Scene
     // Next, implement an options panel.
     // Also make all gum elements independent of screen size (relative not absolute)
     // Also hide the city buildings panel behind a button like monkey city.
+    
+    // Utility variables 
+    private const float _printDelay = 2000f;
+    private  float _pdCounter = 0;
+    
+    // Exposed statics
+    public static float CityWorldScale { get; private set; } = 2.0f; // ! Very important to understand, and also discuss
+    public static int CityTileSize { get; private set; } // ? true 16, or scaled 32 ?
+    
+    public static int CityTileSizeScaled { get; private set; } 
+    public static int CityWidth { get; private set; }
+    public static int CityHeight { get; private set; }
+    public static int CityWidthPx => CityTileSizeScaled * CityWidth; // How do these lambdas impact performance with every frame calculations, what does the compiler optimize?
+    public static int CityHeightPx => CityTileSizeScaled * CityHeight;
+    
+    private int CursorTileX => _input.CursorPosX / CityTileSize;
+    private int CursorTileY => _input.CursorPosY / CityTileSize;
+    
+    
+    /*private int CursorTileX => Math.Max(0, Math.Min(_cursorPosX / CityTileSize, CityWidth - 1));
+    private int CursorTileY => Math.Max(0, Math.Min(_cursorPosY / CityTileSize, CityHeight - 1));*/
+    //private int CursorTileX => Math.Max(0, Math.Min(_cursorPosX, Core.Width - 1)) / CityTileSize;
+    //private int CursorTileY => Math.Max(0, Math.Min(_cursorPosY, Core.Height - 1)) / CityTileSize;
+    
+    // Foundational objects / patterns
     private enum GameState
     {
         Playing,
@@ -38,26 +63,18 @@ public class CityScene : Scene
     }
 
     private GameState _gameState;
-
-    private Camera _camera;
-    private static Vector2 _cameraDirection;
-    public static Vector2 CameraDirection => _cameraDirection;
     
-    private Texture2D _background;
-
-    // 1:1 with IntGrid csv file
-    private int[,] _captureGrid;
-
-    // Intgrid color map for visualization
-    private Dictionary<int, Color> _captureStatusVisual = new Dictionary<int, Color>();
-
     // Gum 
     private CityScreen _UI;
 
+    private CityInputManager _input;
+    
+    
     // ? Ongoing, how to best use these?
     private Tilemap _tileMap;
     private TextureAtlas _atlas;
 
+    
     // TODO: Design an extensible building management helper. New class(es)?
     /*private Dictionary<int, Building> _iconMap = new Dictionary<int, Building>();
     private List<Building> _buildings;*/
@@ -65,28 +82,16 @@ public class CityScene : Scene
     //private Building _building;
     private Sprite _buildingIcon;
     
-    // Scene globals
-    public static float CityWorldScale { get; set; } = 2.0f;
-    public static int CityTileSize { get; set; }
-    public static int CityWidth { get; set; }
-    public static int CityHeight { get; set; }
-    public static int CityWidthPx => CityTileSize * CityWidth; // How do these lambdas impact performance with every frame calculations, what does the compiler optimize?
-    public static int CityHeightPx => CityTileSize * CityHeight;
+    private Texture2D _background;
+    // 1:1 with IntGrid csv file
+    private int[,] _captureGrid;
+    // Intgrid color map for visualization
+    private Dictionary<int, Color> _captureStatusVisual = new Dictionary<int, Color>();
     
-    private int _cursorPosX;
-    private int _cursorPosY;
     
-    /// <summary>
-    /// Expression-bodied properties:
-    /// The => lambda syntax creates read-only computed properties using expression body syntax(introduced in C# 6.0). These properties:
-    /// Have no setter (read-only)
-    /// Calculate their values on-demand based on the underlying fields
-    /// Are essentially shorthand for { get { return _cursorPosX* CityTileSize; } }
-    /// </summary>
-    private int CursorTileX => Math.Max(0, Math.Min(_cursorPosX, Core.Width - 1)) / CityTileSize;
-    private int CursorTileY => Math.Max(0, Math.Min(_cursorPosY, Core.Height - 1)) / CityTileSize;
-
-
+    // Core game properties
+    
+    public static int Doubloons { get; set; } = 500;
 
 
     private void InitializeUI()
@@ -99,9 +104,9 @@ public class CityScene : Scene
     {
         base.Initialize();
         CityTileSize = 16;
+        CityTileSizeScaled = CityTileSize * (int)CityWorldScale;
         InitializeUI();
-        _camera = new Camera(new Vector2(Core.Width / 2, Core.Height / 2));
-        _camera.SetBounds();
+        _input = new CityInputManager();
     }
 
 
@@ -168,20 +173,11 @@ public class CityScene : Scene
     private void HandleInput()
     {
 
-        _cameraDirection = Vector2.Zero;
-        
-        _cursorPosX = GameController.MousePosition().X / (int)CityWorldScale;
-        _cursorPosY = GameController.MousePosition().Y / (int)CityWorldScale;
-        
-        if (GameController.MoveUp()) _cameraDirection.Y--;
-        if (GameController.MoveDown()) _cameraDirection.Y++;
-        if (GameController.MoveLeft()) _cameraDirection.X--;
-        if (GameController.MoveRight()) _cameraDirection.X++;
 
-        if(_cameraDirection != Vector2.Zero)
-        {
-            _cameraDirection.Normalize();
-        }
+        //private int CursorTileX => Math.Max(0, Math.Min(_cursorPosX / CityTileSize, CityWidth - 1));
+        /*_cursorPosX = GameController.MousePosition().X  / (int)CityWorldScale; Math.Max(0, Math.Min(_cursorPosX, Core.Height - 1));
+        _cursorPosY = GameController.MousePosition().Y / (int)CityWorldScale;*/
+        
         
         if (_UI.BuildingIconPushed)
         {
@@ -198,13 +194,15 @@ public class CityScene : Scene
                 _UI.BuildingIconPushed = false;
             }
         }
+        
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        
         HandleInput();
-        _camera.Update();
+        _input.Update();
         
         GumService.Default.Update(gameTime);
     }
@@ -212,11 +210,13 @@ public class CityScene : Scene
     public override void Draw(GameTime gameTime)
     {
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
-        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.Translation * Matrix.CreateScale(CityWorldScale));
+        // ? The create scale essentially zooms in by a factor of 2. So they appear as 32 pixels
+        // ? Need to standardize / generalize this 
+        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: (_input.Translation * Matrix.CreateScale(CityWorldScale)
+            ));
 
         Core.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
-
-
+        
         // Highlight the tile the cursor is currently hovering on
         Texture2D pixelTexture;
         pixelTexture = new Texture2D(Core.GraphicsDevice, 1, 1);
@@ -224,32 +224,26 @@ public class CityScene : Scene
 
         // ` Might be worth putting in a CursorTileXPx property?
         Rectangle highlightRect = new Rectangle(CursorTileX * CityTileSize, CursorTileY * CityTileSize, CityTileSize, CityTileSize);
-
-
+        
         // If dragging and dropping building draw building icon instead
         if (_UI.BuildingIconPushed)
         {
             // ? Generate overloads for draw calls?
             
             _buildingIcon.Color = Color.White * 0.5f; 
-            Core.SpriteBatch.Draw(pixelTexture, highlightRect, Color.White * 0.5f);
-            _buildingIcon.Draw(Core.SpriteBatch, new Vector2(CursorTileX * CityTileSize, CursorTileY * CityTileSize + 1));
+            //Core.SpriteBatch.Draw(pixelTexture, highlightRect, Color.White * 0.5f);
+            //_buildingIcon.Draw(Core.SpriteBatch, new Vector2(CursorTileX * CityTileSize, CursorTileY * CityTileSize + 1));
             
         // TODO: Handle Drag & Drop + Building creation
-        } /*else if (_UI.BuildingIconReleased)
+        } else
         {
-            
-        }*/
-        else
-        {
-            Color currentCol = _captureStatusVisual[_captureGrid[CursorTileX, CursorTileY]];
-            Core.SpriteBatch.Draw(pixelTexture, highlightRect, currentCol * 0.5f);
+            //Color currentCol = _captureStatusVisual[_captureGrid[CursorTileX, CursorTileY]];
+            //Core.SpriteBatch.Draw(pixelTexture, highlightRect, currentCol * 0.5f);
         }
-
-
+        
         // Draw camera sprite placeholder
-        _camera.Draw();
 
+        _input.Draw();
 
         Core.SpriteBatch.End();
 

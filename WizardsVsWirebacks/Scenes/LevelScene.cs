@@ -22,7 +22,8 @@ public class LevelScene
     private Tilemap Tilemap;
 
     private int _currency;
-
+    
+    
     // private Camera _camera;
     //private CitySceneUI _ui;
 }

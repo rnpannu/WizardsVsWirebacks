@@ -8,6 +8,7 @@ using RenderingLibrary.Graphics;
 
 using System.Linq;
 using WizardsVsWirebacks.Components.Controls;
+using WizardsVsWirebacks.Scenes;
 
 namespace WizardsVsWirebacks.Screens
 {
@@ -23,10 +24,12 @@ namespace WizardsVsWirebacks.Screens
         {
             BuildingPaneInstance.BuildingButtonIcon1Instance.Push += (_, _) =>
             {
+                
                 BuildingIconPushed = true;
                 SelectedTowerType = 1;
                 Console.Out.WriteLine("Button pushed"); 
             };
+            DragonCostBarInstance.Text = CityScene.Doubloons.ToString();
             //ButtonStandardInstance.Click += (_, _) =>
             //{
             //    GumService.Default.Root.Children.Clear();

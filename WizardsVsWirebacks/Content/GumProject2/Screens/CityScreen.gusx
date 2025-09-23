@@ -9,5 +9,10 @@
     <BaseType>WizardsVsWirebacks/BuildingPanel/BuildingPane</BaseType>
     <DefinedByBase>false</DefinedByBase>
   </Instance>
+  <Instance>
+    <Name>DragonCostBarInstance</Name>
+    <BaseType>Controls/DragonCostBar</BaseType>
+    <DefinedByBase>false</DefinedByBase>
+  </Instance>
   <Behaviors />
 </ScreenSave>

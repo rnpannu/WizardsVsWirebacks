@@ -82,6 +82,10 @@ public static class GameController
     {
         return s_mouse.WasButtonJustReleased(MouseButton.Left);
     }
+    public static bool M1Clicked()
+    {
+        return s_mouse.WasButtonJustPressed(MouseButton.Left);
+    }
     public static bool IsM1Down()
     {
         return s_mouse.IsButtonDown(MouseButton.Left);

@@ -1,4 +1,5 @@
 ﻿using MonoGameLibrary.Graphics;
+using MonoGameLibrary.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WizardsVsWirebacks.Scenes;
 
-public class LevelScene
+public class LevelScene : Scene
 {
     private enum GameState
     {

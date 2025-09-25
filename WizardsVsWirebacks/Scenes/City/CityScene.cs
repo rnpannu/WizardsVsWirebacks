@@ -174,12 +174,17 @@ public class CityScene : Scene
 
     private void HandleInput()
     {
-
-
         //private int CursorTileX => Math.Max(0, Math.Min(_cursorPosX / CityTileSize, CityWidth - 1));
         /*_cursorPosX = GameController.MousePosition().X  / (int)CityWorldScale; Math.Max(0, Math.Min(_cursorPosX, Core.Height - 1));
         _cursorPosY = GameController.MousePosition().Y / (int)CityWorldScale;*/
         
+
+
+
+        if (GameController.M1Clicked() && _captureGrid[CursorTileX, CursorTileY] == 2) {
+          Core.ChangeScene(new LevelScene());
+        }
+
         
         if (_UI.BuildingIconPushed)
         {
@@ -195,6 +200,7 @@ public class CityScene : Scene
 
                 _UI.BuildingIconPushed = false;
             }
+
         }
         
     }

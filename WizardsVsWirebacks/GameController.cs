@@ -68,6 +68,11 @@ public static class GameController
     {
         return s_keyboard.WasKeyJustPressed(Keys.Enter);
     }
+    
+    public static bool Exit()
+    {
+        return s_keyboard.WasKeyJustPressed(Keys.Escape);
+    }
 
     public static bool ZoomIn()
     {

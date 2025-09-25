@@ -9,6 +9,7 @@ using RenderingLibrary.Graphics;
 using System.Linq;
 using WizardsVsWirebacks.Components.Controls;
 using WizardsVsWirebacks.Scenes;
+using WizardsVsWirebacks.Scenes.City;
 
 namespace WizardsVsWirebacks.Screens
 {

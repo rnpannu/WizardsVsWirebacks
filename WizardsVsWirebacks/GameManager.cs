@@ -1,65 +1,41 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using Gum.Wireframe;
-using GumRuntime;
+﻿using Gum.Wireframe;
 using MonoGameGum;
 using MonoGameLibrary;
-//using WizardsVsWirebacks.Screens;
-using MonoGameGum.Forms.Controls;
-using WizardsVsWirebacks.Screens;
 using WizardsVsWirebacks.Scenes;
-using System;
 
-// THIS IS THE GAME 1 CLASS
-
-
-// TODO: Scene management, UI management, tile drag and drop
 // TODO: Create autotiling + source tile conversion scheme / engine
 namespace WizardsVsWirebacks
 {
-    public class GameManager : Core
+    // This is Game1 renamed, entry point of the application
+    public class GameManager() : Core("Wizards vs Wirebacks", 1600, 900, false)
     {
-
-        GumService GumUI => GumService.Default;
+        private static GumService GumUi => GumService.Default;
 
         public static GraphicalUiElement Root;
 
-
-
-        public GameManager() : base("Wizards vs Wirebacks", 1600, 1024, false)
+        // Redundant?/Original definition of virtual height
+        // Load and link gum project
+        private void InitializeGum()
         {
-            
-        }
-        public void InitializeGum()
-        {
-            // S
-            var gumProject = GumUI.Initialize(
+            // var gumproject
+            var unused = GumUi.Initialize(
                 this,
                 "GumProject2/GumProject.gumx");
-
             
             base.Initialize();
-
         }
 
-
+        /// <summary>
+        /// Intialize UI and set the active scene as Title
+        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            
-
             base.Initialize();
-
             InitializeGum();
             //Audio.PlaySong(_themeSong);
-
             ChangeScene(new TitleScene());
         }
-
-
-
+        
         protected override void LoadContent()
         {
 

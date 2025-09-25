@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WizardsVsWirebacks.Scenes.City;
 using WizardsVsWirebacks.Screens;
 
 namespace WizardsVsWirebacks.Scenes;
@@ -44,6 +45,7 @@ public class TitleScene : Scene
 
     private void InitializeUI()
     {
+        GumService.Default.Root.Children.Clear();
         var screen = new TitleScreen();
         screen.AddToRoot();
     }
@@ -74,7 +76,10 @@ public class TitleScene : Scene
     public override void Draw(GameTime gameTime)
     {
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
-        Core.SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
+        Core.GraphicsDevice.Viewport = Core.Viewport;
+        Core.SpriteBatch.Begin(samplerState: SamplerState.PointWrap
+            , transformMatrix: Core.Scale
+            );
 
         Core.SpriteBatch.Draw(
             _backgroundPattern,

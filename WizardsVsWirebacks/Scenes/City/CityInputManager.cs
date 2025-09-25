@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
+using WizardsVsWirebacks.Scenes.City;
 
 namespace WizardsVsWirebacks.Scenes;
 
@@ -12,7 +13,7 @@ public class CityInputManager
     private float _pdCounter = 0;
     
     public float _delay = 1.0f;
-    private const float SPEED = 500;
+    private const float SPEED = 300;
     
     private Texture2D _focusPoint;
     public Vector2 _origin;
@@ -21,24 +22,27 @@ public class CityInputManager
     public Vector2 _cameraPosition;
     private Vector2 _minPos, _maxPos;
     
-    private static Vector2 _cameraDirection;
-    public static Vector2 CameraDirection => _cameraDirection;
+    private Vector2 _cameraDirection;
+    public Vector2 CameraDirection => _cameraDirection;
     
     public Matrix Translation { get; set; }
+
+    public Matrix Scale { get; set; } = Matrix.CreateScale(CityScene.CityWorldScale);
+
+    
     
     private int _cursorPosX;
     private int _cursorPosY;
-    public int CursorPosX => _cursorPosX;
-    public int CursorPosY => _cursorPosY;
     
+    public Vector2 MouseCoordsWorld { get; private set; } = Vector2.Zero;
+    public Vector2 MouseCoordsScreen { get; private set; } = Vector2.Zero;
     
     public void SetCameraBounds()
     {
         // Console.Out.WriteLine("Outbuffer: " + CityScene.CityTileSize.ToString() + " Inbuffer: " + _origin.X.ToString());
         // idk what i was on when writing this
-        _minPos = new Vector2(0, 0);
-        // ! Relevant 
-        _maxPos = new Vector2(CityScene.CityWidthPx, CityScene.CityHeightPx); 
+        _minPos = new Vector2(_origin.X, _origin.Y);
+        _maxPos = new Vector2(CityScene.CityWidthPx - _origin.X, CityScene.CityHeightPx - _origin.Y); 
     }
 
     public CityInputManager()
@@ -47,15 +51,20 @@ public class CityInputManager
     }
     public void Initialize()
     {
-        _startingPos = new Vector2(Core.Width / 2.0f, Core.Height / 2.0f) / CityScene.CityWorldScale;
+        Matrix invert = Matrix.Invert(Core.Scale * Matrix.CreateScale(CityScene.CityWorldScale));
+        _startingPos = Vector2.Transform(new Vector2(Core.VirtualWidth / 2, Core.VirtualHeight / 2), invert);
         _cameraPosition = _startingPos;
-
+        
         _focusPoint = Core.Content.Load<Texture2D>("images/focusPoint");
         _origin = new Vector2(_focusPoint.Width / 2, _focusPoint.Height / 2);
         SetCameraBounds();
     }
     public void HandleInput()
     {
+        if (GameController.Exit())
+        {
+            Core.ChangeScene(new TitleScene());
+        }
         _cameraDirection = Vector2.Zero;
         
         if (GameController.MoveUp()) _cameraDirection.Y--;
@@ -67,12 +76,23 @@ public class CityInputManager
         {
             _cameraDirection.Normalize();
         }
+
+        MouseCoordsWorld = Vector2.Transform(GameController.MousePosition().ToVector2(), Matrix.Invert(CityScene.Transform)); // OOP Hell
         
-        /*_cursorPosX = (GameController.MousePosition().X - (int)(_camera.Translation.M41 * CityScene.CityWorldScale)) / (int) CityScene.CityWorldScale;
-        _cursorPosY = (GameController.MousePosition().Y - (int)(_camera.Translation.M42 * CityScene.CityWorldScale)) / (int) CityScene.CityWorldScale;*/
+
+        if (_pdCounter > _printDelay)
+        {
+            // * Create debug interface, massive switch for controlling console output?
+            // * the non vim mfs could just use a debugger but we have to consider their kind
+            Console.Out.WriteLine(MouseCoordsWorld.ToString());
+            Console.Out.WriteLine("---------------------------------------------------------------");
+            _pdCounter %= _printDelay;
+        }
+        else
+        {
+            _pdCounter += Core.DT * 1000f;
+        }
         
-        _cursorPosX = (GameController.MousePosition().X - (int)(Translation.M41));
-        _cursorPosY = (GameController.MousePosition().Y - (int)(Translation.M42));
     }
     
     public void CalculateTranslation()
@@ -80,33 +100,36 @@ public class CityInputManager
         // TODO: Incorporate a delay / camera smoothing to the camera navigation - current system looks a little jagged as it perfectly follows WASD movement
         // to do the delay define a constant and multiply it by delta time.
         //    - https://youtu.be/YJB1QnEmlTs?si=OVT4WDeNhagwLxVe
+        // Also, find out why there is a smaller sliver exposed on the bottom of the city
         
-        // Clamping is currently disabled as map size = window size and the camera would just not move at all
-
         float dx = _startingPos.X - _cameraPosition.X;
-        dx = MathHelper.Clamp(dx, -_startingPos.X + 500, 0); // Cleaning up this code wouldn't be a bad idea, handling of variables between Core, GameManager, CityScene, and Camera.
+        dx = MathHelper.Clamp(dx, -(_startingPos.X + (_focusPoint.Width * CityScene.CityWorldScale) + _origin.X) - (Core.Width), 0); // Cleaning up this code wouldn't be a bad idea, handling of variables between Core, GameManager, CityScene, and Camera.
         float dy = _startingPos.Y - _cameraPosition.Y;
-        //dy = MathHelper.Clamp(dy, -CityScene.CityHeightPx + Core.Height + (CityScene.CityTileSize / 2), CityScene.CityTileSize / 2);
+        dy = MathHelper.Clamp(dy, -(_startingPos.Y + _focusPoint.Height + _origin.Y) - (Core.Height), 0);
         
         
         Translation = Matrix.CreateTranslation(dx, dy, 0f);
         //Translation = Matrix.Identity;
         
-        if (_pdCounter > _printDelay)
+        /*if (_pdCounter > _printDelay)
         {
-            Console.Out.WriteLine(_cameraPosition.ToString());
+            // * Create debug interface, massive switch for controlling console output?
+            // * the non vim mfs could just use a debugger but we have to consider their kind
+            Console.Out.WriteLine("X: "+ _cursorPosX.ToString() + ". Y: " + _cursorPosY.ToString());
             _pdCounter %= _printDelay;
         }
         else
         {
             _pdCounter += Core.DT * 1000f;
-        }
+        }*/
     }
+    
+
+
     public void Update()
     {
         HandleInput();
-        _cameraPosition += ((_cameraDirection * GameManager.DT * SPEED) / CityScene.CityWorldScale
-            );
+        _cameraPosition += ((_cameraDirection * GameManager.DT * SPEED));
         
         _cameraPosition = Vector2.Clamp(_cameraPosition, _minPos, _maxPos);
         

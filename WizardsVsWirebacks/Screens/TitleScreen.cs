@@ -8,6 +8,7 @@ using RenderingLibrary.Graphics;
 using System;
 using System.Linq;
 using WizardsVsWirebacks.Scenes;
+using WizardsVsWirebacks.Scenes.City;
 
 namespace WizardsVsWirebacks.Screens
 {
@@ -17,25 +18,18 @@ namespace WizardsVsWirebacks.Screens
         {
             TitleButtonStandardInstance.Click += (_, _) =>
             {
-                GumService.Default.Root.Children.Clear();
-                var screen = new CityScreen();
-                screen.AddToRoot();
+
                 Core.ChangeScene(new CityScene());
             };
 
             TitleButtonStandard1Instance.Click += (_, _) =>
             {
                 GumService.Default.Root.Children.Clear();
-                //Core.Exit();
-                //Core.Audio.PlaySoundEffect(null);
-
                 var screen = new DemoScreenGum();
                 screen.AddToRoot();
                 //Core.ChangeScene(new CityScene());
             }
             ;
-            
-            //ButtonStandardInstance.Text = $"Clicked {++clickCount} Time(s)";
         }
     }
 }

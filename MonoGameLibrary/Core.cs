@@ -38,8 +38,20 @@ public class Core : Game
 
     public static AudioController Audio { get; private set; }
 
-    public static int Width { get; private set; }
-    public static int Height { get; private set; }
+    // 
+    public static int Width { get; private set; } = 640;
+    public static int Height { get; private set; } = 360;
+    
+    
+    // Will change depending on the size of the screen
+    public static int VirtualWidth { get; set; } = 1600;
+
+    public static int VirtualHeight { get; set; } = 900;
+    
+    public static Matrix Scale { get; set; }
+
+    public static Viewport Viewport { get; private set; }
+
 
     public static bool Vsync { get; private set; } = true;
 
@@ -64,12 +76,13 @@ public class Core : Game
         Graphics = new GraphicsDeviceManager(this);
 
         Graphics.PreferredBackBufferWidth = width;
-        Width = width;
+        VirtualWidth = width;
         Graphics.PreferredBackBufferHeight = height;
-        Height = height;
+        VirtualHeight = height;
         Graphics.SynchronizeWithVerticalRetrace = Vsync;
         Graphics.IsFullScreen = fullScreen;
         Graphics.ApplyChanges();
+
 
         Window.Title = title;
 
@@ -94,12 +107,49 @@ public class Core : Game
         Input = new InputManager();
 
         Audio = new AudioController();
+        
+        CalculateScale();
     }
 
     protected override void UnloadContent()
     {
         Audio.Dispose();
         base.UnloadContent();
+    }
+    
+    /// <summary>
+    /// Calculate scaling from base resolution to output resolution.
+    /// Logic to implement dynamic resizing is there if we want to make an event listen register for it
+    ///     - Window.ClientSizeChanged event
+    /// </summary>
+    public void CalculateScale()
+    {
+        /*float screenWidth = Core.GraphicsDevice.PresentationParameters.BackBufferWidth;
+        float screenHeight = Core.GraphicsDevice.PresentationParameters.BackBufferHeight;
+        
+        if (screenWidth / Width > screenHeight / Height)
+        {
+            int aspect = (int) (screenHeight / Height);
+            VirtualWidth = (aspect * Width);
+            VirtualHeight = (Height);
+        }
+        else
+        {
+            int aspect = (int)screenWidth / Width;
+            VirtualWidth = (Width);
+            VirtualHeight = (aspect * Height);
+        }*/
+        
+        Scale = Matrix.CreateScale(VirtualWidth / Width);
+        
+        // Can implement later, center scaling so it doesn't scale from the top left
+        Viewport = new Viewport
+        {
+            X = (int)(0),
+            Y = (int)(0),
+            Width = VirtualWidth,
+            Height = VirtualHeight
+        };
     }
     protected override void Update(GameTime gameTime)
     {
@@ -111,7 +161,7 @@ public class Core : Game
         Audio.Update();
         if (ExitOnEscape && Input.Keyboard.IsKeyDown(Keys.Escape))
         {
-            Exit();
+            //Exit();
         }
 
 

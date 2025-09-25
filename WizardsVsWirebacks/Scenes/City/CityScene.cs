@@ -27,10 +27,7 @@ public class CityScene : Scene
     // ? Question
     // * High priority, important fucntionality
     
-    // TODO: Add a pause screen complete with exit to main menu and a button to another options panel
-    // Next, implement an options panel.
-    // Also make all gum elements independent of screen size (relative not absolute)
-    // Also hide the city buildings panel behind a button like monkey city.
+
     
     // Utility variables 
     private const float _printDelay = 2000f;
@@ -64,7 +61,11 @@ public class CityScene : Scene
 
     private GameState _gameState;
     
-    // Gum 
+    // TODO (UI): Add a pause screen complete with exit to main menu and a button to another options panel
+    // Next, implement an options panel.
+    // Also make all gum elements independent of screen size (relative not absolute)
+    // Also hide the city buildings panel behind a button like monkey city.
+    // Gum
     private CityScreen _UI;
 
     private CityInputManager _input;
@@ -85,6 +86,7 @@ public class CityScene : Scene
     private Texture2D _background;
     // 1:1 with IntGrid csv file
     private int[,] _captureGrid;
+    
     // Intgrid color map for visualization
     private Dictionary<int, Color> _captureStatusVisual = new Dictionary<int, Color>();
     

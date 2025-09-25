@@ -84,7 +84,7 @@ public class CityInputManager
         // Clamping is currently disabled as map size = window size and the camera would just not move at all
 
         float dx = _startingPos.X - _cameraPosition.X;
-        //dx = MathHelper.Clamp(dx, -CityScene.CityWidthPx + Core.Width + (CityScene.CityTileSize / 2), CityScene.CityTileSize / 2); // Cleaning up this code wouldn't be a bad idea, handling of variables between Core, GameManager, CityScene, and Camera.
+        dx = MathHelper.Clamp(dx, -_startingPos.X + 500, 0); // Cleaning up this code wouldn't be a bad idea, handling of variables between Core, GameManager, CityScene, and Camera.
         float dy = _startingPos.Y - _cameraPosition.Y;
         //dy = MathHelper.Clamp(dy, -CityScene.CityHeightPx + Core.Height + (CityScene.CityTileSize / 2), CityScene.CityTileSize / 2);
         

@@ -51,7 +51,7 @@ public class CityScene : Scene
     // Next, implement an options panel.
     // Also make all gum elements independent of screen size (relative not absolute)
     // Also hide the city buildings panel behind a button like monkey city.
-    private CityScreen _ui;
+
 
     private static CityInputManager _input;
     
@@ -83,9 +83,7 @@ public class CityScene : Scene
     /// </summary>
     private void InitializeUi()
     {
-        GumService.Default.Root.Children.Clear();
-        _ui = new CityScreen();
-        _ui.AddToRoot();
+
     }
 
     public override void Initialize()
@@ -163,38 +161,7 @@ public class CityScene : Scene
 
         LoadIntGrid();
     }
-
-    /// <summary>
-    /// Redundant, to be encapsulated in separate class
-    /// </summary>
-    private void HandleInput()
-    {
-
-
-        /*if (GameController.M1Clicked() && _captureGrid[CursorTileX, CursorTileY] == 2) {
-          Core.ChangeScene(new LevelScene());
-        }*/
-
-        
-        if (_ui.BuildingIconPushed)
-        {
-            
-            if (GameController.M1Released())
-            {
-                //Vector2 releasePosition = new Vector2(CursorTileX, CursorTileY);
-                //Console.Out.WriteLine("Drag and drop at position: " + releasePosition.ToString());
-                
-                // * stuff to do here
-                //building = new Building();
-                //buildings.Add(building);
-
-                _ui.BuildingIconPushed = false;
-            }
-
-        }
-        
-    }
-
+    
     /// <summary>
     /// Core gameloop's logical update run 60 times a second
     /// </summary>
@@ -203,7 +170,6 @@ public class CityScene : Scene
     {
         base.Update(gameTime);
         
-        HandleInput();
         _input.Update();
         
         GumService.Default.Update(gameTime);
@@ -248,7 +214,7 @@ public class CityScene : Scene
             _pdCounter += Core.DT * 1000f;
         }
         // If dragging and dropping building draw building icon instead
-        if (_ui.BuildingIconPushed)
+        if (_input.BuildingIconPushed() > 0)
         {
             // ? Generate overloads for draw calls?
             _buildingIcon.Color = Color.White * 0.5f; 

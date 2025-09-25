@@ -1,13 +1,17 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameGum;
 using MonoGameLibrary;
 using WizardsVsWirebacks.Scenes.City;
+using WizardsVsWirebacks.Screens;
 
 namespace WizardsVsWirebacks.Scenes;
 
 public class CityInputManager
 {
+    
+    private CityScreen _ui;
     
     private float _printDelay = 2000f;
     private float _pdCounter = 0;
@@ -49,8 +53,18 @@ public class CityInputManager
     {
         Initialize();
     }
+
+    private void InitializeUi()
+    {
+        GumService.Default.Root.Children.Clear();
+        _ui = new CityScreen();
+        _ui.AddToRoot();
+
+    }
     public void Initialize()
     {
+        InitializeUi();
+        // I should really document some of this
         Matrix invert = Matrix.Invert(Core.Scale * Matrix.CreateScale(CityScene.CityWorldScale));
         _startingPos = Vector2.Transform(new Vector2(Core.VirtualWidth / 2, Core.VirtualHeight / 2), invert);
         _cameraPosition = _startingPos;
@@ -65,6 +79,7 @@ public class CityInputManager
         {
             Core.ChangeScene(new TitleScene());
         }
+        
         _cameraDirection = Vector2.Zero;
         
         if (GameController.MoveUp()) _cameraDirection.Y--;
@@ -80,6 +95,9 @@ public class CityInputManager
         MouseCoordsWorld = Vector2.Transform(GameController.MousePosition().ToVector2(), Matrix.Invert(CityScene.Transform)); // OOP Hell
         
 
+        
+        
+        
         if (_pdCounter > _printDelay)
         {
             // * Create debug interface, massive switch for controlling console output?
@@ -139,5 +157,28 @@ public class CityInputManager
     public void Draw()
     {
         Core.SpriteBatch.Draw(_focusPoint, _cameraPosition, null, Color.White, 0.0f, _origin, 1.0f, SpriteEffects.None, default);
+    }
+
+    public int BuildingIconPushed()
+    {
+        // Come up with a non stupid system for this
+        if (_ui.BuildingIconPushed)
+        {       
+            if (GameController.M1Released())
+            {
+                //Vector2 releasePosition = new Vector2(CursorTileX, CursorTileY);
+                //Console.Out.WriteLine("Drag and drop at position: " + releasePosition.ToString());
+            
+                // * stuff to do here
+                //building = new Building();
+                //buildings.Add(building);
+
+                _ui.BuildingIconPushed = false;
+            }
+            return 1; 
+        }
+
+        return 0;
+
     }
 }

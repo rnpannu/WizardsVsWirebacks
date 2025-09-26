@@ -8,71 +8,84 @@ using WizardsVsWirebacks.Screens;
 
 namespace WizardsVsWirebacks.Scenes;
 
+/// <summary>
+/// A class that kinda tookover from city scene to be a godling class. Slightly better I suppose?
+/// Kinda violates the single responsibility principle
+///     - Handles camera movement
+///     - Handles input processing
+///     - Handles coordinate transformations
+///     - Does debugging
+/// </summary>
 public class CityInputManager
 {
-    
-    private CityScreen _ui;
+    // Injected (kinda) dependencies
+    private CityConfig _config;
     
     private float _printDelay = 2000f;
     private float _pdCounter = 0;
     
-    public float _delay = 1.0f;
+    private float _delay = 1.0f;
     private const float SPEED = 300;
     
     private Texture2D _focusPoint;
-    public Vector2 _origin;
+    private Vector2 _origin;
     
     private Vector2 _startingPos;
-    public Vector2 _cameraPosition;
+    private Vector2 _cameraPosition;
     private Vector2 _minPos, _maxPos;
     
     private Vector2 _cameraDirection;
     public Vector2 CameraDirection => _cameraDirection;
     
-    public Matrix Translation { get; set; }
-
-    public Matrix Scale { get; set; } = Matrix.CreateScale(CityScene.CityWorldScale);
-
-    
-    
     private int _cursorPosX;
     private int _cursorPosY;
     
     public Vector2 MouseCoordsWorld { get; private set; } = Vector2.Zero;
-    public Vector2 MouseCoordsScreen { get; private set; } = Vector2.Zero;
     
-    public void SetCameraBounds()
+    
+    public CityInputManager(CityConfig config)
     {
-        // Console.Out.WriteLine("Outbuffer: " + CityScene.CityTileSize.ToString() + " Inbuffer: " + _origin.X.ToString());
-        // idk what i was on when writing this
-        _minPos = new Vector2(_origin.X, _origin.Y);
-        _maxPos = new Vector2(CityScene.CityWidthPx - _origin.X, CityScene.CityHeightPx - _origin.Y); 
-    }
+        _config = config;
 
-    public CityInputManager()
-    {
         Initialize();
     }
 
-    private void InitializeUi()
-    {
-        GumService.Default.Root.Children.Clear();
-        _ui = new CityScreen();
-        _ui.AddToRoot();
 
-    }
     public void Initialize()
     {
-        InitializeUi();
-        // I should really document some of this
-        Matrix invert = Matrix.Invert(Core.Scale * Matrix.CreateScale(CityScene.CityWorldScale));
+        // Background gum stuff
+
+        // Go back to world coords to get starting position
+        Matrix invert = Matrix.Invert(Core.Scale * Matrix.CreateScale(_config.WorldScale));
         _startingPos = Vector2.Transform(new Vector2(Core.VirtualWidth / 2, Core.VirtualHeight / 2), invert);
         _cameraPosition = _startingPos;
         
+        // asset stuff
         _focusPoint = Core.Content.Load<Texture2D>("images/focusPoint");
         _origin = new Vector2(_focusPoint.Width / 2, _focusPoint.Height / 2);
+        
         SetCameraBounds();
+
+
     }
+
+
+    /// <summary>
+    /// Define the bounds that the camera (just the sprite, cameraPosition) can go
+    /// City edge camera lockout / clamp is defined in CalculateTranslation
+    /// </summary>
+    public void SetCameraBounds()
+    {
+        // Console.Out.WriteLine("Outbuffer: " + _config.CityTileSize.ToString() + " Inbuffer: " + _origin.X.ToString());
+        // idk what i was on when writing this
+        _minPos = new Vector2(_origin.X, _origin.Y);
+        _maxPos = new Vector2(_config.WidthPx - _origin.X, _config.HeightPx - _origin.Y); 
+    }
+    
+    /// <summary>
+    /// Kinda the point of the whole class
+    /// </summary>
+    // * could fragment into different functions for neatness
     public void HandleInput()
     {
         if (GameController.Exit())
@@ -80,6 +93,7 @@ public class CityInputManager
             Core.ChangeScene(new TitleScene());
         }
         
+        // WASD camera movement
         _cameraDirection = Vector2.Zero;
         
         if (GameController.MoveUp()) _cameraDirection.Y--;
@@ -91,19 +105,17 @@ public class CityInputManager
         {
             _cameraDirection.Normalize();
         }
-
-        MouseCoordsWorld = Vector2.Transform(GameController.MousePosition().ToVector2(), Matrix.Invert(CityScene.Transform)); // OOP Hell
         
-
+        // Apply inverse transform to get from screenCoords (with translation) -> Worldcoords
+        MouseCoordsWorld = Vector2.Transform(GameController.MousePosition().ToVector2(), Matrix.Invert(GetTransform())); // OOP Hell
         
-        
-        
+        // Debugging help
         if (_pdCounter > _printDelay)
         {
             // * Create debug interface, massive switch for controlling console output?
             // * the non vim mfs could just use a debugger but we have to consider their kind
-            Console.Out.WriteLine(MouseCoordsWorld.ToString());
-            Console.Out.WriteLine("---------------------------------------------------------------");
+            /*Console.Out.WriteLine(MouseCoordsWorld.ToString());
+            Console.Out.WriteLine("---------------------------------");*/
             _pdCounter %= _printDelay;
         }
         else
@@ -113,7 +125,11 @@ public class CityInputManager
         
     }
     
-    public void CalculateTranslation()
+    /// <summary>
+    /// Get the Translation matrix to shift the world by to simulate a camera.
+    /// </summary>
+    /// <returns> A translation matrix </returns>
+    public Matrix CalculateTranslation()
     {
         // TODO: Incorporate a delay / camera smoothing to the camera navigation - current system looks a little jagged as it perfectly follows WASD movement
         // to do the delay define a constant and multiply it by delta time.
@@ -121,64 +137,49 @@ public class CityInputManager
         // Also, find out why there is a smaller sliver exposed on the bottom of the city
         
         float dx = _startingPos.X - _cameraPosition.X;
-        dx = MathHelper.Clamp(dx, -(_startingPos.X + (_focusPoint.Width * CityScene.CityWorldScale) + _origin.X) - (Core.Width), 0); // Cleaning up this code wouldn't be a bad idea, handling of variables between Core, GameManager, CityScene, and Camera.
+        dx = MathHelper.Clamp(dx, -(_startingPos.X + (_focusPoint.Width * _config.WorldScale) + _origin.X) - (Core.Width), 0); // Cleaning up this code wouldn't be a bad idea, handling of variables between Core, GameManager, CityScene, and Camera.
         float dy = _startingPos.Y - _cameraPosition.Y;
         dy = MathHelper.Clamp(dy, -(_startingPos.Y + _focusPoint.Height + _origin.Y) - (Core.Height), 0);
         
         
-        Translation = Matrix.CreateTranslation(dx, dy, 0f);
-        //Translation = Matrix.Identity;
-        
-        /*if (_pdCounter > _printDelay)
-        {
-            // * Create debug interface, massive switch for controlling console output?
-            // * the non vim mfs could just use a debugger but we have to consider their kind
-            Console.Out.WriteLine("X: "+ _cursorPosX.ToString() + ". Y: " + _cursorPosY.ToString());
-            _pdCounter %= _printDelay;
-        }
-        else
-        {
-            _pdCounter += Core.DT * 1000f;
-        }*/
+        return Matrix.CreateTranslation(dx, dy, 0f);
+        // return Matrix.Identity;
     }
     
-
-
+    /// <summary>
+    /// Get the total transformation to go from world space -> screen space. Recall matrix multiplication goes from
+    /// right to left. 1 and 2 might need to be swapped ? idk brain is fried
+    /// 1. Scale from base resolution to screen resolution
+    /// 2. Scale city up to desired zoom
+    /// 3. Translate the whole thing by the camera's total offset
+    /// </summary>
+    /// <returns> The final transformation matrix </returns>
+    public Matrix GetTransform()
+    {
+        return CalculateTranslation() * Matrix.CreateScale(_config.WorldScale) * Core.Scale;
+    }
+    
+    /// <summary>
+    /// Move camera, checkbounds, update translation
+    /// </summary>
     public void Update()
     {
         HandleInput();
         _cameraPosition += ((_cameraDirection * GameManager.DT * SPEED));
-        
         _cameraPosition = Vector2.Clamp(_cameraPosition, _minPos, _maxPos);
-        
         CalculateTranslation();
     }
-
+    
+    /// <summary>
+    /// Debugging / completely useless
+    /// </summary>
     public void Draw()
     {
         Core.SpriteBatch.Draw(_focusPoint, _cameraPosition, null, Color.White, 0.0f, _origin, 1.0f, SpriteEffects.None, default);
     }
 
-    public int BuildingIconPushed()
+    public bool Drop()
     {
-        // Come up with a non stupid system for this
-        if (_ui.BuildingIconPushed)
-        {       
-            if (GameController.M1Released())
-            {
-                //Vector2 releasePosition = new Vector2(CursorTileX, CursorTileY);
-                //Console.Out.WriteLine("Drag and drop at position: " + releasePosition.ToString());
-            
-                // * stuff to do here
-                //building = new Building();
-                //buildings.Add(building);
-
-                _ui.BuildingIconPushed = false;
-            }
-            return 1; 
-        }
-
-        return 0;
-
+        return GameController
     }
 }

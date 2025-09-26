@@ -61,8 +61,6 @@ public class Camera
 
 Keyboard navigation of city? - mouse necessity?
 
-ToDo:
-
 	- Try to have a building project with a working rudimentary title screen and city screen and associated scene classes. Can view city with basic tilemap layout
 	- Figure out event handling to process screen transitions + work with tilemap.
 

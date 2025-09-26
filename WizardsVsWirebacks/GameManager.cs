@@ -12,7 +12,7 @@ namespace WizardsVsWirebacks
         private static GumService GumUi => GumService.Default;
 
         public static GraphicalUiElement Root;
-
+        
         // Redundant?/Original definition of virtual height
         // Load and link gum project
         private void InitializeGum()

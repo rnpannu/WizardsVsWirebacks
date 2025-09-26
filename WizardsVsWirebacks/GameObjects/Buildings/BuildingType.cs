@@ -1,0 +1,30 @@
+﻿namespace WizardsVsWirebacks.GameObjects;
+
+public enum BuildingType
+{
+    Chainsawmancer,
+    Soothsayer,
+    Archivist,
+    Oracle,
+    Leadconjurer,
+    Transmuter,
+    Artificer,
+    WraithShaman,
+    Chronomancer,
+    Thaumaturge,
+    Biomancer,
+    Lawyer,
+    Underwearwarper,
+    BloodBard,
+    Runesmith,
+    Psion,
+    Monk,
+    Soulslinger,
+    Occultist,
+    Kurdaitcha,
+    Illusionist,
+    Syncretist,
+    Garaboncid,
+    Totemist,
+    Archon,
+}

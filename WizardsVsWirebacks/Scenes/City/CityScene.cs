@@ -36,20 +36,21 @@ public class CityScene : Scene
     private CityObjectManager _objManager;
     
     // ? Ongoing, how to best use these?
-    //public static Tilemap _tileMap;
     public static TextureAtlas _atlas;
     
     // Assets
     private Sprite _buildingIcon;
     private Texture2D _background;
+    
+    // ? Move to object manager?
     private int[,] _captureGrid;// 1:1 with IntGrid csv file
     // Intgrid color map for visualization
     private Dictionary<int, Color> _captureStatusVisual = new Dictionary<int, Color>();
+    //public static Tilemap _tileMap;
     
     // Core game properties
     public static int Doubloons { get; set; } = 500;
-
-
+    
     // Utility variables 
     private const float _printDelay = 2000f;
     private float _pdCounter = 0;
@@ -149,6 +150,7 @@ public class CityScene : Scene
         {
             Console.Out.WriteLine("Drag and drop at position: " + new Vector2(_input.MouseCoordsWorld.X, _input.MouseCoordsWorld.Y).ToString());
             // TODO: Buildings !  - Confluence?
+            //_objManager.CreateBuilding(e, );
             _objManager.BuildingIconPushed = 0;
             _objManager.BuildingIconReleased = true;
         }

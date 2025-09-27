@@ -180,6 +180,6 @@ public class CityInputManager
 
     public bool Drop()
     {
-        return GameController
+        return GameController.M1Released();
     }
 }

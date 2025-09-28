@@ -3,7 +3,7 @@
 public enum BuildingType
 {
     Chainsawmancer,
-    Soothsayer,
+    Lawyer,
     Archivist,
     Oracle,
     Leadconjurer,
@@ -13,7 +13,7 @@ public enum BuildingType
     Chronomancer,
     Thaumaturge,
     Biomancer,
-    Lawyer,
+    Soothsayer,
     Underwearwarper,
     BloodBard,
     Runesmith,

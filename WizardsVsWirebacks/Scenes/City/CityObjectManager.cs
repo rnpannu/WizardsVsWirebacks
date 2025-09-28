@@ -11,6 +11,7 @@ public class CityObjectManager
 {
     private List<Building> _buildings;
     private Sprite _chainsawSprite;
+    private Sprite _lawyerSprite;
 
     private CityInputManager _input;
     private CityState _state;
@@ -40,6 +41,7 @@ public class CityObjectManager
 
         _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
         _chainsawSprite = _objectAtlas.CreateSprite("chainsawmancer-1");
+        _lawyerSprite = _objectAtlas.CreateSprite("laywer-1");
         _buildingSprites.Add(BuildingType.Chainsawmancer, _chainsawSprite);
         //_buildingIcon.Scale = new Vector2(1.0f / CityConfig.WorldScale, 1.0f / CityConfig.WorldScale);
     }

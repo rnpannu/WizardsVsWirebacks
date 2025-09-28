@@ -40,7 +40,7 @@ partial class CityScreen
         // DragonCostBarInstance.Text = CityScene.Doubloons.ToString();
         BuildingPaneInstance.BuildingButtonIcon1Instance.Push += (_, _) =>
         {
-            BuildingIconPushed?.Invoke(this, new BuildingSelectedEventArgs(0));
+            BuildingIconPushed?.Invoke(this, new BuildingSelectedEventArgs(1));
         };
         
         //ButtonStandardInstance.Click += (_, _) =>

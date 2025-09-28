@@ -13,9 +13,6 @@ using WizardsVsWirebacks.Screens;
 
 namespace WizardsVsWirebacks.Scenes.City;
 
-/// <summary>
-/// Manages the gameloop and objects involved with the city building gameplay
-/// </summary>
 public class CityScene : Scene
 {   
     // TODO: todo, have to do
@@ -37,16 +34,12 @@ public class CityScene : Scene
     
     // ? Ongoing, how to best use these?
     public static TextureAtlas _atlas;
+    //public static Tilemap _tileMap;
     
     // Assets
     private Sprite _buildingIcon;
     private Texture2D _background;
     
-    // ? Move to object manager?
-    // 1:1 with IntGrid csv file
-    // Intgrid color map for visualization
-    
-    //public static Tilemap _tileMap;
     
     // Debug
     private const float _printDelay = 2000f;
@@ -64,7 +57,7 @@ public class CityScene : Scene
     {
         InitializeUi();
         CityConfig.TileSize = 16;
-        CityConfig.WorldScale = 0.25f;
+        CityConfig.WorldScale = 0.5f;
         Core.ExitOnEscape = false;
         _ui.BuildingIconPushed += HandleBuildingSelected;
         _input = new CityInputManager();
@@ -73,10 +66,6 @@ public class CityScene : Scene
         
         base.Initialize(); // ALWAYS CALL THIS AT THE END
     }
-
-
-    // 2. Parse intgrid csv file 
-
     
     /// <summary>
     /// Load game assets
@@ -114,20 +103,16 @@ public class CityScene : Scene
         int height = CityConfig.HeightPx;
         int tileSize = CityConfig.TileSize;
         
-        // Create white rectangle texture
-
-        // Cursor info
-        
-        
-
         // Clear previous frame's data
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
         Core.GraphicsDevice.Viewport = Core.Viewport; // * Work in progress, not even sure if this does anything (it doesn't)
         // Use nearest neighbor sampling when upscaling the art with PointClamp, and apply camera, city, and resolution translations
-        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _input.GetTransform()); // ! ----
-        // Draw static png background (grass)
+        Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _input.GetTransform()); 
+
         Core.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
+        
         _objManager.Draw();
+        
         _state.Draw();
         // If dragging and dropping building draw building icon instead
         
@@ -141,8 +126,8 @@ public class CityScene : Scene
 
         //}
         
-        Core.SpriteBatch.End(); // ! ----------------------------------------------------------------------------------
-
+        Core.SpriteBatch.End(); 
+        
         GumService.Default.Draw();
         base.Draw(gameTime);
     }

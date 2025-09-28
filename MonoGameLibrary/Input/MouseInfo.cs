@@ -149,5 +149,6 @@ public class MouseInfo
             CurrentState.XButton1,
             CurrentState.XButton2
         );
+
     }
 }

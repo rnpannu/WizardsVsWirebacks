@@ -39,8 +39,8 @@ public class Core : Game
     public static AudioController Audio { get; private set; }
 
     // 
-    public static int Width { get; private set; } = 640;
-    public static int Height { get; private set; } = 360;
+    public static int Width { get; private set; } = 320;
+    public static int Height { get; private set; } = 180;
     
     
     // Will change depending on the size of the screen
@@ -140,7 +140,8 @@ public class Core : Game
             VirtualHeight = (aspect * Height);
         }*/
         
-        Scale = Matrix.CreateScale(VirtualWidth / Width);
+        Scale = Matrix.CreateScale((float)VirtualWidth / (float)Width);
+        Console.Out.WriteLine("Resolution scale: " + (VirtualWidth / Width).ToString());
         
         // Can implement later, center scaling so it doesn't scale from the top left
         Viewport = new Viewport

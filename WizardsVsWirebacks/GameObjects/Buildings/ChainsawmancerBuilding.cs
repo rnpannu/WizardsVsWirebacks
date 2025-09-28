@@ -6,17 +6,21 @@ namespace WizardsVsWirebacks.GameObjects;
 public class ChainsawmancerBuilding : Building
 {
     
-    public ChainsawmancerBuilding(Sprite sprite) : base(BuildingType.Chainsawmancer, 100, 1, sprite)
+    public ChainsawmancerBuilding(Sprite sprite, Rectangle position) : base(sprite, position)
     {
-        Sprite = sprite;
-        Initialize();
+        Footprint = new Vector2(4, 5);
+        Position = new Rectangle(position.X, position.Y, position.Width * (int)Footprint.X, position.Height * (int) Footprint.Y);
     }
 
-    public void Initialize(Vector2 tile)
+    public void Initialize()
     {
-        GridPosition = tile;
+        LoadContent();
+    }
+
+    public void LoadContent()
+    {
+        
     }
     
-
 
 }

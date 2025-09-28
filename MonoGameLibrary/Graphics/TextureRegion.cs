@@ -33,10 +33,12 @@ public  class TextureRegion
     }
     public void Draw(SpriteBatch spriteBatch, Rectangle destRect, Color color)
     {
+
         // Bad, idc
         spriteBatch.Draw(
             Texture,
             destRect,
+            SourceRectangle,
             color
         );
     }

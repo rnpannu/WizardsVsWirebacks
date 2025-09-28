@@ -29,17 +29,18 @@ partial class CityScreen
     public bool BuildingIconReleased { get; set; } = false;*/
 
     public event EventHandler<BuildingSelectedEventArgs> BuildingIconPushed;
-    public event EventHandler<BuildingSelectedEventArgs> BuildingIconReleased;
+
+    
     public int SelectedTowerType { get; set; } = 0;
     /*public bool IconHovered => BuildingPaneInstance.BuildingButtonIcon1Instance.IsFocused;*/
 
     partial void CustomInitialize()
     {
-        DragonCostBarInstance.Text = CityScene.Doubloons.ToString();
+        //TODO: Fix
+        // DragonCostBarInstance.Text = CityScene.Doubloons.ToString();
         BuildingPaneInstance.BuildingButtonIcon1Instance.Push += (_, _) =>
         {
-            BuildingIconPushed?.Invoke(this, new BuildingSelectedEventArgs(1));
-            Console.Out.WriteLine("Button pushed"); 
+            BuildingIconPushed?.Invoke(this, new BuildingSelectedEventArgs(0));
         };
         
         //ButtonStandardInstance.Click += (_, _) =>

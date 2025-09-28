@@ -3,7 +3,7 @@
 	<Texture>images/objectAtlas</Texture>
 	<Regions>
 		<Region name="buildingIcon-1" x="0" y="0" width="32" height="32" />
-		<Region name="chainsawmancer-1" x="0" y = "32" width = "64" height = "80" />
+		<Region name="chainsawmancer-1" x="0" y="32" width = "64" height ="80"/>
 	</Regions>
 	<Animations>
 

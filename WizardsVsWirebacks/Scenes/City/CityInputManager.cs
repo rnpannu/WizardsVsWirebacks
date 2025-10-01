@@ -100,7 +100,8 @@ public class CityInputManager
         if (GameController.MoveDown()) _cameraDirection.Y++;
         if (GameController.MoveLeft()) _cameraDirection.X--;
         if (GameController.MoveRight()) _cameraDirection.X++;
-
+        if (GameController.ZoomIn()) _config.WorldScale += 0.1f;
+        if (GameController.ZoomOut()) _config.WorldScale -= 0.1f;
         if(_cameraDirection != Vector2.Zero)
         {
             _cameraDirection.Normalize();

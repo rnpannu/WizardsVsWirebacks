@@ -87,10 +87,17 @@ public class CityState
 
     public void Update()
     {
+        //TODO: Make capture statuses an enum
+        // Implement the placement tile hover. 
         
+        if (_input.Click() && _captureGrid[_input.CursorTileX, _input.CursorTileY] == 2)
+        {
+            Console.Out.WriteLine("HERE");
+            Core.ChangeScene(new LevelScene());
+        }
     }
 
-    public void Draw()
+    public void HighlightHoveredTile()
     {
         Texture2D pixelTexture;
         pixelTexture = new Texture2D(Core.GraphicsDevice, 1, 1);
@@ -98,5 +105,9 @@ public class CityState
         Rectangle highlightRect = new Rectangle(_input.XTilePx, _input.YTilePx, CityConfig.TileSize, CityConfig.TileSize);
         Color currentCol = _captureStatusVisual[_captureGrid[_input.CursorTileX, _input.CursorTileY]];
         Core.SpriteBatch.Draw(pixelTexture, highlightRect, currentCol * 0.5f);
+    }
+    public void Draw()
+    {
+        HighlightHoveredTile();
     }
 }

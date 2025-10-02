@@ -41,7 +41,7 @@ public class CityObjectManager
 
         _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
         _chainsawSprite = _objectAtlas.CreateSprite("chainsawmancer-1");
-        _lawyerSprite = _objectAtlas.CreateSprite("laywer-1");
+        _lawyerSprite = _objectAtlas.CreateSprite("lawyer-1");
         _buildingSprites.Add(BuildingType.Chainsawmancer, _chainsawSprite);
         //_buildingIcon.Scale = new Vector2(1.0f / CityConfig.WorldScale, 1.0f / CityConfig.WorldScale);
     }
@@ -55,14 +55,13 @@ public class CityObjectManager
         var type = (BuildingType) id;
         Console.Out.WriteLine(position.ToString());
         Building building = type switch
-        {
-            
+        { // Cube building - BuildingType
             BuildingType.Chainsawmancer => new ChainsawmancerBuilding(_chainsawSprite, position),
+            BuildingType.Lawyer => new LawyerBuilding(_lawyerSprite, position),
             _ => throw new ArgumentException($"Unknown building type: {type}")
         };
 
         _buildings.Add(building);
-        Console.Out.WriteLine("Building count: " + _buildings.Count.ToString());
     }
     
     public void Update( )

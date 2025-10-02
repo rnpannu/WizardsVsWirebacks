@@ -40,7 +40,6 @@ public class CityScene : Scene
     private Sprite _buildingIcon;
     private Texture2D _background;
     
-    
     // Debug
     private const float _printDelay = 2000f;
     private float _pdCounter = 0;
@@ -51,7 +50,6 @@ public class CityScene : Scene
         GumService.Default.Root.Children.Clear();
         _ui = new CityScreen();
         _ui.AddToRoot();
-
     }
     public override void Initialize()
     {
@@ -79,6 +77,7 @@ public class CityScene : Scene
     public void HandleBuildingSelected(object sender, BuildingSelectedEventArgs e)
     {
         _objManager.BuildingIconPushed = e.Building;
+        Console.Out.WriteLine("Resolution scale: " + _input.GetTransform().ToString());
     }
 
     /// <summary>
@@ -91,6 +90,7 @@ public class CityScene : Scene
         
         _input.Update();
         _objManager.Update();
+        _state.Update();
         GumService.Default.Update(gameTime);
     }
     /// <summary>
@@ -99,32 +99,19 @@ public class CityScene : Scene
     /// <param name="gameTime"></param>
     public override void Draw(GameTime gameTime)
     {
-        int width = CityConfig.WidthPx;
-        int height = CityConfig.HeightPx;
-        int tileSize = CityConfig.TileSize;
-        
+
         // Clear previous frame's data
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
         Core.GraphicsDevice.Viewport = Core.Viewport; // * Work in progress, not even sure if this does anything (it doesn't)
         // Use nearest neighbor sampling when upscaling the art with PointClamp, and apply camera, city, and resolution translations
         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _input.GetTransform()); 
 
+
         Core.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
         
         _objManager.Draw();
         
         _state.Draw();
-        // If dragging and dropping building draw building icon instead
-        
-        /*if (_input.BuildingIconPushed() > 0)
-        {
-            _buildingIcon.Color = Color.White * 0.5f; 
-            Core.SpriteBatch.Draw(pixelTexture, highlightRect, Color.White * 0.3f);
-            _buildingIcon.Draw(Core.SpriteBatch, new Vector2(cursorTileX * tileSize, cursorTileY * tileSize + 1));
-        } else // Highlight the tile the cursor is currently hovering on
-        { */
-
-        //}
         
         Core.SpriteBatch.End(); 
         

@@ -1,0 +1,86 @@
+{
+	"identifier": "Level_1",
+	"uniqueIdentifer": "48ed3ed0-8560-11f0-8a26-535825fb14a3",
+	"x": 1280,
+	"y": 0,
+	"width": 1280,
+	"height": 720,
+	"bgColor": "#696A79",
+	"neighbourLevels": [
+		{
+			"levelIid": "c246a260-8560-11f0-bc1b-310c0f44ebee",
+			"dir": "w"
+		}
+	],
+	"customFields" : {},
+	"layers": [
+		"Background.png",
+		"City.png"
+	],
+	"entities": {
+		"Waypoints": [
+			{
+				"id": "Waypoints",
+				"iid": "d28553b0-8560-11f0-8a26-3185bce06e84",
+				"layer": "Entities",
+				"x": 128,
+				"y": 0,
+				"width": 16,
+				"height": 16,
+				"color": 12470831,
+				"customFields": {
+					"Waypoint": [
+						{
+							"cx": 8,
+							"cy": 13
+						},
+						{
+							"cx": 36,
+							"cy": 13
+						},
+						{
+							"cx": 36,
+							"cy": 21
+						},
+						{
+							"cx": 8,
+							"cy": 21
+						},
+						{
+							"cx": 8,
+							"cy": 29
+						},
+						{
+							"cx": 16,
+							"cy": 29
+						},
+						{
+							"cx": 16,
+							"cy": 38
+						},
+						{
+							"cx": 63,
+							"cy": 38
+						},
+						{
+							"cx": 69,
+							"cy": 30
+						},
+						{
+							"cx": 56,
+							"cy": 20
+						},
+						{
+							"cx": 67,
+							"cy": 13
+						},
+						{
+							"cx": 60,
+							"cy": 1
+						}
+					]
+				}
+			}
+		]
+	}
+}

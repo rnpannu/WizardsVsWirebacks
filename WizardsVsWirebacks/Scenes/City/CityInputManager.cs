@@ -22,7 +22,7 @@ public class CityInputManager
     private float _pdCounter = 0;
     
     private float _delay = 1.0f;
-    private const float SPEED = 300;
+    private const float SPEED = 300; // ! Camera smoothing
     
     private Texture2D _focusPoint;
     private Vector2 _origin;
@@ -85,13 +85,8 @@ public class CityInputManager
     /// Kinda the point of the whole class
     /// </summary>
     // * could fragment into different functions for neatness
-    public void HandleInput()
+    public void UpdateCamera()
     {
-        if (GameController.Exit())
-        {
-            Core.ChangeScene(new TitleScene());
-        }
-        
         // WASD camera movement
         _cameraDirection = Vector2.Zero;
         
@@ -105,8 +100,8 @@ public class CityInputManager
             _cameraDirection.Normalize();
         }
         
-        // Apply inverse transform to get from screenCoords (with translation) -> Worldcoords
-        MouseCoordsWorld = Vector2.Transform(GameController.MousePosition().ToVector2(), Matrix.Invert(GetTransform())); // OOP Hell
+        _cameraPosition += ((_cameraDirection * GameManager.DT * SPEED));
+        _cameraPosition = Vector2.Clamp(_cameraPosition, _minPos, _maxPos);
         
     }
     
@@ -122,7 +117,7 @@ public class CityInputManager
         // Also, find out why there is a smaller sliver exposed on the bottom of the city
         
         float dx = _startingPos.X - _cameraPosition.X;
-        dx = MathHelper.Clamp(dx, -(_startingPos.X + (_focusPoint.Width * CityConfig.WorldScale) + _origin.X) - (Core.Width), 0); // Cleaning up this code wouldn't be a bad idea, handling of variables between Core, GameManager, CityScene, and Camera.
+        dx = MathHelper.Clamp(dx, -(_startingPos.X + (_focusPoint.Width * CityConfig.WorldScale) + _origin.X) - (Core.Width), 0); // ? Reduce magic numbers
         float dy = _startingPos.Y - _cameraPosition.Y;
         dy = MathHelper.Clamp(dy, -(_startingPos.Y + _focusPoint.Height + _origin.Y) - (Core.Height), 0);
         
@@ -149,25 +144,37 @@ public class CityInputManager
     /// </summary>
     public void Update()
     {
-        HandleInput();
-        _cameraPosition += ((_cameraDirection * GameManager.DT * SPEED));
-        _cameraPosition = Vector2.Clamp(_cameraPosition, _minPos, _maxPos);
+        if (GameController.Exit())
+        {
+            Core.ChangeScene(new TitleScene());
+        }
+        
+        UpdateCamera();
         CalculateTranslation();
+        UpdateMouse();
+
+        //var datastructure = null;
+        //PrintDebugHelper(datastructure);
+
+    }
+
+    private void UpdateMouse()
+    {
+        // Apply inverse transform to get from screenCoords (with translation) -> Worldcoords
+        MouseCoordsWorld = Vector2.Transform(GameController.MousePosition().ToVector2(), Matrix.Invert(GetTransform())); // OOP Hell
         CursorTileX = Math.Max(0, Math.Min((int) MouseCoordsWorld.X, CityConfig.WidthPx - 1)) / CityConfig.TileSize;
         CursorTileY = Math.Max(0, Math.Min((int) MouseCoordsWorld.Y, CityConfig.HeightPx - 1)) / CityConfig.TileSize;
-
-        if (_pdCounter > _printDelay)
-        {
-            // * Create debug interface, massive switch for controlling console output?
-            // * the non vim mfs could just use a debugger but we have to consider their kind
-            //Console.Out.WriteLine(CityConfig.Width.ToString() + CityConfig.Height.ToString());
-            _pdCounter %= _printDelay;
-        }
-        else
-        {
-            _pdCounter += Core.DT * 1000f;
-        }
     }
+
+    public bool Click()
+    {
+        return GameController.M1Clicked();
+    }
+    public bool Drop()
+    {
+        return GameController.M1Released();
+    }
+    
     
     /// <summary>
     /// Debugging / completely useless
@@ -178,8 +185,18 @@ public class CityInputManager
     }
 
 
-    public bool Drop()
+    private void PrintDebugHelper(object dataStructure)
     {
-        return GameController.M1Released();
+        if (_pdCounter > _printDelay)
+        {
+            // * Create debug interface, massive switch for controlling console output?
+            // * the non vim mfs could just use a debugger but we have to consider their kind
+            Console.Out.WriteLine(dataStructure.ToString());
+            _pdCounter %= _printDelay;
+        }
+        else
+        {
+            _pdCounter += Core.DT * 1000f;
+        }
     }
 }

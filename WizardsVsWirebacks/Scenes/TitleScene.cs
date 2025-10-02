@@ -33,14 +33,11 @@ public class TitleScene : Scene
     private TitleScreen _UI;
     public override void Initialize()
     {
-        base.Initialize();
         Core.ExitOnEscape = true;
-
         _backgroundOffset = Vector2.Zero;
-
         _backgroundDestination = Core.GraphicsDevice.PresentationParameters.Bounds;
-
         InitializeUI();
+        base.Initialize();
     }
 
     private void InitializeUI()

@@ -6,7 +6,12 @@
 	"width": 1280,
 	"height": 720,
 	"bgColor": "#696A79",
-	"neighbourLevels": [],
+	"neighbourLevels": [
+		{
+			"levelIid": "48ed3ed0-8560-11f0-8a26-535825fb14a3",
+			"dir": "e"
+		}
+	],
 	"customFields" : {},
 	"layers": [
 		"Background.png",

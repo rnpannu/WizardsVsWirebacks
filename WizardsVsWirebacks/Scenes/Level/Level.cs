@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
+using MonoGameLibrary;
+using MonoGameLibrary.Graphics;
+using WizardsVsWirebacks.GameObjects;
+using WizardsVsWirebacks.GameObjects.Enemies;
 
 namespace WizardsVsWirebacks.Scenes;
 
@@ -12,6 +17,11 @@ public class Level
     private Vector2 _startPos;
 
     private Vector2[] _waypoints;
+
+    private List<Enemy> _wave;
+
+    private TextureAtlas _objectAtlas;
+    private Sprite _clankaSprite;
     public Level()
     {
         Initialize();
@@ -56,5 +66,24 @@ public class Level
     public void Initialize()
     {
         InitializeConfig();
+        LoadContent();
+    }
+
+    private void LoadContent()
+    {
+        _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
+        //_clankaSprite = _objectAtlas.CreateSprite("clanka-1");
+    }
+    public void CreateEnemy(int id, Rectangle position)
+    {
+        var type = (EnemyType) id;
+        Console.Out.WriteLine(position.ToString());
+        Enemy enemy = type switch
+        { // Cube building - BuildingType
+            EnemyType.Clanker => new Clanker(_clankaSprite, _waypoints, _startPos),
+            _ => throw new ArgumentException($"Unknown enemy type: {type}")
+        };
+
+        _wave.Add(enemy);
     }
 }

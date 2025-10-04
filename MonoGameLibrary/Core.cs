@@ -141,7 +141,6 @@ public class Core : Game
         }*/
         
         Scale = Matrix.CreateScale((float)VirtualWidth / (float)Width);
-        Console.Out.WriteLine("Resolution scale: " + (VirtualWidth / Width).ToString());
         
         // Can implement later, center scaling so it doesn't scale from the top left
         Viewport = new Viewport

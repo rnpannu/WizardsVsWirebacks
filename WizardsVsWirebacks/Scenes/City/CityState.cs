@@ -90,9 +90,9 @@ public class CityState
         //TODO: Make capture statuses an enum
         // Implement the placement tile hover. 
         
-        if (_input.Click() && _captureGrid[_input.CursorTileX, _input.CursorTileY] == 2)
+        // ? Is this proper use of the input manager? Should this be moved to there? idek
+        if (_input.Select() && _captureGrid[_input.CursorTileX, _input.CursorTileY] == 2)
         {
-            Console.Out.WriteLine("HERE");
             Core.ChangeScene(new LevelScene());
         }
     }

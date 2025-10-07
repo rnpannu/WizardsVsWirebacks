@@ -2,10 +2,16 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace WizardsVsWirebacks.Scenes;
 public class LevelConfig
 {
+    // ? with the default value only, waypoint assignment becomes zero in Level.Initconfig, but with it 
+    // ? assigned in this FromFile the waypoints are adjusted properly
+    [JsonIgnore]
+    public static int LevelTileSize { get; private set; } = 16;
+    
     public string identifier { get; set; }
     public string uniqueIdentifer { get; set; }
     public int x { get; set; }
@@ -20,6 +26,7 @@ public class LevelConfig
 
     public static LevelConfig FromFile(string filepath)
     {
+        LevelTileSize = 16;
         if (filepath == null) throw new ArgumentNullException(nameof(filepath));
         if (!File.Exists(filepath)) throw new FileNotFoundException("Level config file not found", filepath);
 

@@ -16,8 +16,7 @@ public abstract class Building
     public Sprite Sprite { get; set; }
 
     
-    private const float _printDelay = 2000f;
-    private float _pdCounter = 0;
+
 
     protected Building(Sprite sprite, Rectangle position)
     {
@@ -49,19 +48,6 @@ public abstract class Building
     {
         if (Sprite != null)
         {
-
-            if (_pdCounter > _printDelay)
-            {
-                //Console.Out.WriteLine("Rectangle: " + Position.ToString());
-                // * Create debug interface, massive switch for controlling console output?
-                // * the non vim mfs could just use a debugger but we have to consider their kind
-                //Console.Out.WriteLine(CityConfig.Width.ToString() + CityConfig.Height.ToString());
-                _pdCounter %= _printDelay;
-            }
-            else
-            {
-                _pdCounter += Core.DT * 1000f;
-            }
             Sprite.Draw(Core.SpriteBatch, Position);
         }
 

@@ -77,7 +77,6 @@ public class CityScene : Scene
     public void HandleBuildingSelected(object sender, BuildingSelectedEventArgs e)
     {
         _objManager.BuildingIconPushed = e.Building;
-        Console.Out.WriteLine("Resolution scale: " + _input.GetTransform().ToString());
     }
 
     /// <summary>
@@ -87,6 +86,10 @@ public class CityScene : Scene
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (GameController.Exit()) // Change to input handl
+        {
+            Core.ChangeScene(new TitleScene());
+        }
         
         _input.Update();
         _objManager.Update();

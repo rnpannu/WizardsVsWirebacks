@@ -53,7 +53,6 @@ public class CityObjectManager
     public void CreateBuilding(int id, Rectangle position)
     {
         var type = (BuildingType) id;
-        Console.Out.WriteLine(position.ToString());
         Building building = type switch
         { // Cube building - BuildingType
             BuildingType.Chainsawmancer => new ChainsawmancerBuilding(_chainsawSprite, position),

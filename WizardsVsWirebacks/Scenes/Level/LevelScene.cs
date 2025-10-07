@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameGum;
 using MonoGameLibrary;
+using WizardsVsWirebacks.Scenes.City;
 
 namespace WizardsVsWirebacks.Scenes;
 
@@ -72,11 +73,16 @@ public class LevelScene : Scene
     }
     public override void Update(GameTime gameTime)
     {
+        _level.Update();
         if (GameController.MoveUp()) _position.Y--;
         if (GameController.MoveDown()) _position.Y++;
         if (GameController.MoveLeft()) _position.X--;
         if (GameController.MoveRight()) _position.X++;
-    
+        
+        if (GameController.Exit()) // Change to input handle
+        {
+            Core.ChangeScene(new CityScene());
+        }
         GumService.Default.Update(gameTime);
         base.Update(gameTime);
     }
@@ -88,8 +94,10 @@ public class LevelScene : Scene
         // Use nearest neighbor sampling when upscaling the art with PointClamp, and apply camera, city, and resolution translations
         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp
             , transformMatrix: Matrix.CreateScale(1.25f)
-            ); 
+            );
+
         Core.SpriteBatch.Draw(_background, _position, Color.White);
+        _level.Draw();
         Core.SpriteBatch.End(); 
         
         GumService.Default.Draw();

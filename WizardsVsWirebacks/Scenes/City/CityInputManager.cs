@@ -144,10 +144,7 @@ public class CityInputManager
     /// </summary>
     public void Update()
     {
-        if (GameController.Exit())
-        {
-            Core.ChangeScene(new TitleScene());
-        }
+
         
         UpdateCamera();
         CalculateTranslation();
@@ -166,7 +163,7 @@ public class CityInputManager
         CursorTileY = Math.Max(0, Math.Min((int) MouseCoordsWorld.Y, CityConfig.HeightPx - 1)) / CityConfig.TileSize;
     }
 
-    public bool Click()
+    public bool Select()
     {
         return GameController.M1Clicked();
     }

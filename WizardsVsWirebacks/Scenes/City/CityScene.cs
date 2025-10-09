@@ -71,6 +71,7 @@ public class CityScene : Scene
     public override void LoadContent()
     {
         _background = Content.Load<Texture2D>("Tilemaps/City/simplified/Level_0/Background");
+        _state.LoadContent();
         _objManager.LoadContent();
     }
 

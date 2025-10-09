@@ -13,18 +13,16 @@ namespace WizardsVsWirebacks.Scenes;
 public class Level
 {
     private LevelConfig _config;
-
+    private LevelObjectManager _obj;
+    
     private Vector2 _startPos;
-
     private Vector2[] _waypoints;
 
-    private List<Enemy> _wave;
-    private Enemy _clanka;
 
-    private TextureAtlas _objectAtlas;
-    private Sprite _clankaSprite;
+
     public Level()
     {
+        _obj = new LevelObjectManager();
         Initialize();
     }
 
@@ -64,36 +62,22 @@ public class Level
     public void Initialize()
     {
         InitializeConfig();
-        _wave = new List<Enemy>();
+        _obj.Initialize();
         LoadContent();
     }
 
     private void LoadContent()
     {
-        _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
-        _clankaSprite = _objectAtlas.CreateSprite("clanka-1");
-        _clankaSprite.Origin = new Vector2(_clankaSprite.Width * 0.25f, _clankaSprite.Height * 0.25f); // Centers it in a 16px tile!
-        
-        CreateEnemy(0, new Rectangle((int)_startPos.X, (int)_startPos.Y, (int)_clankaSprite.Width, (int)_clankaSprite.Height));
+        _obj.LoadContent();
     }
-    public void CreateEnemy(int id, Rectangle position)
-    {
-        var type = (EnemyType) id;
-        Enemy enemy = type switch
-        { // Cube building - BuildingType
-            EnemyType.Clanker => new Clanker(_clankaSprite, _waypoints, _startPos),
-            _ => throw new ArgumentException($"Unknown enemy type: {type}")
-        };
-        _clanka = enemy;
-        _wave.Add(enemy);
-    }
+
 
     public void Update()
     {
-        _clanka.Update();
+        _obj.Update();
     }
     public void Draw()
     {
-        _clanka.Draw();
+        _obj.Draw();
     }
 }

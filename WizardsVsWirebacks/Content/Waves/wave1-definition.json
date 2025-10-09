@@ -1,0 +1,14 @@
+﻿[
+  {
+    "StartTime": 2,
+    "EnemyType": 0,
+    "SpawnCount": 5,
+    "SpawnDelay": 0.5
+  },
+  {
+    "StartTime": 2,
+    "EnemyType": 0,
+    "SpawnCount": 5,
+    "SpawnDelay": 0.5
+  }
+]

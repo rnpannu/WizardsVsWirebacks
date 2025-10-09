@@ -27,7 +27,7 @@ public class CityState
     public void Initialize()
     {
         _input = _input;
-        LoadContent();
+
     }
     private void LoadIntGrid()
     {

@@ -65,6 +65,7 @@ public abstract class Enemy
             {
                 _currentWayPoint++;
             }
+            // Reassign Dir 
             _nextPosition = _waypoints[_currentWayPoint];
         }
     }

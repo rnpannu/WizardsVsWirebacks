@@ -15,6 +15,11 @@ public class Clanker : Enemy
         // ! Create a object/wave manager that manages the enemies
 
     }
+
+    public override void Update()
+    {
+        
+    }
     
 
 

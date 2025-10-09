@@ -1,3 +1,11 @@
+/ -------------- ------------
+DateTime.Now is not as precise as System.Diagnostics.StopWatch
+
+- Define function grouping.
+    - Core funcs: Initialize, Load, Update, Draw
+        - Helper utility functions related to each go above or below the core call?
+/ --------------- 10 / 08 ------------
+How to group enemies together and load them in a data-driven approach?
 
 / ---------------- 09 / 09 ------------
 	Learning how referencing works in Gum is going to be very important

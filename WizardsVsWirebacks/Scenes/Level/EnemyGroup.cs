@@ -18,7 +18,6 @@ public class EnemyGroup
         if (!File.Exists(filepath)) throw new FileNotFoundException("Level config file not found", filepath);
 
         string json = File.ReadAllText(filepath);
-        Console.Out.WriteLine(json);
         List<EnemyGroup> config;
         try
         {

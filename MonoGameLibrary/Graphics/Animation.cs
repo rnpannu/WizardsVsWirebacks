@@ -21,13 +21,6 @@ public class Animation
     public Animation(List<TextureRegion> frames, TimeSpan delay)
     {
         Frames = frames;
-        //foreach (var frame in frames)
-        //{
-        //    Console.Out.WriteLine(frame.Texture);
-        //    Console.Out.WriteLine(frame.SourceRectangle);
-        //}
-
-
         Delay = delay;
     }
 

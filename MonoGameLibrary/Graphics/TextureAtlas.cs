@@ -43,7 +43,6 @@ public class TextureAtlas
 
     public TextureRegion GetRegion(string name)
     {
-        //Console.Out.WriteLine(_regions.ContainsKey(name));
         return _regions[name];
     }
 
@@ -119,7 +118,6 @@ public class TextureAtlas
 
                         if (!string.IsNullOrEmpty(name))
                         {
-                            //Console.Out.WriteLine("Add region: " + name);
                             string buildingName = name.Split("-")[1];
                             if (name.Contains("building") && lastBuildingName != buildingName)
                             {

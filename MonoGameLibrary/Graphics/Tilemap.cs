@@ -150,8 +150,6 @@ public class Tilemap
                         TextureRegion region = tileset.GetTile(tilesetIndex);
 
                         tilemap.SetTile(column, row, tilesetIndex);
-                        //Console.Out.WriteLine("Column: " + column.ToString() + "Row: " +
-                            //row.ToString() + "Tileset index: " + tilesetIndex.ToString());
                     }
 
                 }

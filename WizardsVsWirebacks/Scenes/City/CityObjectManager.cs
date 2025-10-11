@@ -67,10 +67,9 @@ public class CityObjectManager
     {
         if (BuildingIconPushed >= 0)
         {
-            //Console.Out.WriteLine("Event recognized");
             if (_input.Drop()) // Second layer after game controller? lol
             {
-                Console.Out.WriteLine("Drag and drop at position: " + new Vector2(_input.MouseCoordsWorld.X, _input.MouseCoordsWorld.Y).ToString());
+                //Console.Out.WriteLine("Drag and drop at position: " + new Vector2(_input.MouseCoordsWorld.X, _input.MouseCoordsWorld.Y).ToString());
                 // TODO: Buildings !  - Confluence?
                 Rectangle buildingPosition = new Rectangle(_input.XTilePx, _input.YTilePx, CityConfig.TileSize, CityConfig.TileSize);
                 CreateBuilding(BuildingIconPushed, buildingPosition);

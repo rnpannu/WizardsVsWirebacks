@@ -47,7 +47,6 @@ public class AnimatedSprite : Sprite
             {
                 _currentFrame = 0;
             }
-            //Console.Out.WriteLine(_animation.Frames[_currentFrame].SourceRectangle);
             Region = _animation.Frames[_currentFrame];
         }
     }

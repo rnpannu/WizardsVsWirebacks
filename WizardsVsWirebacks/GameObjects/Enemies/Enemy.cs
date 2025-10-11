@@ -33,12 +33,12 @@ public abstract class Enemy
         _currentWayPoint = 0;
         _currentPosition = position;
         _nextPosition = waypoints[_currentWayPoint];
-        Console.Out.WriteLine("Create enemy object with starting pos: " + _currentPosition.ToString());
+        /*Console.Out.WriteLine("Create enemy object with starting pos: " + _currentPosition.ToString());
         foreach (var waypoint in waypoints)
         {
             Console.Out.WriteLine("Waypoint: " + waypoint.ToString());
         }
-        Console.Out.WriteLine("Direction to next waypoint: " + Dir.ToString() + "\n\n\n");
+        Console.Out.WriteLine("Direction to next waypoint: " + Dir.ToString() + "\n\n\n");*/
         Initialize();
     }
 
@@ -52,8 +52,8 @@ public abstract class Enemy
     }
     public virtual void Update()
     {
-        DebugLogger.Log(this.ToString());
-        DebugLogger.WriteLogs();
+        /*DebugLogger.Log(this.ToString());
+        DebugLogger.WriteLogs();*/
         _currentPosition += ((Dir * Core.DT * _movementSpeed));
 
         // ? Improve with Vector2.DistanceSquared?

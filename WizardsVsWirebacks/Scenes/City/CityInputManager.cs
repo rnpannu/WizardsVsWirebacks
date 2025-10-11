@@ -75,7 +75,6 @@ public class CityInputManager
     /// </summary>
     public void SetCameraBounds()
     {
-        // Console.Out.WriteLine("Outbuffer: " + CityConfig.CityTileSize.ToString() + " Inbuffer: " + _origin.X.ToString());
         // idk what i was on when writing this
         _minPos = new Vector2(_origin.X, _origin.Y);
         _maxPos = new Vector2(CityConfig.WidthPx - _origin.X, CityConfig.HeightPx - _origin.Y); 

@@ -18,6 +18,7 @@ public static class DebugLogger
     private static float _pdCounter = 0;
     public static void Log(string message)
     {
+        //Console.Out.WriteLine(_pdCounter.ToString() + _lastLogTime.ToString() + DateTime.Now.ToString());
         if (DateTime.Now - _lastLogTime > _defaultDelay)
         {
             _messageQueue.Enqueue((message, DateTime.Now));
@@ -40,4 +41,8 @@ public static class DebugLogger
         }
     }
 
+    public static void Clear()
+    {
+        _messageQueue.Clear();
+    }
 }

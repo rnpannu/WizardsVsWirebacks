@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -13,12 +14,19 @@ namespace WizardsVsWirebacks.Scenes;
 public class Wave
 {
     private List<EnemyGroup> _enemies;
-    private Enemy _clanka;
-    private TextureAtlas _objectAtlas;
-    private Sprite _clankaSprite;
-
-    private int _spawnedGroup;
+    private List<bool> _spawnedBitmask;
+    
     private float _waveTime;
+    private int _currentGroup; // index
+    private float _groupDelay;
+
+    private float _groupTimeElapsed;
+    private int _currentSpawnIndex;
+    private float _groupSpawnInterval;
+
+    private bool _isSpawning = false;
+    public event EventHandler<SpawnEnemyEventArgs> SpawnEnemy;
+
     // private EventHandler<___> livesLost;
     private void InitializeConfig()
     {
@@ -42,52 +50,87 @@ public class Wave
     }
     public void LoadContent()
     {
-        _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
-        _clankaSprite = _objectAtlas.CreateSprite("clanka-1");
-        _clankaSprite.Origin = new Vector2(_clankaSprite.Width * 0.25f, _clankaSprite.Height * 0.25f); // Centers it in a 16px tile!
+
     }
 
-    private async Task SpawnWave()
+    private void SpawnWave()
     {
-        // [ (start time, enemy type, count, delay) ]
-        // Track a cumulative start time, if wavetime has exceeded this, spawn the group with their delay in spacing
-        float spawnTime = 0;
-        // Task => Deploy this as an asynchronous operation
-        // await => Run this asynchronously but wait for the execution because I need the results, but the rest of the game can continue
-        foreach (EnemyGroup cluster in _enemies)
+        // Enemy Group has [ (start time, enemy type, count, delay) ]. Start time is time after the last group,
+        // delay is the interval between the enemies in this group
+        // Track a cumulative start time, if wavetime has exceeded this, spawn the group 
+
+        // Task -> Deploy this as an asynchronous operation
+        // await -> Run this asynchronously but wait for the execution because I need the results, but the rest of the game can continue
+        //onsole.Out.WriteLine(ToString());
+        DebugLogger.Log("Initial log: " + ToString());
+        Console.Out.WriteLine(_isSpawning);
+        if (!_isSpawning) // If not currently spawning enemies
         {
-            spawnTime += cluster.StartTime;
-            if (_waveTime >= spawnTime)
+            DebugLogger.Log("Into spawning");
+            EnemyGroup cluster = _enemies[_currentGroup];
+            _groupDelay += cluster.StartTime; // this is being updated too often, need to track visits
+            DebugLogger.Log("Before trigger");
+            if (_waveTime >= _groupDelay)
             {
-                await Task.Run(() => SpawnGroup(cluster));
+                DebugLogger.Log("After trigger");
+                _isSpawning = true;
+                _groupSpawnInterval = (float) cluster.SpawnDelay;
+                _groupTimeElapsed = 0;
+                _currentSpawnIndex = 0;
+                SpawnGroup(cluster);
+                _currentGroup++;
+                _waveTime %= _groupDelay;
             }
+            _waveTime += Core.DT * 1000f;
         }
-        _waveTime += Core.DT * 1000f;
+        else
+        {
+            _waveTime = 0;
+        }
+        DebugLogger.WriteLogs();
+
     }
     private void SpawnGroup(EnemyGroup cluster)
     {
-        
-        for (int i = 0; i < cluster.SpawnCount; i++)
+
+        if (_groupTimeElapsed >= _groupSpawnInterval)
         {
-            CreateEnemy(cluster.EnemyType);
+            SpawnEnemy?.Invoke(this, new SpawnEnemyEventArgs(0));
+            _currentSpawnIndex++;
+            if (_currentSpawnIndex >= cluster.SpawnCount)
+            {
+                
+                _isSpawning = false;
+                return;
+            }
+            _groupTimeElapsed %= _groupSpawnInterval;
         }
+        _groupTimeElapsed += Core.DT * 1000f;
     }
-    public void CreateEnemy(int id, Rectangle position)
-    {
-        var type = (EnemyType) id;
-        Enemy enemy = type switch
-        { // Cube building - BuildingType
-            EnemyType.Clanker => new Clanker(_clankaSprite, _waypoints, _startPos),
-            _ => throw new ArgumentException($"Unknown enemy type: {type}")
-        };
-    }
+
     public void Update()
     {
-        
+        SpawnWave();
     }
 
     public void Draw()
     {
         
+    }
+
+    public override string ToString()
+    {
+        return
+            $"{nameof(_waveTime)}: {_waveTime}, {nameof(_currentGroup)}: {_currentGroup}, {nameof(_groupDelay)}: {_groupDelay}, {nameof(_groupTimeElapsed)}: {_groupTimeElapsed}, {nameof(_currentSpawnIndex)}: {_currentSpawnIndex}, {nameof(_groupSpawnInterval)}: {_groupSpawnInterval}, {nameof(_isSpawning)}: {_isSpawning}";
+    }
+}
+
+public class SpawnEnemyEventArgs : EventArgs
+{
+    public int Enemy { get; }
+    
+    public SpawnEnemyEventArgs(int enemy)
+    {
+        Enemy = enemy;
     }
 }

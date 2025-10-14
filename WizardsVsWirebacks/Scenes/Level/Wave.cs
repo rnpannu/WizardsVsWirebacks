@@ -14,17 +14,18 @@ namespace WizardsVsWirebacks.Scenes;
 public class Wave
 {
     private List<EnemyGroup> _enemies;
-    private List<bool> _spawnedBitmask;
+    private List<bool> _visited;
+    private List<bool> _spawned;
     
-    private float _waveTime;
-    private int _currentGroup; // index
-    private float _groupDelay;
+    private float _waveTimeElapsed;
+    private int _currentGroupIndex; // index
+    private float _groupSpawnDelay;
 
     private float _groupTimeElapsed;
     private int _currentSpawnIndex;
     private float _groupSpawnInterval;
 
-    private bool _isSpawning = false;
+    private bool _spawning = false;
     public event EventHandler<SpawnEnemyEventArgs> SpawnEnemy;
 
     // private EventHandler<___> livesLost;
@@ -34,60 +35,72 @@ public class Wave
         if (RuntimeInformation.IsOSPlatform((OSPlatform.Windows)))
         {
             dataPath = "../../../Content/Waves";
-            
-        } else if (RuntimeInformation.IsOSPlatform((OSPlatform.Linux)))
+
+        }
+        else if (RuntimeInformation.IsOSPlatform((OSPlatform.Linux)))
         {
             dataPath = Path.Combine("Content", "Waves");
         }
+
         string levelFile = Path.Combine(dataPath, "wave1-definition.json");
         _enemies = EnemyGroup.FromFile(levelFile);
-        // [ (start time, enemy type, count, delay) ]
+        for (int i = 0; i < _enemies.Count; i++)
+        {
+            _visited.Add(false);
+            _spawned.Add(false);
+
+        }
+    // [ (start time, enemy type, count, delay) ]
     }
     public void Initialize()
     {
         _enemies = new List<EnemyGroup>();
+        _visited = new List<bool>();
+        _spawned = new List<bool>();
         InitializeConfig();
     }
     public void LoadContent()
     {
-
+        
     }
 
     private void SpawnWave()
     {
-        // Enemy Group has [ (start time, enemy type, count, delay) ]. Start time is time after the last group,
-        // delay is the interval between the enemies in this group
-        // Track a cumulative start time, if wavetime has exceeded this, spawn the group 
-
-        // Task -> Deploy this as an asynchronous operation
-        // await -> Run this asynchronously but wait for the execution because I need the results, but the rest of the game can continue
-        //onsole.Out.WriteLine(ToString());
-        DebugLogger.Log("Initial log: " + ToString());
-        Console.Out.WriteLine(_isSpawning);
-        if (!_isSpawning) // If not currently spawning enemies
+        /*
+         *     public int StartTime { get; set; }
+                public int EnemyType { get; set; }
+                public int SpawnCount { get; set; }
+                public double SpawnDelay { get; set; }
+                
+                If start time >= time between last spawn
+                    SpawnGroup
+                    freeze above until spawning is finished
+         */
+        
+        
+        EnemyGroup cluster = _enemies[_currentGroupIndex];
+        //DebugLogger.Log(ToString());
+        if (!_spawning)
         {
-            DebugLogger.Log("Into spawning");
-            EnemyGroup cluster = _enemies[_currentGroup];
-            _groupDelay += cluster.StartTime; // this is being updated too often, need to track visits
-            DebugLogger.Log("Before trigger");
-            if (_waveTime >= _groupDelay)
+            if (_waveTimeElapsed >= cluster.StartTime)
             {
-                DebugLogger.Log("After trigger");
-                _isSpawning = true;
+                _spawning = true;
                 _groupSpawnInterval = (float) cluster.SpawnDelay;
                 _groupTimeElapsed = 0;
                 _currentSpawnIndex = 0;
-                SpawnGroup(cluster);
-                _currentGroup++;
-                _waveTime %= _groupDelay;
+                _waveTimeElapsed %= _groupSpawnDelay;
             }
-            _waveTime += Core.DT * 1000f;
+            else
+            {
+                _waveTimeElapsed += Core.DT;
+            }
         }
         else
         {
-            _waveTime = 0;
+            SpawnGroup(cluster);
+            _waveTimeElapsed = 0;
         }
-        DebugLogger.WriteLogs();
+        //DebugLogger.WriteLogs();
 
     }
     private void SpawnGroup(EnemyGroup cluster)
@@ -99,13 +112,23 @@ public class Wave
             _currentSpawnIndex++;
             if (_currentSpawnIndex >= cluster.SpawnCount)
             {
-                
-                _isSpawning = false;
+                _groupSpawnInterval = 0;
+                _groupTimeElapsed = 0;
+                _currentSpawnIndex = 0;                   
+                if (_currentGroupIndex < _enemies.Count - 1)
+                {
+                    _currentGroupIndex++;
+                }      
+                _spawning = false;
                 return;
             }
             _groupTimeElapsed %= _groupSpawnInterval;
         }
-        _groupTimeElapsed += Core.DT * 1000f;
+        else
+        {
+            _groupTimeElapsed += Core.DT ;
+        }
+
     }
 
     public void Update()
@@ -121,7 +144,7 @@ public class Wave
     public override string ToString()
     {
         return
-            $"{nameof(_waveTime)}: {_waveTime}, {nameof(_currentGroup)}: {_currentGroup}, {nameof(_groupDelay)}: {_groupDelay}, {nameof(_groupTimeElapsed)}: {_groupTimeElapsed}, {nameof(_currentSpawnIndex)}: {_currentSpawnIndex}, {nameof(_groupSpawnInterval)}: {_groupSpawnInterval}, {nameof(_isSpawning)}: {_isSpawning}";
+            $"{nameof(_waveTimeElapsed)}: {_waveTimeElapsed}, {nameof(_currentGroupIndex)}: {_currentGroupIndex}, {nameof(_groupSpawnDelay)}: {_groupSpawnDelay}, {nameof(_groupTimeElapsed)}: {_groupTimeElapsed}, {nameof(_currentSpawnIndex)}: {_currentSpawnIndex}, {nameof(_groupSpawnInterval)}: {_groupSpawnInterval}, {nameof(_spawning)}: {_spawning}";
     }
 }
 

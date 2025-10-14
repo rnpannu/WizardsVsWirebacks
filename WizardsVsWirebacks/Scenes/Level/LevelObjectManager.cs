@@ -17,13 +17,14 @@ public class LevelObjectManager
     private TextureAtlas _objectAtlas;
     private Sprite _clankaSprite;
 
+    private List<Enemy> _activeEnemies;
     
     private Vector2[] _waypoints;
     private Vector2 _startPos;
     public LevelObjectManager()
     {
+        _activeEnemies = new List<Enemy>();
         _wave = new Wave();
-        
     }
     private void InitializeConfig()
     {
@@ -58,7 +59,6 @@ public class LevelObjectManager
     public void Initialize()
     {
         InitializeConfig();
-        _startPos = _waypoints[0];
         _wave.Initialize();
         _wave.SpawnEnemy += WaveOnSpawnEnemy;
         LoadContent();
@@ -80,26 +80,36 @@ public class LevelObjectManager
             EnemyType.Clanker => new Clanker(_clankaSprite, _waypoints, _startPos),
             _ => throw new ArgumentException($"Unknown enemy type: {type}")
         };
-        _clanka = enemy;
+        _activeEnemies.Add(enemy);
     }
 
     public void Update()
     {
         _wave.Update();
-        if (_clanka != null)
+        foreach (Enemy clanka in _activeEnemies)
+        {
+            clanka.Update();
+        }
+        /*if (_clanka != null)
         {
             _clanka.Update();
         }
-        //_clanka.Update();
+        else
+        {
+            CreateEnemy(0);
+        }*/
+
+
     }
 
     public void Draw()
     {
         _wave.Draw();
-        if (_clanka != null)
+        foreach (Enemy clanka in _activeEnemies)
         {
-            _clanka.Draw();
+            clanka.Draw();
         }
-        //_clanka.Draw();
+
     }
+
 }

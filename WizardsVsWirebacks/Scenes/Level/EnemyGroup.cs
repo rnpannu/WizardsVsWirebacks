@@ -7,7 +7,7 @@ using WizardsVsWirebacks.Scenes;
 
 public class EnemyGroup
 {
-    public int StartTime { get; set; }
+    public double StartTime { get; set; }
     public int EnemyType { get; set; }
     public int SpawnCount { get; set; }
     public double SpawnDelay { get; set; }

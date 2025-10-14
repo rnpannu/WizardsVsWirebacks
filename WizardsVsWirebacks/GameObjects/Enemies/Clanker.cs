@@ -18,7 +18,7 @@ public class Clanker : Enemy
 
     public override void Update()
     {
-        
+        base.Update();
     }
     
 

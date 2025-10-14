@@ -1,12 +1,12 @@
 ﻿[
   {
-    "StartTime": 2,
+    "StartTime": 2.0,
     "EnemyType": 0,
     "SpawnCount": 5,
     "SpawnDelay": 0.5
   },
   {
-    "StartTime": 2,
+    "StartTime": 2.0,
     "EnemyType": 0,
     "SpawnCount": 5,
     "SpawnDelay": 0.5

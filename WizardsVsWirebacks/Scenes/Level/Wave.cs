@@ -50,7 +50,6 @@ public class Wave
             _spawned.Add(false);
 
         }
-    // [ (start time, enemy type, count, delay) ]
     }
     public void Initialize()
     {
@@ -90,6 +89,10 @@ public class Wave
         }
 
     }
+    /// <summary>
+    /// Helper method to spawn wave. Controls the timing of spawning individual enemies within a group
+    /// </summary>
+    /// <param name="cluster" > A data object with timing information </param>
     private void SpawnGroup(EnemyGroup cluster)
     {
 

@@ -12,7 +12,8 @@ namespace WizardsVsWirebacks.GameObjects.Enemies;
 public abstract class Enemy
 {
     protected const int MOVEMENT_BUFFER = 15;
-    protected Sprite _sprite;
+    protected AnimatedSprite _currentSprite;
+    protected List<AnimatedSprite> _sprites;
     protected int _movementSpeed;
     protected Vector2[] _waypoints;
     protected int _currentWayPoint = 0;
@@ -24,9 +25,9 @@ public abstract class Enemy
     protected int Health { get; set; }
     
 
-    public Enemy(Sprite sprite, Vector2[] waypoints, Vector2 position)
+    public Enemy(AnimatedSprite currentSprite, Vector2[] waypoints, Vector2 position)
     {
-        _sprite = sprite;
+        _currentSprite = currentSprite;
         _waypoints = waypoints; // Apparently this is by reference instead of copy. Arrays are on the heap i guess
         _currentWayPoint = 0;
         _currentPosition = position;
@@ -44,9 +45,37 @@ public abstract class Enemy
     {
         
     }
-    public virtual void Update()
-    {
 
+    private void UpdateSprite(GameTime gameTime)
+    {
+        if (Math.Abs(Dir.Y) > Math.Abs(Dir.X))
+        {
+            if (Dir.Y < 0)
+            {
+                _currentSprite = _sprites[0];
+            }
+            else
+            {
+                _currentSprite = _sprites[1];
+            }
+        }
+        else
+        {
+            if (Dir.X < 0)
+            {
+                _currentSprite = _sprites[2];
+            }
+            else
+            {
+                _currentSprite = _sprites[3];
+            }
+        }
+
+    }
+    public virtual void Update(GameTime gameTime)
+    {
+        
+        //_sprite.Update(gameTime);
         _currentPosition += ((Dir * Core.DT * _movementSpeed));
         
          if (Vector2.DistanceSquared(_currentPosition, _nextPosition) < 5)
@@ -60,9 +89,9 @@ public abstract class Enemy
         }
     }
 
-    public virtual void Draw()
+    public virtual void Draw(GameTime gameTime)
     {
-        _sprite.Draw(Core.SpriteBatch, _currentPosition);
+        _currentSprite.Draw(Core.SpriteBatch, _currentPosition);
     }
     
 }

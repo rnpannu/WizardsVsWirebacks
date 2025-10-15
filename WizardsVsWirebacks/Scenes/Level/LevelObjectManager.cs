@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
+using WizardsVsWirebacks.GameObjects;
 using WizardsVsWirebacks.GameObjects.Enemies;
 
 namespace WizardsVsWirebacks.Scenes;
@@ -13,17 +15,21 @@ public class LevelObjectManager
 {
     private Wave _wave;
     private LevelConfig _config;
+    
     private Enemy _clanka;
     private TextureAtlas _objectAtlas;
-    private Sprite _clankaSprite;
+    private AnimatedSprite _clankaSprite;
+    private Sprite _chainsawSprite;
 
     private List<Enemy> _activeEnemies;
+    private List<Tower> _activeTowers;
     
     private Vector2[] _waypoints;
     private Vector2 _startPos;
     public LevelObjectManager()
     {
         _activeEnemies = new List<Enemy>();
+        _activeTowers = new List<Tower>();
         _wave = new Wave();
     }
     private void InitializeConfig()
@@ -67,7 +73,8 @@ public class LevelObjectManager
     public void LoadContent()
     {
         _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
-        _clankaSprite = _objectAtlas.CreateSprite("clanka-1");
+        _clankaSprite = _objectAtlas.CreateAnimatedSprite("clanka-walk");
+        _chainsawSprite = _objectAtlas.CreateSprite("chainsawmancer-1");
         _clankaSprite.Origin = new Vector2(_clankaSprite.Width * 0.25f, _clankaSprite.Height * 0.25f); // Centers it in a 16px tile!
         _wave.LoadContent();
     }
@@ -82,33 +89,49 @@ public class LevelObjectManager
         };
         _activeEnemies.Add(enemy);
     }
+    
+    public void CreateTower(int towerType, Vector2 position)
+    {
+        var type = (BuildingType) towerType; // Placeholder
+        Tower tower = type switch
+        { // Cube building - BuildingType
+            BuildingType.Chainsawmancer => new Chainsawmancer(_chainsawSprite, position),
+            _ => throw new ArgumentException($"Unknown enemy type: {type}")
+        };
+        _activeTowers.Add(tower);
+    }
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
         _wave.Update();
         foreach (Enemy clanka in _activeEnemies)
         {
-            clanka.Update();
+            clanka.Update(gameTime);
         }
-        /*if (_clanka != null)
+
+        
+        foreach (Tower wizard in _activeTowers)
         {
-            _clanka.Update();
+            wizard.Update(gameTime);
         }
-        else
-        {
-            CreateEnemy(0);
-        }*/
-
-
+        
     }
+    
 
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
         _wave.Draw();
         foreach (Enemy clanka in _activeEnemies)
         {
-            clanka.Draw();
+            clanka.Draw(gameTime);
         }
+
+        _clankaSprite.Update(gameTime); // Otherwise gets updated by every enemy
+        foreach (Tower wizard in _activeTowers)
+        {
+            wizard.Draw(gameTime);
+        }
+
 
     }
 

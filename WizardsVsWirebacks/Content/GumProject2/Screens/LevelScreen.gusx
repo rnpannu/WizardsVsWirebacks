@@ -3,6 +3,18 @@
   <Name>LevelScreen</Name>
   <State>
     <Name>Default</Name>
+    <Variable>
+      <Type>float</Type>
+      <Name>BuildingPaneInstance.Height</Name>
+      <Value xsi:type="xsd:float">90</Value>
+      <SetsValue>true</SetsValue>
+    </Variable>
+    <Variable>
+      <Type>float</Type>
+      <Name>BuildingPaneInstance.Width</Name>
+      <Value xsi:type="xsd:float">12</Value>
+      <SetsValue>true</SetsValue>
+    </Variable>
   </State>
   <Instance>
     <Name>BuildingPaneInstance</Name>

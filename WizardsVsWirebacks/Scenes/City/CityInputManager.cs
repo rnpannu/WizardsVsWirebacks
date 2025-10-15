@@ -143,15 +143,9 @@ public class CityInputManager
     /// </summary>
     public void Update()
     {
-
-        
         UpdateCamera();
         CalculateTranslation();
         UpdateMouse();
-
-        //var datastructure = null;
-        //PrintDebugHelper(datastructure);
-
     }
 
     private void UpdateMouse()
@@ -179,20 +173,5 @@ public class CityInputManager
     {
         Core.SpriteBatch.Draw(_focusPoint, _cameraPosition, null, Color.White, 0.0f, _origin, 1.0f, SpriteEffects.None, default);
     }
-
-
-    private void PrintDebugHelper(object dataStructure)
-    {
-        if (_pdCounter > _printDelay)
-        {
-            // * Create debug interface, massive switch for controlling console output?
-            // * the non vim mfs could just use a debugger but we have to consider their kind
-            Console.Out.WriteLine(dataStructure.ToString());
-            _pdCounter %= _printDelay;
-        }
-        else
-        {
-            _pdCounter += Core.DT * 1000f;
-        }
-    }
+    
 }

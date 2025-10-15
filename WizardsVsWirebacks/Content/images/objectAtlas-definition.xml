@@ -5,8 +5,21 @@
 		<Region name="buildingIcon-1" x="0" y="0" width="32" height="32" />
 		<Region name="chainsawmancer-1" x="0" y="32" width = "64" height ="80"/>
 		<Region name="lawyer-1" x="64" y = "32" width="32" height = "64" />
-		<Region name="clanka-1" x="112" y = "0" width="32" height = "32" />
+		<Region name="clanka_walking-1" x="112" y = "144" width="32" height = "32" />
+		<Region name="clanka_walking-2" x="144" y = "144" width="32" height = "32" />
+		<Region name="clanka_walking-3" x="176" y = "144" width="32" height = "32" />
+		<Region name="clanka_walking-4" x="208" y = "144" width="32" height = "32" />
+		<Region name="clanka_walking-5" x="240" y = "144" width="32" height = "32" />
+		<Region name="clanka_walking-6" x="272" y = "144" width="32" height = "32" />
  	</Regions>
 	<Animations>
+		<Animation name = "clanka-walk-down" delay = "150">
+			<Frame region="clanka_walking-1" />
+			<Frame region="clanka_walking-2" />
+			<Frame region="clanka_walking-3" />
+			<Frame region="clanka_walking-4" />
+			<Frame region="clanka_walking-5" />
+			<Frame region="clanka_walking-6" />
+		</Animation>
 	</Animations>
 </TextureAtlas>

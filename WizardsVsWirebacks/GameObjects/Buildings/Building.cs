@@ -9,14 +9,11 @@ namespace WizardsVsWirebacks.GameObjects;
 
 public abstract class Building
 {
-    public BuildingType Type { get; protected set; }
     public int Cost { get; set; }
     public Vector2 Footprint { get; set; }// Number of tiles a building takes up
     public Rectangle Position { get; set; }
     public Sprite Sprite { get; set; }
-
     
-
 
     protected Building(Sprite sprite, Rectangle position)
     {
@@ -24,27 +21,27 @@ public abstract class Building
         Position = position;
         Initialize();
     }
-    public void Initialize()
-    {
-
-    }
-
-    public void LoadContent()
-    {
-
-    }
-    
-    public void HandleInput()
-    {
-        
-    }
-    
-    public void Update()
+    public virtual void Initialize()
     {
         
     }
 
-    public void Draw()
+    public virtual void LoadContent()
+    {
+
+    }
+    
+    public virtual void HandleInput()
+    {
+        
+    }
+    
+    public virtual void Update()
+    {
+        
+    }
+
+    public virtual void Draw()
     {
         if (Sprite != null)
         {

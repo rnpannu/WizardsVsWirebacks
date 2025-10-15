@@ -49,6 +49,7 @@ public class CityScene : Scene
     {
         GumService.Default.Root.Children.Clear();
         _ui = new CityScreen();
+        _ui.BuildingIconPushed += HandleBuildingSelected;
         _ui.AddToRoot();
     }
     public override void Initialize()
@@ -57,7 +58,7 @@ public class CityScene : Scene
         CityConfig.TileSize = 16;
         CityConfig.WorldScale = 0.5f;
         Core.ExitOnEscape = false;
-        _ui.BuildingIconPushed += HandleBuildingSelected;
+        
         _input = new CityInputManager();
         _state = new CityState(_input);
         _objManager = new CityObjectManager(_input, _state);

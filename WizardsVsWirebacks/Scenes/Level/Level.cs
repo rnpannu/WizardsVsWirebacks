@@ -13,7 +13,7 @@ namespace WizardsVsWirebacks.Scenes;
 public class Level
 {
     private LevelObjectManager _obj;
-
+    public int SelectedTower { get; set; } = -1;
     public Level()
     {
         _obj = new LevelObjectManager();
@@ -36,12 +36,21 @@ public class Level
     }
 
 
-    public void Update()
+    public void Update(GameTime gameTime)
     {
-        _obj.Update();
+        if (SelectedTower >= 0 && LevelInputManager.Drop())
+        {
+            // TODO: Buildings !  - Confluence?
+            Vector2 location = LevelInputManager.GetMouseCoords();
+            _obj.CreateTower(SelectedTower, location);
+            SelectedTower = -1;
+            //BuildingIconReleased = true;
+            
+        }
+        _obj.Update(gameTime);
     }
-    public void Draw()
+    public void Draw(GameTime gameTime)
     {
-        _obj.Draw();
+        _obj.Draw(gameTime);
     }
 }

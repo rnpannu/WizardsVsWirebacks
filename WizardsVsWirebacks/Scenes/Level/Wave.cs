@@ -66,21 +66,9 @@ public class Wave
 
     private void SpawnWave()
     {
-        /*
-         *     public int StartTime { get; set; }
-                public int EnemyType { get; set; }
-                public int SpawnCount { get; set; }
-                public double SpawnDelay { get; set; }
-                
-                If start time >= time between last spawn
-                    SpawnGroup
-                    freeze above until spawning is finished
-         */
-        
         
         EnemyGroup cluster = _enemies[_currentGroupIndex];
-        //DebugLogger.Log(ToString());
-        if (!_spawning)
+        if (!_spawning && (_currentGroupIndex < _enemies.Count))
         {
             if (_waveTimeElapsed >= cluster.StartTime)
             {
@@ -100,7 +88,6 @@ public class Wave
             SpawnGroup(cluster);
             _waveTimeElapsed = 0;
         }
-        //DebugLogger.WriteLogs();
 
     }
     private void SpawnGroup(EnemyGroup cluster)
@@ -140,12 +127,7 @@ public class Wave
     {
         
     }
-
-    public override string ToString()
-    {
-        return
-            $"{nameof(_waveTimeElapsed)}: {_waveTimeElapsed}, {nameof(_currentGroupIndex)}: {_currentGroupIndex}, {nameof(_groupSpawnDelay)}: {_groupSpawnDelay}, {nameof(_groupTimeElapsed)}: {_groupTimeElapsed}, {nameof(_currentSpawnIndex)}: {_currentSpawnIndex}, {nameof(_groupSpawnInterval)}: {_groupSpawnInterval}, {nameof(_spawning)}: {_spawning}";
-    }
+    
 }
 
 public class SpawnEnemyEventArgs : EventArgs

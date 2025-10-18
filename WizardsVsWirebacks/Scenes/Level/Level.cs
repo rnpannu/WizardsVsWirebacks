@@ -45,7 +45,6 @@ public class Level
             _obj.CreateTower(SelectedTower, location);
             SelectedTower = -1;
             //BuildingIconReleased = true;
-            
         }
         _obj.Update(gameTime);
     }

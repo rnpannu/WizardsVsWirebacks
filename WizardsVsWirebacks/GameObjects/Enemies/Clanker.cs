@@ -8,7 +8,7 @@ namespace WizardsVsWirebacks.GameObjects.Enemies;
 
 public class Clanker : Enemy
 {
-    public Clanker(AnimatedSprite currentSprite, Vector2[] waypoints, Vector2 position) : base(currentSprite, waypoints, position)
+    public Clanker(TextureAtlas atlas, Vector2[] waypoints, Vector2 position) : base(atlas, waypoints, position)
     {
         _movementSpeed = 100;
         // ! Refactor. Every enemy probably does not need its own copy of waypoints 
@@ -16,12 +16,18 @@ public class Clanker : Enemy
 
     }
 
-    private void LoadContent(TextureAtlas objectAtlas)
+    public override void Initialize(TextureAtlas atlas)
     {
-        _sprites.Add(objectAtlas.CreateAnimatedSprite("clanka-walk-up"));
-        _sprites.Add(objectAtlas.CreateAnimatedSprite("clanka-walk-down"));
-        _sprites.Add(objectAtlas.CreateAnimatedSprite("clanka-walk-left"));
-        _sprites.Add(objectAtlas.CreateAnimatedSprite("clanka-walk-right"));
+        base.Initialize(atlas);
+    }
+
+    public override void LoadContent(TextureAtlas objectAtlas)
+    {
+        _animations.Add(objectAtlas.GetAnimation("clanka-walk-up"));
+        _animations.Add(objectAtlas.GetAnimation("clanka-walk-down"));
+        _animations.Add(objectAtlas.GetAnimation("clanka-walk-right"));
+        _sprite = objectAtlas.CreateAnimatedSprite("clanka-walk-down");
+        base.LoadContent(objectAtlas);
     }
 
     public override void Update(GameTime gameTime)

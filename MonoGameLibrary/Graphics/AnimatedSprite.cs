@@ -12,7 +12,7 @@ public class AnimatedSprite : Sprite
     private int _currentFrame;
     private TimeSpan _elapsed;
     private Animation _animation;
-    
+
     public Animation Animation
     {
         get => _animation;

@@ -1,8 +1,5 @@
 ﻿using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Scenes;
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameGum;
@@ -19,17 +16,7 @@ public class LevelScene : Scene
 
 	private Level _level;
     private LevelScreen _ui;
-    private enum GameState
-    {
-        Playing,
-        FastForward,
-        WavePause,
-        Paused
-    }
-    private GameState _gameState;
-    
-    private Texture2D _background;
-    private Vector2 _position = Vector2.Zero;
+    private LevelAssets _assets;
     
     private int _currency;
 
@@ -45,13 +32,14 @@ public class LevelScene : Scene
     public override void Initialize()
     {
         InitializeUi();
+        _assets = new LevelAssets();
         _level = new Level();
         base.Initialize();
     }
 
     public override void LoadContent()
     {
-        _background = Content.Load<Texture2D>("Tilemaps/City/simplified/Level_1/_bg");
+        _assets.LoadContent();
     }
     
     public void HandleTowerSelected(object sender, TowerSelectedEventArgs e)
@@ -75,7 +63,7 @@ public class LevelScene : Scene
         Core.GraphicsDevice.Viewport = Core.Viewport; // * Work in progress, not even sure if this does anything (it doesn't)
         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: LevelInputManager.GetTransform());
 
-        Core.SpriteBatch.Draw(_background, _position, Color.White);
+        Core.SpriteBatch.Draw(_assets.RawTextures["background"], Vector2.Zero, Color.White);
         _level.Draw(gameTime);
         
         Core.SpriteBatch.End(); 

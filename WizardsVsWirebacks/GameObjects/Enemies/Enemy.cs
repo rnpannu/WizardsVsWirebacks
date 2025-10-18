@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGameGum.ExtensionMethods;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
@@ -12,74 +13,84 @@ namespace WizardsVsWirebacks.GameObjects.Enemies;
 public abstract class Enemy
 {
     protected const int MOVEMENT_BUFFER = 15;
-    protected AnimatedSprite _currentSprite;
-    protected List<AnimatedSprite> _sprites;
+    protected AnimatedSprite _sprite;
+    protected List<Animation> _animations;
     protected int _movementSpeed;
     protected Vector2[] _waypoints;
     protected int _currentWayPoint = 0;
     protected Vector2 _currentPosition;
     protected Vector2 _nextPosition;
     protected Vector2 Dir { get; set; }
-    
-
+    protected bool _switchDir = false;
     protected int Health { get; set; }
     
 
-    public Enemy(AnimatedSprite currentSprite, Vector2[] waypoints, Vector2 position)
+    public Enemy(TextureAtlas atlas, Vector2[] waypoints, Vector2 position)
     {
-        _currentSprite = currentSprite;
         _waypoints = waypoints; // Apparently this is by reference instead of copy. Arrays are on the heap i guess
         _currentWayPoint = 0;
         _currentPosition = position;
         _nextPosition = waypoints[_currentWayPoint];
         Dir = Vector2.Normalize(_nextPosition - _currentPosition);
-        Initialize();
-        
+
+        _animations = new List<Animation>();
+        Initialize(atlas);
     }
 
-    public virtual void Initialize()
+    public virtual void Initialize(TextureAtlas atlas)
     {
-        
+        LoadContent(atlas);
     }
-    public virtual void LoadContent()
+    public virtual void LoadContent(TextureAtlas atlas)
     {
-        
+        _sprite.Origin = new Vector2(_sprite.Width * 0.25f, _sprite.Height * 0.25f); // Centers it in a 16px tile!
     }
 
     private void UpdateSprite(GameTime gameTime)
     {
-        if (Math.Abs(Dir.Y) > Math.Abs(Dir.X))
+        if (_switchDir)
         {
-            if (Dir.Y < 0)
+            _sprite.Effects = SpriteEffects.None;
+            if (Math.Abs(Dir.Y) > (Math.Abs(Dir.X) * 1.5)) // Prefer horizontal animations unless incline is near perpendicular
             {
-                _currentSprite = _sprites[0];
+                if (Dir.Y < 0)
+                {
+                    _sprite.Animation = _animations[0];
+                }
+                else
+                {
+                    _sprite.Animation = _animations[1];
+                    
+                }
             }
             else
             {
-                _currentSprite = _sprites[1];
+                if (Dir.X < 0)
+                {
+                    _sprite.Animation = _animations[2];
+                    
+                    // Currently, clanker has no unique left/right walks, so we invert. May need to change this behaviour for other assets
+                    _sprite.Effects = SpriteEffects.FlipHorizontally;
+                }
+                
+                else
+                {
+                    _sprite.Animation = _animations[2];
+                }
             }
-        }
-        else
-        {
-            if (Dir.X < 0)
-            {
-                _currentSprite = _sprites[2];
-            }
-            else
-            {
-                _currentSprite = _sprites[3];
-            }
+
+            _switchDir = false;
         }
 
+        _sprite.Update(gameTime);
     }
     public virtual void Update(GameTime gameTime)
     {
-        
-        //_sprite.Update(gameTime);
         _currentPosition += ((Dir * Core.DT * _movementSpeed));
-        
-         if (Vector2.DistanceSquared(_currentPosition, _nextPosition) < 5)
-        {
+         if (Vector2.DistanceSquared(_currentPosition, _nextPosition) < 2)
+         {
+             
+             _switchDir = true;
             _nextPosition = _waypoints[_currentWayPoint + 1];
             Dir = Vector2.Normalize(_nextPosition - _waypoints[_currentWayPoint]);
             if (_currentWayPoint < _waypoints.Length)
@@ -87,11 +98,12 @@ public abstract class Enemy
                 _currentWayPoint++;
             }
         }
+        UpdateSprite(gameTime);
     }
 
     public virtual void Draw(GameTime gameTime)
     {
-        _currentSprite.Draw(Core.SpriteBatch, _currentPosition);
+        _sprite.Draw(Core.SpriteBatch, _currentPosition);
     }
     
 }

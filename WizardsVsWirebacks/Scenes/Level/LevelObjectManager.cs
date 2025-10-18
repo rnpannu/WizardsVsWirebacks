@@ -17,6 +17,8 @@ public class LevelObjectManager
     private LevelConfig _config;
     
     private Enemy _clanka;
+    private Dictionary<EnemyType, bool> _spriteUpdated = new(); // establish convention
+    
     private TextureAtlas _objectAtlas;
     private AnimatedSprite _clankaSprite;
     private Sprite _chainsawSprite;
@@ -28,6 +30,7 @@ public class LevelObjectManager
     private Vector2 _startPos;
     public LevelObjectManager()
     {
+        _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
         _activeEnemies = new List<Enemy>();
         _activeTowers = new List<Tower>();
         _wave = new Wave();
@@ -72,21 +75,26 @@ public class LevelObjectManager
 
     public void LoadContent()
     {
-        _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
-        _clankaSprite = _objectAtlas.CreateAnimatedSprite("clanka-walk");
-        _chainsawSprite = _objectAtlas.CreateSprite("chainsawmancer-1");
-        _clankaSprite.Origin = new Vector2(_clankaSprite.Width * 0.25f, _clankaSprite.Height * 0.25f); // Centers it in a 16px tile!
         _wave.LoadContent();
     }
     
     private void WaveOnSpawnEnemy(object sender, SpawnEnemyEventArgs e)
     {
         var type = (EnemyType) e.Enemy;
+        
         Enemy enemy = type switch
         { // Cube building - BuildingType
-            EnemyType.Clanker => new Clanker(_clankaSprite, _waypoints, _startPos),
+            EnemyType.Clanker => new Clanker(_objectAtlas, _waypoints, _startPos),
             _ => throw new ArgumentException($"Unknown enemy type: {type}")
         };
+        /*foreach (var sprite in enemy.Sprites)
+        {
+            if(!_spriteUpdated.ContainsKey(type))
+            {
+                _spriteUpdated.Add(sprite., false); 
+                // ! HERE, WAIT
+            }
+        }*/
         _activeEnemies.Add(enemy);
     }
     
@@ -117,7 +125,6 @@ public class LevelObjectManager
         
     }
     
-
     public void Draw(GameTime gameTime)
     {
         _wave.Draw();
@@ -126,7 +133,8 @@ public class LevelObjectManager
             clanka.Draw(gameTime);
         }
 
-        _clankaSprite.Update(gameTime); // Otherwise gets updated by every enemy
+        //_clankaSprite.Update(gameTime); // Otherwise gets updated by every enemy
+        
         foreach (Tower wizard in _activeTowers)
         {
             wizard.Draw(gameTime);

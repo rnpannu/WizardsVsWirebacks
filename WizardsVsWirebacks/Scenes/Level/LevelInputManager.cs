@@ -14,7 +14,7 @@ public static class LevelInputManager
     {
         // TODO: Figure out scaling, panel UI (not have it over world but rather its own thing)
         // Also figure out fidelity 320x180 or 640x320
-        return Matrix.CreateScale(2.0f) 
+        return Matrix.CreateScale(1.25f) 
                //* Core.Scale
                ;
     }

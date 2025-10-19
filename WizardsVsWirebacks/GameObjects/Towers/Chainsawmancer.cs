@@ -10,6 +10,7 @@ public class Chainsawmancer : Tower
     {
         Sprite = sprite;
         Position = position;
+        Range = 30; 
         Initialize();
     }
 

@@ -22,7 +22,7 @@ public class Scene : IDisposable
 
     }
 
-    ~Scene() => Dispose(false);
+
 
     public virtual void Initialize()
     {

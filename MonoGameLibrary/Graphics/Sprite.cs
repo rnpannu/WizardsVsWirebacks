@@ -44,7 +44,6 @@ public class Sprite
     }
     public void Draw(SpriteBatch spriteBatch, Rectangle destRect)
     {
-        
         Region.Draw(spriteBatch, destRect, Color);
     }
 

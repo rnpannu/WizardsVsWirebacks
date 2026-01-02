@@ -100,7 +100,8 @@ public class Wave
         {
             SpawnEnemy?.Invoke(this, new SpawnEnemyEventArgs(0));
             _currentSpawnIndex++;
-            if (_currentSpawnIndex >= cluster.SpawnCount)
+            //if (_currentSpawnIndex >= cluster.SpawnCount) 
+            if (_currentSpawnIndex >= 1)
             {
                 _groupSpawnInterval = 0;
                 _groupTimeElapsed = 0;

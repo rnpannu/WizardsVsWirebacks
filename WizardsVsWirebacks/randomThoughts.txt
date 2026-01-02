@@ -1,3 +1,7 @@
+
+
+
+
     Create a another class variable: Matrix  _screenScaleMatrixInverse;      Set  _screenScaleMatrixInverse = Matrix.Invert(_screenScaleMatrix);
      in UpdateScreenScaleMatrix() after the matrix is updated.  The mouse position Vector2 is _mousePosition = Vector2.Transform(new Vector2(_ms.X,_ms.Y),_screenScaleMatrixInverse);
       Where _ms is the current MouseState. You may need to Add the centering adjustments from the viewport(may depend on the platform).    

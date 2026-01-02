@@ -1,3 +1,17 @@
+/ ---------------10-22 -----------
+   
+    Tower heirarchy.
+    Most towers have a range and shoot projectiles at an (one at a time) enemy. Their projectiles may have various properties
+        - Some towers have a range and do damage to everything in their range - tack shooter, sub reactor
+        - Some towers have a range but are support towers to other towers in their range
+        - Some towers have infinite range or no concept of range (sniper, ace, helicopter, mortar)
+            - sniper actually has a clos
+        
+        How to encapsulate behaviours while maintaining flexibility. Currently Tower has a range and is intended to shoot projectiles.
+        Chainsawmancer just inherits from that and defines the sprite and the range. Should I have the base class Tower just be a complete
+        placeholder dud blueprint? Make it an interface instead of an abstract class with no range defined? Then have different inheritence layers for like
+        ProjecTileTower, AOE tower, etc...
+
 / -------------- ------------
 DateTime.Now is not as precise as System.Diagnostics.StopWatch
 

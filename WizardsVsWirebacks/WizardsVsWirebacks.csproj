@@ -45,7 +45,6 @@
 	</ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Tilemaps\" />
-    <Folder Include="UI\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -87,14 +87,7 @@ public class LevelObjectManager
             EnemyType.Clanker => new Clanker(_objectAtlas, _waypoints, _startPos),
             _ => throw new ArgumentException($"Unknown enemy type: {type}")
         };
-        /*foreach (var sprite in enemy.Sprites)
-        {
-            if(!_spriteUpdated.ContainsKey(type))
-            {
-                _spriteUpdated.Add(sprite., false); 
-                // ! HERE, WAIT
-            }
-        }*/
+
         _activeEnemies.Add(enemy);
     }
     
@@ -103,7 +96,7 @@ public class LevelObjectManager
         var type = (BuildingType) towerType; // Placeholder
         Tower tower = type switch
         { // Cube building - BuildingType
-            BuildingType.Chainsawmancer => new Chainsawmancer(_chainsawSprite, position),
+            BuildingType.Chainsawmancer => new Chainsawmancer(_objectAtlas, position),
             _ => throw new ArgumentException($"Unknown enemy type: {type}")
         };
         _activeTowers.Add(tower);
@@ -116,11 +109,30 @@ public class LevelObjectManager
         {
             clanka.Update(gameTime);
         }
-
         
+        // Maybe projectiles should be a struct to be stack allocated and more performant
         foreach (Tower wizard in _activeTowers)
         {
-            wizard.Update(gameTime);
+            wizard.Update(gameTime, _activeEnemies);
+            
+            // Dead code, leaving for reference
+            // O(n^2), will break loop once targetting is found? - BAD, replace with better system
+            /*foreach (Enemy clanka in _activeEnemies)
+            {
+                // Scuffed asf, move to tower-specific update? - needs enemy information
+                if (wizard.GetType() == typeof(ProjectileTower))
+                {
+                    var projectileTower = (ProjectileTower)wizard;
+                    if (projectileTower.GetRange().Intersects(clanka.GetBounds()))
+                    {
+                        projectileTower.Target(clanka.GetBounds());
+                        break;
+                        
+                    }
+                }
+
+            }*/
+            
         }
         
     }
@@ -132,8 +144,6 @@ public class LevelObjectManager
         {
             clanka.Draw(gameTime);
         }
-
-        //_clankaSprite.Update(gameTime); // Otherwise gets updated by every enemy
         
         foreach (Tower wizard in _activeTowers)
         {

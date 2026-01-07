@@ -15,7 +15,8 @@ public class ProjectileFactory
     public Projectile CreateMagicBall(Vector2 position, Vector2 direction)
     {
         Sprite sprite = _atlas.CreateSprite("sword-1");
-        
-        return new MagicBall(sprite, position, direction);
+
+        return null;
+        //new MagicBall(sprite, position, direction);
     }
 }

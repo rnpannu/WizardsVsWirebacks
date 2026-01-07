@@ -16,10 +16,13 @@ public abstract class Projectile : IDisposable
     protected TimeSpan _timeAlive;
     protected TimeSpan _lifespan;
 
+    public event EventHandler OnTimeout;
+    public Tower _sourceTower;
     public bool IsDisposed { get; private set;  }
 
-    public Projectile(Sprite sprite, Vector2 startPosition, Vector2 direction)
+    public Projectile(Tower sourceTower, Sprite sprite, Vector2 startPosition, Vector2 direction)
     {
+        _sourceTower = sourceTower;
         Sprite = sprite;
         _position = startPosition;
         _dir = direction;
@@ -32,7 +35,7 @@ public abstract class Projectile : IDisposable
     }
     public virtual void UnloadContent()
     {
-        //Core.Content.UnloadAsset(assetName); 
+        
     }
     public virtual void Update(GameTime gameTime)
     {
@@ -44,6 +47,7 @@ public abstract class Projectile : IDisposable
         _timeAlive += TimeSpan.FromMilliseconds(Core.DT * 1000);
         if (_timeAlive >= _lifespan) // Replace with OnTimeout event
         {
+            OnTimeout?.Invoke(this, EventArgs.Empty);
             Dispose();
         } 
     }
@@ -68,8 +72,9 @@ public abstract class Projectile : IDisposable
         if (disposing)
         {
             UnloadContent();
-            //Core.Content.Dispose();
         }
+
+        IsDisposed = true;
     }
     // Getbounds is used a lot throughout our code - encapsulate?
     public Circle GetBounds()

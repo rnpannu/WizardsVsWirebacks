@@ -6,11 +6,11 @@ namespace WizardsVsWirebacks.GameObjects.Projectiles;
 
 public class MagicBall : Projectile
 {
-    public MagicBall(Sprite sprite, Vector2 startPosition, Vector2 startDirection) : base(sprite, startPosition, startDirection)
+    public MagicBall(Tower sourceTower, Sprite sprite, Vector2 startPosition, Vector2 startDirection) : base(sourceTower, sprite, startPosition, startDirection)
     {
         Sprite = sprite;
-        _movementSpeed = 50; //px per second? who knows! 
-        _lifespan = TimeSpan.FromMilliseconds(5000);
+        _movementSpeed = 100; //px per second? who knows! 
+        _lifespan = TimeSpan.FromMilliseconds(2000);
     }
     
 } 

@@ -8,6 +8,7 @@ using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using WizardsVsWirebacks.GameObjects;
 using WizardsVsWirebacks.GameObjects.Enemies;
+using WizardsVsWirebacks.GameObjects.Projectiles;
 
 namespace WizardsVsWirebacks.Scenes;
 
@@ -25,6 +26,7 @@ public class LevelObjectManager
 
     private List<Enemy> _activeEnemies;
     private List<Tower> _activeTowers;
+    private List<Projectile> _activeProjectiles;
     
     private Vector2[] _waypoints;
     private Vector2 _startPos;
@@ -32,6 +34,7 @@ public class LevelObjectManager
     {
         _objectAtlas = TextureAtlas.FromFile(Core.Content, "images/objectAtlas-definition.xml");
         _activeEnemies = new List<Enemy>();
+        _activeProjectiles = new List<Projectile>();
         _activeTowers = new List<Tower>();
         _wave = new Wave();
     }
@@ -70,6 +73,7 @@ public class LevelObjectManager
         InitializeConfig();
         _wave.Initialize();
         _wave.SpawnEnemy += WaveOnSpawnEnemy;
+        
         LoadContent();
     }
 
@@ -96,12 +100,36 @@ public class LevelObjectManager
         var type = (BuildingType) towerType; // Placeholder
         Tower tower = type switch
         { // Cube building - BuildingType
-            BuildingType.Chainsawmancer => new Chainsawmancer(_objectAtlas, position),
+            BuildingType.Chainsawmancer => new Chainsawmancer(this, _objectAtlas, position),
             _ => throw new ArgumentException($"Unknown enemy type: {type}")
         };
+
+        // Scuffed
+        if (tower is Chainsawmancer chainsawmancer)
+        {
+            chainsawmancer.OnShoot += CreateProjectile;
+        }
         _activeTowers.Add(tower);
     }
+    
+    public void CreateProjectile(Tower sourceTower, Sprite sprite, Vector2 startPosition, Vector2 startDirection)
+    {
+        //var type = (BuildingType) towerType; 
+        Projectile proj = sourceTower switch // switch for enum of projectile?
+        { // Cube building - BuildingType
+            Chainsawmancer => new MagicBall(sourceTower, sprite, startPosition, startDirection),
+            _ => throw new ArgumentException($"Unknown projectile type: {sourceTower}")
+        };
+        _activeProjectiles.Add(proj);
+        proj.OnTimeout += DeleteProjectile;
+        
+    }
 
+    private void DeleteProjectile(object sender, EventArgs e)
+    {
+        _activeProjectiles.Remove((Projectile)sender);
+    }
+    
     public void Update(GameTime gameTime)
     {
         _wave.Update();
@@ -109,30 +137,21 @@ public class LevelObjectManager
         {
             clanka.Update(gameTime);
         }
-        
-        // Maybe projectiles should be a struct to be stack allocated and more performant
+        foreach (Projectile proj in _activeProjectiles.ToList())
+        {
+            proj.Update(gameTime);
+        }
+        // Maybe projectiles should be a struct to be stack allocated and more performant (struct)
         foreach (Tower wizard in _activeTowers)
         {
             wizard.Update(gameTime, _activeEnemies);
-            
-            // Dead code, leaving for reference
-            // O(n^2), will break loop once targetting is found? - BAD, replace with better system
-            /*foreach (Enemy clanka in _activeEnemies)
-            {
-                // Scuffed asf, move to tower-specific update? - needs enemy information
-                if (wizard.GetType() == typeof(ProjectileTower))
-                {
-                    var projectileTower = (ProjectileTower)wizard;
-                    if (projectileTower.GetRange().Intersects(clanka.GetBounds()))
-                    {
-                        projectileTower.Target(clanka.GetBounds());
-                        break;
-                        
-                    }
-                }
 
-            }*/
-            
+            if (wizard.GetType() == typeof(Chainsawmancer))
+            {
+                var tower = (Chainsawmancer)wizard;
+
+            }
+
         }
         
     }
@@ -149,8 +168,10 @@ public class LevelObjectManager
         {
             wizard.Draw(gameTime);
         }
-
-
+        foreach (Projectile proj in _activeProjectiles)
+        {
+            proj.Draw();
+        }
     }
 
 }

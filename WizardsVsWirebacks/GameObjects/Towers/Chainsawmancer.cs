@@ -6,6 +6,7 @@ using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using WizardsVsWirebacks.GameObjects.Enemies;
 using WizardsVsWirebacks.GameObjects.Projectiles;
+using WizardsVsWirebacks.Scenes;
 
 namespace WizardsVsWirebacks.GameObjects;
 
@@ -23,16 +24,14 @@ public class Chainsawmancer : Tower
     protected bool _shooting;
 
     private Sprite _projectileSprite;
-    private List<Projectile> _activeProjectiles;
-    
-    public Action OnTarget;
-    public Action OnShoot;
-    public Chainsawmancer(TextureAtlas atlas, Vector2 position) : base(atlas, position)
+    public List<Projectile> ActiveProjectiles { get; private set; }
+    public event Action<Tower, Sprite, Vector2, Vector2> OnShoot; // event keyword enforces that this is the only object that can invoke or null this Action/delegate
+    public Chainsawmancer(LevelObjectManager manager, TextureAtlas atlas, Vector2 position) : base(atlas, position)
     {
-        _activeProjectiles = new List<Projectile>();
+        ActiveProjectiles = new List<Projectile>();
         Sprite = atlas.CreateSprite("chainsawmancer-1");
         _projectileSprite = atlas.CreateSprite("magicball-1");
-        //Sprite.Scale = new Vector2(2.0f, 2.0f);
+        // Sprite.Scale = new Vector2(2.0f, 2.0f);
         Sprite.CenterOrigin();
         _projectileSprite.CenterOrigin();
         Range = 100;
@@ -70,7 +69,10 @@ public class Chainsawmancer : Tower
         // Might be better to use a state machine?
         // If not shooting and targeting -> shoot (shooting = true) else if projectile despawned -> shooting = false
         
-        foreach (var projectile in _activeProjectiles)
+        // ToList creates a copy, so that any timeouts/removals from the original list don't cause a collection modified exception
+        // more efficient would be doing it in reverse order so objects are only deleted from the end but who cares
+        // TODO: Someone do that
+        foreach (var projectile in ActiveProjectiles.ToList()) 
         {
             projectile.Update(gameTime);
         }
@@ -103,21 +105,29 @@ public class Chainsawmancer : Tower
         _currentTarget.Y = target.Y;
         float adj = _currentTarget.X - Position.X;
         float opp = _currentTarget.Y - Position.Y;
-
-        // snap
+        
+        // TODO: Implement a smoother angle snap for the tower
         _startingAngle = Sprite.Rotation;
         _destinationAngle =  (float) Math.Atan2(opp, adj) + MathHelper.PiOver2;
-        
         Sprite.Rotation = (float) Math.Atan2(opp, adj) + MathHelper.PiOver2; //Sprite is facing up not left
-
+        
+        // Spawn projectile.
         Vector2 projectileDirection = Vector2.Normalize(new Vector2(adj, opp));
-        Vector2 projectilePosition = Position + (projectileDirection * 30);
-        Projectile firedProjectile = new MagicBall(_projectileSprite, projectilePosition, projectileDirection);
-        _activeProjectiles.Add(firedProjectile);
+        Vector2 projectilePosition = Position + (projectileDirection * 15);
+        OnShoot?.Invoke(this ,_projectileSprite, projectilePosition, projectileDirection);
+        //Projectile firedProjectile = new MagicBall(this, _projectileSprite, projectilePosition, projectileDirection);
+        //ActiveProjectiles.Add(firedProjectile);
+        
+        // Important
+        /*firedProjectile.OnTimeout += (sender, e) =>
+        {
+            ActiveProjectiles.Remove((Projectile)sender);
+            _shooting = false;
+        };*/
     }
     public virtual void Shoot(Vector2 target)
     {
-        
+        // potentially move shooting logic into here
     }
 
     public override void Draw(GameTime gameTime)
@@ -127,7 +137,7 @@ public class Chainsawmancer : Tower
             Sprite.Draw(Core.SpriteBatch, Position);
         }
 
-        foreach (var projectile in _activeProjectiles)
+        foreach (var projectile in ActiveProjectiles)
         {
             projectile.Draw();
         }

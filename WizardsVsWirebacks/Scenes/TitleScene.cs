@@ -18,19 +18,22 @@ namespace WizardsVsWirebacks.Scenes;
 
 public class TitleScene : Scene
 {
-    private Texture2D _backgroundPattern;
+    //Following Parameters are used to add the scrolling background.
+    private Texture2D _backgroundPattern; // source pattern
+    private Rectangle _backgroundDestination; // entire screen.
+    private float _scrollSpeed = 50.0f; // speed of scroll
+    private Vector2 _backgroundOffset; // instantanious value for x/y offset.
 
-    private Vector2 _backgroundOffset; // scrolling effect
 
-    private Rectangle _backgroundDestination;
-
-    private float _scrollSpeed = 50.0f;
-
+    // Following parameters are unused, as this screen is very simple.
     private TextureAtlas _atlas;
-
     private SoundEffect _uiSoundEffect;
-
     private TitleScreen _UI;
+
+
+    /// <summary>
+    /// sets up escape command, initializes values for offset, calls InitializeUI, calls base.Initialize (where LoadContent is found)
+    /// </summary>
     public override void Initialize()
     {
         Core.ExitOnEscape = true;
@@ -40,6 +43,10 @@ public class TitleScene : Scene
         base.Initialize();
     }
 
+    /// <summary>
+    /// Establishes the interface with GUM.
+    /// !! Note: Uncertain how the screen items are functioning here. Ask Raj why this is included.
+    /// </summary>
     private void InitializeUI()
     {
         GumService.Default.Root.Children.Clear();
@@ -47,11 +54,20 @@ public class TitleScene : Scene
         screen.AddToRoot();
     }
 
+    /// <summary>
+    /// Loads scrolling background for title screen.
+    /// Note: LoadContent is invoked in the "base.initialize" call in TitleScene.Initialize().
+    /// </summary>
     public override void LoadContent()
     {
         //_atlas = TextureAtlas.FromFile(Core.Content, "images/atlas-definition.xml");
         _backgroundPattern = Content.Load<Texture2D>("images/background-pattern");
     }
+
+    /// <summary>
+    /// Three major functions: Move to next scene if enter pressed, Increment the background offset, Link to the code in our corresponding GUM files.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Enter))
@@ -70,6 +86,11 @@ public class TitleScene : Scene
         GumService.Default.Update(gameTime);
     }
 
+    /// <summary>
+    /// Establishes the use of pointwrap to sample the background texture (https://docs.monogame.net/articles/tutorials/building_2d_games/18_texture_sampling/index.html)
+    /// Otherwise, it draws the Scrolling background and links to the corresponding draw function in our GUM files.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Draw(GameTime gameTime)
     {
         Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));

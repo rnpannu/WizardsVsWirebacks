@@ -6,15 +6,21 @@ using WizardsVsWirebacks.Scenes;
 // TODO: Create autotiling + source tile conversion scheme / engine
 namespace WizardsVsWirebacks
 {
-    // This is Game1 renamed, entry point of the application
+
+    /// <summary>
+    /// This is Game1 renamed, entry point of the application.
+    /// Inherits from Core.
+    /// </summary>
     public class GameManager() : Core("Wizards vs Wirebacks", 1600, 900, false)
     {
+
         private static GumService GumUi => GumService.Default;
 
         public static GraphicalUiElement Root;
         
-        // Redundant?/Original definition of virtual height
-        // Load and link gum project
+        /// <summary>
+        /// Load and link gum project
+        /// </summary>
         private void InitializeGum()
         {
             // var gumproject
@@ -22,7 +28,6 @@ namespace WizardsVsWirebacks
                 this,
                 "GumProject2/GumProject.gumx");
             
-            base.Initialize();
         }
 
         /// <summary>
@@ -36,6 +41,10 @@ namespace WizardsVsWirebacks
             ChangeScene(new TitleScene());
         }
         
+        /// <summary>
+        /// No content needs to be loaded in the Game Manager.
+        /// !! Redundant?
+        /// </summary>
         protected override void LoadContent()
         {
 

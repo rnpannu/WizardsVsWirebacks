@@ -14,6 +14,10 @@ namespace WizardsVsWirebacks.Screens
 {
     partial class TitleScreen
     {
+        /// <summary>
+        /// Adds methods to interface with Gum UI Objects.
+        /// Note Two different ways to change sreens found here.
+        /// </summary>
         partial void CustomInitialize()
         {
             TitleButtonStandardInstance.Click += (_, _) =>

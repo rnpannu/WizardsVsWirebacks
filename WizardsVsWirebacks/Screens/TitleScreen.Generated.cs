@@ -46,6 +46,12 @@ partial class TitleScreen : MonoGameGum.Forms.Controls.FrameworkElement
     public StackPanel StackPanelInstance { get; protected set; }
     public TextRuntime TextInstance { get; protected set; }
 
+    public string TextInstanceText
+    {
+        get => TextInstance.Text;
+        set => TextInstance.Text = value;
+    }
+
     public TitleScreen(InteractiveGue visual) : base(visual)
     {
     }

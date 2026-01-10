@@ -71,6 +71,7 @@ partial class DemoScreenGum : MonoGameGum.Forms.Controls.FrameworkElement
     public DialogBox DialogBoxInstance { get; protected set; }
     public WindowStandard WindowStandardInstance { get; protected set; }
     public Label LabelInstance1 { get; protected set; }
+    public ContainerRuntime Blah { get; protected set; }
 
     public DemoScreenGum(InteractiveGue visual) : base(visual)
     {
@@ -117,6 +118,7 @@ partial class DemoScreenGum : MonoGameGum.Forms.Controls.FrameworkElement
         DialogBoxInstance = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<DialogBox>(this.Visual,"DialogBoxInstance");
         WindowStandardInstance = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<WindowStandard>(this.Visual,"WindowStandardInstance");
         LabelInstance1 = MonoGameGum.Forms.GraphicalUiElementFormsExtensions.TryGetFrameworkElementByName<Label>(this.Visual,"LabelInstance1");
+        Blah = this.Visual?.GetGraphicalUiElementByName("Blah") as ContainerRuntime;
         CustomInitialize();
     }
     //Not assigning variables because Object Instantiation Type is set to By Name rather than Fully In Code

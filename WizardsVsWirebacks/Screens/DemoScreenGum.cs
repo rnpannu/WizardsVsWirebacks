@@ -6,6 +6,7 @@ using Gum.Wireframe;
 using RenderingLibrary.Graphics;
 
 using System.Linq;
+using MonoGameGum.GueDeriving;
 
 namespace WizardsVsWirebacks.Screens
 {
@@ -13,7 +14,7 @@ namespace WizardsVsWirebacks.Screens
     {
         partial void CustomInitialize()
         {
-        
+            DialogBoxInstance.TextInstanceText = "plug";
         }
     }
 }

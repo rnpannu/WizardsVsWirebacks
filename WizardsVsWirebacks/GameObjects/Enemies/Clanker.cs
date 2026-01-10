@@ -10,7 +10,7 @@ public class Clanker : Enemy
 {
     public Clanker(TextureAtlas atlas, Vector2[] waypoints, Vector2 position) : base(atlas, waypoints, position)
     {
-        _movementSpeed = 100;
+        _movementSpeed = 60;
     }
 
     public override void Initialize(TextureAtlas atlas)
@@ -44,8 +44,8 @@ public class Clanker : Enemy
     public override Circle GetBounds()
     {
         Circle bounds = new Circle(
-            (int)(_currentPosition.X + (_sprite.Width * 0.5f)),
-            (int)(_currentPosition.Y + (_sprite.Height * 0.5f)),
+            (int)(Position.X + (_sprite.Width * 0.5f)),
+            (int)(Position.Y + (_sprite.Height * 0.5f)),
             (int)(_sprite.Width * 0.25f) // 0.25f currently for skeleton with whitespace?
         );
         return bounds;

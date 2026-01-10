@@ -37,6 +37,12 @@ partial class DialogBox : MonoGameGum.Forms.Controls.FrameworkElement
     public TextRuntime TextInstance { get; protected set; }
     public Icon ContinueIndicatorInstance { get; protected set; }
 
+    public string TextInstanceText
+    {
+        get => TextInstance.Text;
+        set => TextInstance.Text = value;
+    }
+
     public DialogBox(InteractiveGue visual) : base(visual)
     {
     }

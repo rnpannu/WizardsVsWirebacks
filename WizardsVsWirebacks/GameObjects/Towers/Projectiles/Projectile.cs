@@ -8,24 +8,30 @@ namespace WizardsVsWirebacks.GameObjects.Projectiles;
 
 public abstract class Projectile : IDisposable
 {
-    public Sprite Sprite;
-    protected float _movementSpeed;
-    protected Vector2 _position;
-    protected Vector2 _dir;
-    
-    protected TimeSpan _timeAlive;
-    protected TimeSpan _lifespan;
 
+
+
+
+    public Tower SourceTower { get; protected set; }
+    public Sprite Sprite { get; protected set; }
+    public Vector2 Position { get; protected set; }
+    public float MovementSpeed { get; protected set; }
+    public Vector2 Dir { get; protected set; }
+    
+    public TimeSpan LifeSpan { get; protected set; }
+
+    protected TimeSpan _timeAlive;
+    
     public event EventHandler OnTimeout;
-    public Tower _sourceTower;
+    public event EventHandler OnCollision;
     public bool IsDisposed { get; private set;  }
 
     public Projectile(Tower sourceTower, Sprite sprite, Vector2 startPosition, Vector2 direction)
     {
-        _sourceTower = sourceTower;
+        SourceTower = sourceTower;
         Sprite = sprite;
-        _position = startPosition;
-        _dir = direction;
+        Position = startPosition;
+        Dir = direction;
     }
     ~Projectile() => Dispose(false);
 
@@ -39,13 +45,13 @@ public abstract class Projectile : IDisposable
     }
     public virtual void Update(GameTime gameTime)
     {
-        if(_dir != Vector2.Zero)
+        if(Dir != Vector2.Zero)
         {
-            _dir.Normalize();
+            Dir.Normalize();
         }
-        _position += _dir * _movementSpeed * Core.DT;
+        Position += Dir * MovementSpeed * Core.DT;
         _timeAlive += TimeSpan.FromMilliseconds(Core.DT * 1000);
-        if (_timeAlive >= _lifespan) // Replace with OnTimeout event
+        if (_timeAlive >= LifeSpan) 
         {
             OnTimeout?.Invoke(this, EventArgs.Empty);
             Dispose();
@@ -54,7 +60,7 @@ public abstract class Projectile : IDisposable
 
     public virtual void Draw()
     {
-        Sprite.Draw(Core.SpriteBatch, _position);
+        Sprite.Draw(Core.SpriteBatch, Position);
     }
     public void Dispose()
     {
@@ -79,7 +85,13 @@ public abstract class Projectile : IDisposable
     // Getbounds is used a lot throughout our code - encapsulate?
     public Circle GetBounds()
     {
-        return Circle.Empty;
+        Circle bounds = new Circle(
+            (int)(Position.X + (Sprite.Width * 0.5f)),
+            (int)(Position.Y + (Sprite.Height * 0.5f)),
+            (int)(Sprite.Width * 0.25f) // 0.25f currently for skeleton with whitespace?
+        );
+
+        return bounds;
     }
 
 

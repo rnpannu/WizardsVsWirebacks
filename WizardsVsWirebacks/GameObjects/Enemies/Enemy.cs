@@ -18,20 +18,23 @@ public abstract class Enemy
     protected int _movementSpeed;
     protected Vector2[] _waypoints;
     protected int _currentWayPoint = 0;
-    protected Vector2 _currentPosition;
+    public Vector2 Position { get; protected set; }
     protected Vector2 _nextPosition;
-    protected Vector2 Dir { get; set; }
-    protected bool _switchDir = false;
+
+    public Vector2 Dir { get; protected set; }
     protected int Health { get; set; }
+    protected bool _switchDir = false;
+
+    
     
 
     public Enemy(TextureAtlas atlas, Vector2[] waypoints, Vector2 position)
     {
         _waypoints = waypoints; // Apparently this is by reference instead of copy. Arrays are on the heap i guess
         _currentWayPoint = 0;
-        _currentPosition = position;
+        Position = position;
         _nextPosition = waypoints[_currentWayPoint];
-        Dir = Vector2.Normalize(_nextPosition - _currentPosition);
+        Dir = Vector2.Normalize(_nextPosition - Position);
 
         _animations = new List<Animation>();
         Initialize(atlas);
@@ -45,16 +48,7 @@ public abstract class Enemy
     {
         _sprite.Origin = new Vector2(_sprite.Width * 0.25f, _sprite.Height * 0.25f); // Centers it in a 16px tile!
     }
-    public virtual Circle GetBounds()
-    {
-        Circle bounds = new Circle(
-            (int)(_currentPosition.X + (_sprite.Width * 0.5f)),
-            (int)(_currentPosition.Y + (_sprite.Height * 0.5f)),
-            (int)(_sprite.Width * 0.25f) // 0.25f currently for skeleton with whitespace?
-        );
 
-        return bounds;
-    }
     private void UpdateSprite(GameTime gameTime)
     {
         if (_switchDir)
@@ -96,8 +90,8 @@ public abstract class Enemy
 
     public virtual void Update(GameTime gameTime)
     {
-        _currentPosition += ((Dir * Core.DT * _movementSpeed));
-         if (Vector2.DistanceSquared(_currentPosition, _nextPosition) < 2) // magic number
+        Position += ((Dir * Core.DT * _movementSpeed));
+         if (Vector2.DistanceSquared(Position, _nextPosition) < 2) // magic number
          {
              _switchDir = true;
             _nextPosition = _waypoints[_currentWayPoint + 1];
@@ -121,7 +115,16 @@ public abstract class Enemy
 
     public virtual void Draw(GameTime gameTime)
     {
-        _sprite.Draw(Core.SpriteBatch, _currentPosition);
+        _sprite.Draw(Core.SpriteBatch, Position);
     }
-    
+    public virtual Circle GetBounds()
+    {
+        Circle bounds = new Circle(
+            (int)(Position.X + (_sprite.Width * 0.5f)),
+            (int)(Position.Y + (_sprite.Height * 0.5f)),
+            (int)(_sprite.Width * 0.25f) // 0.25f currently for skeleton with whitespace?
+        );
+
+        return bounds;
+    }
 }

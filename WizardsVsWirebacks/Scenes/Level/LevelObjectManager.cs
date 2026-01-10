@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -97,13 +98,12 @@ public class LevelObjectManager
     
     public void CreateTower(int towerType, Vector2 position)
     {
-        var type = (BuildingType) towerType; // Placeholder
+        var type = (BuildingType) towerType; 
         Tower tower = type switch
-        { // Cube building - BuildingType
+        {
             BuildingType.Chainsawmancer => new Chainsawmancer(this, _objectAtlas, position),
             _ => throw new ArgumentException($"Unknown enemy type: {type}")
         };
-
         // Scuffed
         if (tower is Chainsawmancer chainsawmancer)
         {
@@ -114,9 +114,8 @@ public class LevelObjectManager
     
     public void CreateProjectile(Tower sourceTower, Sprite sprite, Vector2 startPosition, Vector2 startDirection)
     {
-        //var type = (BuildingType) towerType; 
-        Projectile proj = sourceTower switch // switch for enum of projectile?
-        { // Cube building - BuildingType
+        Projectile proj = sourceTower switch // Define projectile enums?
+        { 
             Chainsawmancer => new MagicBall(sourceTower, sprite, startPosition, startDirection),
             _ => throw new ArgumentException($"Unknown projectile type: {sourceTower}")
         };
@@ -124,34 +123,73 @@ public class LevelObjectManager
         proj.OnTimeout += DeleteProjectile;
         
     }
-
+    /// <summary>
+    /// Unload projectile content
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void DeleteProjectile(object sender, EventArgs e)
     {
-        _activeProjectiles.Remove((Projectile)sender);
+        // This is what was done before but now it's just going to be marked so that it can be disposed without modifying an active list
+        // Later add unload content logic
+        //_activeProjectiles.Remove((Projectile)sender);
+        Projectile proj = (Projectile)sender;
+        proj.UnloadContent();
     }
     
     public void Update(GameTime gameTime)
     {
         _wave.Update();
+        
+        // Update core entities
         foreach (Enemy clanka in _activeEnemies)
         {
             clanka.Update(gameTime);
         }
-        foreach (Projectile proj in _activeProjectiles.ToList())
-        {
-            proj.Update(gameTime);
-        }
-        // Maybe projectiles should be a struct to be stack allocated and more performant (struct)
+        
         foreach (Tower wizard in _activeTowers)
         {
             wizard.Update(gameTime, _activeEnemies);
-
-            if (wizard.GetType() == typeof(Chainsawmancer))
+        }
+        // Iterate in reverse order so modifying the list doesn't throw an exception
+        for (int i = _activeProjectiles.Count - 1; i >= 0; i--)
+        {
+            _activeProjectiles[i].Update(gameTime);
+            // Projectile timeout
+            if (_activeProjectiles[i].IsDisposed)
             {
-                var tower = (Chainsawmancer)wizard;
+                _activeProjectiles.RemoveAt(i);
+            }
+        }
+        
+        // Projectile - Enemy collision checks
+        foreach (Projectile proj in _activeProjectiles)
+        {
+            Tower source = proj.SourceTower;
+            if (source is Chainsawmancer chainsawmancer )
+            {
+                float zone = chainsawmancer.Range * 1.5f;
+                float left = source.Position.X - zone;
+                float right = source.Position.X + zone;
+                float top = source.Position.Y - zone;
+                float bottom = source.Position.Y + zone;
+
+                foreach (Enemy clanka in _activeEnemies)
+                {
+                    if (clanka.Position.X > left && clanka.Position.X < right)
+                    {
+                        if (clanka.Position.Y > top && clanka.Position.Y < bottom)
+                        {
+                            if (proj.GetBounds().Intersects(clanka.GetBounds()))
+                            {
+                                //proj.
+                                    Console.Out.WriteLine("Collision");
+                            }
+                        }
+                    }
+                }
 
             }
-
         }
         
     }

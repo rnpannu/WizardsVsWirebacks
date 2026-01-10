@@ -73,7 +73,7 @@
     <Variable>
       <Type>bool</Type>
       <Name>ExposeChildrenEvents</Name>
-      <Value xsi:type="xsd:boolean">false</Value>
+      <Value xsi:type="xsd:boolean">true</Value>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>
@@ -141,6 +141,7 @@
       <Type>string</Type>
       <Name>TextInstance.Text</Name>
       <Value xsi:type="xsd:string">This is a dialog box. This text will be displayed one character at a time. Typically a dialog box is added to a Screen such as the GameScreen, but it defaults to being invisible.</Value>
+      <ExposedAsName>TextInstanceText</ExposedAsName>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>

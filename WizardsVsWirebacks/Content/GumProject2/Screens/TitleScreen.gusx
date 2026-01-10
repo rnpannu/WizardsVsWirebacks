@@ -225,6 +225,7 @@
       <Name>TextInstance.Text</Name>
       <Value xsi:type="xsd:string">Wizards Vs
 Wirebacks</Value>
+      <ExposedAsName>TextInstanceText</ExposedAsName>
       <SetsValue>true</SetsValue>
     </Variable>
     <Variable>

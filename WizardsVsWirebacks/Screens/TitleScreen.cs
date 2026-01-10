@@ -20,6 +20,8 @@ namespace WizardsVsWirebacks.Screens
         /// </summary>
         partial void CustomInitialize()
         {
+            TextInstanceText = "wallahi";
+            
             TitleButtonStandardInstance.Click += (_, _) =>
             {
 

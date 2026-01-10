@@ -68,34 +68,25 @@ public class Chainsawmancer : Tower
             .FirstOrDefault();
         // Might be better to use a state machine?
         // If not shooting and targeting -> shoot (shooting = true) else if projectile despawned -> shooting = false
-        
-        // ToList creates a copy, so that any timeouts/removals from the original list don't cause a collection modified exception
-        // more efficient would be doing it in reverse order so objects are only deleted from the end but who cares
-        // TODO: Someone do that
-        foreach (var projectile in ActiveProjectiles.ToList()) 
+
+        if (_shootClock >= _shootDelay) // current condition, replace with projectile despawn (!_activeProjectile)
         {
-            projectile.Update(gameTime);
-        }
-        /*if (!_shooting)
-        {*/
-            if (_shootClock >= _shootDelay) // current condition, replace with projectile despawn (!_activeProjectile)
+            if (targetEnemy != null)
             {
-                if (targetEnemy != null)
-                {
-                    Target(targetEnemy.GetBounds());
-                    // TODO: implement a fast linear interpolation of the angle snap to the target to make it not look so jagged
-                    // Shoot(Vector2.Normalize(new Vector2(adj, opp)));
-                    // float.Lerp(startAngle, targetAngle, shootClock / (shootCooldown / 5));
-                    _shooting = true;
-                    _shootClock %= _shootDelay;
-                }
-                
-            }
-            else
-            {
-                _shootClock = Math.Min(_shootClock + Core.DT * 1000, _shootDelay); 
+                Target(targetEnemy.GetBounds());
+                // TODO: implement a fast linear interpolation of the angle snap to the target to make it not look so jagged
+                // Shoot(Vector2.Normalize(new Vector2(adj, opp)));
+                // float.Lerp(startAngle, targetAngle, shootClock / (shootCooldown / 5));
+                _shooting = true;
+                _shootClock %= _shootDelay;
             }
             
+        }
+        else
+        {
+            _shootClock = Math.Min(_shootClock + Core.DT * 1000, _shootDelay); 
+        }
+        
         base.Update(gameTime, enemies);
     }
     
@@ -113,17 +104,10 @@ public class Chainsawmancer : Tower
         
         // Spawn projectile.
         Vector2 projectileDirection = Vector2.Normalize(new Vector2(adj, opp));
-        Vector2 projectilePosition = Position + (projectileDirection * 15);
-        OnShoot?.Invoke(this ,_projectileSprite, projectilePosition, projectileDirection);
-        //Projectile firedProjectile = new MagicBall(this, _projectileSprite, projectilePosition, projectileDirection);
-        //ActiveProjectiles.Add(firedProjectile);
         
-        // Important
-        /*firedProjectile.OnTimeout += (sender, e) =>
-        {
-            ActiveProjectiles.Remove((Projectile)sender);
-            _shooting = false;
-        };*/
+        Vector2 projectilePosition = (Position + Sprite.Origin) + (projectileDirection * 15);
+        
+        OnShoot?.Invoke(this ,_projectileSprite, projectilePosition, projectileDirection);
     }
     public virtual void Shoot(Vector2 target)
     {
@@ -136,12 +120,6 @@ public class Chainsawmancer : Tower
         {
             Sprite.Draw(Core.SpriteBatch, Position);
         }
-
-        foreach (var projectile in ActiveProjectiles)
-        {
-            projectile.Draw();
-        }
-
     }
     
 }

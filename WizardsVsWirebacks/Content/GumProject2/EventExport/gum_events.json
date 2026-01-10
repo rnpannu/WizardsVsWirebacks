@@ -1,5 +1,13 @@
 {
   "UserEvents": {
-    "12e91d9e1b76dc9ad431a02b197f8a2322f8cdd948307762034fd9e851c757d9": []
+    "12e91d9e1b76dc9ad431a02b197f8a2322f8cdd948307762034fd9e851c757d9": [
+      {
+        "NewName": "DemoScreenGum.Blah",
+        "OldName": null,
+        "ElementType": "Screens",
+        "EventType": 5,
+        "TimestampUtc": "2026-01-10T22:16:26.4220217Z"
+      }
+    ]
   }
 }

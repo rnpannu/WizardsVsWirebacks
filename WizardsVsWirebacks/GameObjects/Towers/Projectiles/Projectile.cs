@@ -3,15 +3,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
+using WizardsVsWirebacks.GameObjects.Enemies;
 
 namespace WizardsVsWirebacks.GameObjects.Projectiles;
 
 public abstract class Projectile : IDisposable
 {
-
-
-
-
+    
     public Tower SourceTower { get; protected set; }
     public Sprite Sprite { get; protected set; }
     public Vector2 Position { get; protected set; }
@@ -22,8 +20,10 @@ public abstract class Projectile : IDisposable
 
     protected TimeSpan _timeAlive;
     
-    public event EventHandler OnTimeout;
-    public event EventHandler OnCollision;
+    // the event keyword means that only that object can invoke its events, a regular delegate can be invoked by anyone with a reference (i think)
+    // events can also only be subscribed or unsubscribed += -= to outside its containing class
+    public event Action<Projectile> OnTimeout;
+    public Action<Projectile, Enemy> OnCollision;
     public bool IsDisposed { get; private set;  }
 
     public Projectile(Tower sourceTower, Sprite sprite, Vector2 startPosition, Vector2 direction)
@@ -53,8 +53,7 @@ public abstract class Projectile : IDisposable
         _timeAlive += TimeSpan.FromMilliseconds(Core.DT * 1000);
         if (_timeAlive >= LifeSpan) 
         {
-            OnTimeout?.Invoke(this, EventArgs.Empty);
-            Dispose();
+            OnTimeout?.Invoke(this); 
         } 
     }
 
@@ -67,7 +66,7 @@ public abstract class Projectile : IDisposable
         Dispose(true);
         GC.SuppressFinalize(this);
     }
-
+    
     protected virtual void Dispose(bool disposing)
     {
         if (IsDisposed)

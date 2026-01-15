@@ -62,7 +62,7 @@ public class Chainsawmancer : Tower
     /// </param>
     public override void Update(GameTime gameTime, IEnumerable<Enemy> enemies) // IEnumerable covers lists, queues, enumerable data structures
     {
-
+        // LINQ filtering is apparently innefficient, replace with normal for loops and logic
         Enemy targetEnemy = enemies
             .Where(enemy => this.GetRange().Intersects(enemy.GetBounds()))
             .FirstOrDefault();
@@ -92,20 +92,21 @@ public class Chainsawmancer : Tower
     
     public virtual void Target(Circle target)
     {
+        Vector2 centeredPosition = Position + Sprite.Origin;
         _currentTarget.X = target.X;
         _currentTarget.Y = target.Y;
+        
         float adj = _currentTarget.X - Position.X;
         float opp = _currentTarget.Y - Position.Y;
         
-        // TODO: Implement a smoother angle snap for the tower
+        /*// TODO: Implement a smoother angle snap for the tower
         _startingAngle = Sprite.Rotation;
         _destinationAngle =  (float) Math.Atan2(opp, adj) + MathHelper.PiOver2;
-        Sprite.Rotation = (float) Math.Atan2(opp, adj) + MathHelper.PiOver2; //Sprite is facing up not left
+        Sprite.Rotation = (float) Math.Atan2(opp, adj) + MathHelper.PiOver2; //Sprite is facing up not left*/
         
-        // Spawn projectile.
+
         Vector2 projectileDirection = Vector2.Normalize(new Vector2(adj, opp));
-        
-        Vector2 projectilePosition = (Position + Sprite.Origin) + (projectileDirection * 15);
+        Vector2 projectilePosition = Position + (projectileDirection * 15);
         
         OnShoot?.Invoke(this ,_projectileSprite, projectilePosition, projectileDirection);
     }

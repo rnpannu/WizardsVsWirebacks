@@ -112,6 +112,7 @@ public class LevelObjectManager
         _activeTowers.Add(tower);
     }
     
+    
     public void CreateProjectile(Tower sourceTower, Sprite sprite, Vector2 startPosition, Vector2 startDirection)
     {
         Projectile proj = sourceTower switch // Define projectile enums?
@@ -121,20 +122,26 @@ public class LevelObjectManager
         };
         _activeProjectiles.Add(proj);
         proj.OnTimeout += DeleteProjectile;
-        
+        proj.OnCollision += HandleCollision;
+
     }
+
+    private void HandleCollision(Projectile proj, Enemy enemy)
+    {
+        DeleteProjectile(proj);
+    }
+    
     /// <summary>
     /// Unload projectile content
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void DeleteProjectile(object sender, EventArgs e)
+    private void DeleteProjectile(Projectile proj)
     {
         // This is what was done before but now it's just going to be marked so that it can be disposed without modifying an active list
         // Later add unload content logic
         //_activeProjectiles.Remove((Projectile)sender);
-        Projectile proj = (Projectile)sender;
-        proj.UnloadContent();
+        proj.Dispose();
     }
     
     public void Update(GameTime gameTime)
@@ -183,7 +190,8 @@ public class LevelObjectManager
                             if (proj.GetBounds().Intersects(clanka.GetBounds()))
                             {
                                 //proj.
-                                    Console.Out.WriteLine("Collision");
+                                proj.OnCollision?.Invoke(proj, clanka);
+                                Console.Out.WriteLine("Collision");
                             }
                         }
                     }

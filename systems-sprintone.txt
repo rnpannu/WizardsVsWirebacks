@@ -1,0 +1,34 @@
+---- GAME SYSTEMS Sprint One Outline ----
+
+The goal of this sprint is to build out and define the core gameplay systemsand utilities defined in the design document.
+
+These should largely be decoupled from any MonoGame Specific Code.
+
+The main items to be built out this sprint are as follows:
+
+1. RunState Class:
+    The 'RunState' will contain all core information that defines a run. the class should be serializable, meaning we can write the state to a JSON object, then read the JSON object back into the game preserving the state of the game in its entirety.
+
+2. Wizard Class:
+    A simple wizard class which can be built out later. this should be a simple representation of a wizard which can be serialized and stored.
+
+3. Wizard Manager:
+    A class which contains a pool of the players wizards, and allows for operations over those wizards. ie add, remove, select, random removal.
+
+4. City Nodes:
+    A class which containts information pertaining to out city nodes, to be expanded later.
+
+5. City Graph:
+    A serialiable representation of our city graph and nodes.
+
+6. World event interface:
+    A world event interface which takes our runstate as an input and modifies its state as needed in events.
+
+7. Random Service:
+    A random service which takes a seed from our run state and provides a random generator. this should be the only interface with random in the whole game. seeding will allow for deterministic testing.
+
+8. Serializing and Save/Delete service:
+    A service which can serialize runstate into a JSON object, read the JSONobject into the game, and delete said object when needed.
+
+
+

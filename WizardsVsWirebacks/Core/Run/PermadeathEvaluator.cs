@@ -1,0 +1,1 @@
+/// Permadeath Evaluator Class Stub.

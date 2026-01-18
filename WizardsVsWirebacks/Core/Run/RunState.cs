@@ -1,4 +1,4 @@
-// Run State Class Stub
+// Run State
 
 /// Run State is the central state model of the game.
 /// It contains the data needed to save and reproduce the game state,
@@ -6,39 +6,43 @@
 ///
 /// RunState should be a single source of truth for the game.
 ///
+using WizardsVsWirebacks.Wizards
 
-public class RunState
+namespace WizardsVsWirebacks.Run.Core
 {
-    // Run Seed
-    public int RngSeed { get; set; }
-
-    //Progression Information
-    public int CityIndex { get; set; }
-
-    // Resources
-    public int Scrap { get; set; }
-    public int ManaCap { get; set; }
-    
-    // Core Systems
-    public WizardPool WizardPool { get; private set; }
-
-    public CityGraph CityGraph { get; set; }
-    public int CurrentNodeId { get; set; }
-
-    // Debug / UI
-    public List<string> EventLog { get; private set; }
-
-    // Constructor for new runs
-    public RunState(int seed)
+    public class RunState
     {
-        RngSeed = seed;
+        // Run Seed
+        public int RngSeed { get; set; }
 
-        Scrap = 0;
-        ManaCap = 3;
+        //Progression Information
+        public int CityIndex { get; set; }
 
-        CityIndex = 0;
+        // Resources
+        public int Scrap { get; set; }
+        public int ManaCap { get; set; }
+    
+        // Core Systems
+        public WizardPool WizardPool { get; private set; }
+
+        public CityGraph CityGraph { get; set; }
+        public int CurrentNodeId { get; set; }
+
+        // Debug / UI -- Not yet implemented but a run event logger would be useful
+        public List<string> EventLog { get; private set; }
+
+        // Constructor for new runs
+        public RunState(int seed)
+        {
+            RngSeed = seed;
+
+            Scrap = 0;
+            ManaCap = 3;
+
+            CityIndex = 0;
         
-        WizardPool = new WizardPool();
-        EventLog = new List<string>();
+            WizardPool = new WizardPool();
+            EventLog = new List<string>();
+        }
     }
 }

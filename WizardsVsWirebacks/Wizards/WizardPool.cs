@@ -1,3 +1,7 @@
+// Wizard Pool
+// This is out wizard pool class, it is fairly simple, it may need to be extended
+// depending on what features should be implemented but for now it is relatively complete.
+
 using System.Collections.Generic;
 
 namespace WizardsVsWirebacks.Wizards

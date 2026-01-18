@@ -1,11 +1,14 @@
 /// Permadeath Evaluator Class Stub.
 
-public static class PermadeathEvaluator
+namespace WizardsVsWirebacks.Core.Run
 {
-    // TODO: Evaluate RunState for permadeath condition.
-    public static bool IsPermadeath(RunState runState)
+    public static class PermadeathEvaluator
     {
-        // TODO: Implement Check
-        return false;
+        // TODO: Evaluate RunState for permadeath condition.
+        public static bool IsPermadeath(RunState runState)
+        {
+            // TODO: Implement Check
+            return false;
+        }
     }
 }

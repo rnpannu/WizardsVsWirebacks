@@ -1,5 +1,8 @@
 ﻿namespace WizardsVsWirebacks.Scenes.City;
 
+/// <summary>
+/// Effectively acts as a struct. Holds the dimensions of the screen and tile size.
+/// </summary>
 public static class CityConfig
 {
     // ? Does monkey city allow zooming in

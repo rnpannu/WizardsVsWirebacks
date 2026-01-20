@@ -115,5 +115,12 @@ ADVANCED
 
 
 
+/ ----------------- Notes ------------
+    // TODO: todo, have to do
+    // ! Urgent, breaking the system
+    // ? Question
+    // * High priority, important functionality
+    
+
 
 

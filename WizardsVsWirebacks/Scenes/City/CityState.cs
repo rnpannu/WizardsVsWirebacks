@@ -9,13 +9,19 @@ using MonoGameLibrary;
 
 namespace WizardsVsWirebacks.Scenes.City;
 
+/// <summary>
+/// The purpose of class is to highlight each space on a city screen based on if the tile is captured or not. 
+/// Currently disabled as the load method is not linked to the initialization method. 
+/// </summary>
 public class CityState
 {
     private CityInputManager _input;
-    public int Doubloons { get; set; } = 500;
     private int[,] _captureGrid;
     private Dictionary<int, Color> _captureStatusVisual = new Dictionary<int, Color>();
 
+    /* Unused Variables:
+    public int Doubloons { get; set; } = 500;
+    */
 
     public CityState(CityInputManager input)
     {

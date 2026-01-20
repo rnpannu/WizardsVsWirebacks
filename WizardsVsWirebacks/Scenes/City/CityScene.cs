@@ -13,37 +13,44 @@ using WizardsVsWirebacks.Screens;
 
 namespace WizardsVsWirebacks.Scenes.City;
 
+
+/// <summary>
+/// This class is the main game loop for the "City" Level. 
+/// Declares objects of all other City-related classes. 
+/// Interfaces with GUM elements. 
+/// Contains the Update - Draw Loop. 
+/// </summary>
 public class CityScene : Scene
 {   
-    // TODO: todo, have to do
-    // ! Urgent, breaking the system
-    // ? Question
-    // * High priority, important functionality
-    
+
     // Foundational objects / patterns
     private enum GameState
     {
         Playing,
         Paused
     }
-    private CityState _gameState;
-    private CityScreen _ui;
+
+    // Instances of city classes.
     private CityInputManager _input;
     private CityObjectManager _objManager;
     private CityState _state;
+    private CityScreen _ui; // Note: This is an interface with GUM.
     
-    // ? Ongoing, how to best use these?
-    public static TextureAtlas _atlas;
-    //public static Tilemap _tileMap;
-    
+
     // Assets
-    private Sprite _buildingIcon;
     private Texture2D _background;
-    
+
+
+    /* Unused Variables:
+    private CityState _gameState;
+    public static TextureAtlas _atlas;
+    public static Tilemap _tileMap;
+    private Sprite _buildingIcon;
+
     // Debug
     private const float _printDelay = 2000f;
     private float _pdCounter = 0;
-
+    */
 
     private void InitializeUi()
     {

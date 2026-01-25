@@ -39,6 +39,15 @@ public class LevelObjectManager
         _activeTowers = new List<Tower>();
         _wave = new Wave();
     }
+
+    public void Initialize()
+    {
+        InitializeConfig();
+        _wave.Initialize();
+        _wave.SpawnEnemy += WaveOnSpawnEnemy;
+        
+        LoadContent();
+    }
     private void InitializeConfig()
     {
         string dataPath = "";
@@ -69,15 +78,6 @@ public class LevelObjectManager
         }
 
     }
-    public void Initialize()
-    {
-        InitializeConfig();
-        _wave.Initialize();
-        _wave.SpawnEnemy += WaveOnSpawnEnemy;
-        
-        LoadContent();
-    }
-
     public void LoadContent()
     {
         _wave.LoadContent();
@@ -104,10 +104,9 @@ public class LevelObjectManager
             BuildingType.Chainsawmancer => new Chainsawmancer(this, _objectAtlas, position),
             _ => throw new ArgumentException($"Unknown enemy type: {type}")
         };
-        // Scuffed
         if (tower is Chainsawmancer chainsawmancer)
         {
-            chainsawmancer.OnShoot += CreateProjectile;
+            chainsawmancer.Shoot += CreateProjectile;
         }
         _activeTowers.Add(tower);
     }
@@ -123,7 +122,6 @@ public class LevelObjectManager
         _activeProjectiles.Add(proj);
         proj.OnTimeout += DeleteProjectile;
         proj.OnCollision += HandleCollision;
-
     }
 
     private void HandleCollision(Projectile proj, Enemy enemy)
@@ -153,11 +151,28 @@ public class LevelObjectManager
         {
             clanka.Update(gameTime);
         }
-        
+
         foreach (Tower wizard in _activeTowers)
         {
-            wizard.Update(gameTime, _activeEnemies);
+            wizard.Update(gameTime);
+            if (wizard is Chainsawmancer chainsawmancer)
+            {
+                if (!chainsawmancer.OnCooldown)
+                {
+                    // TODO: Improve collision detection algorithm. Improve collision bounds checking
+                    foreach (Enemy clanka in _activeEnemies)
+                    {
+                        if (chainsawmancer.GetRange().Intersects(clanka.GetBounds()))
+                        {
+                            chainsawmancer.OnTarget?.Invoke(clanka.Position);
+                            break;
+                        }
+
+                    }
+                }
+            }
         }
+
         // Iterate in reverse order so modifying the list doesn't throw an exception
         for (int i = _activeProjectiles.Count - 1; i >= 0; i--)
         {
@@ -175,6 +190,8 @@ public class LevelObjectManager
             Tower source = proj.SourceTower;
             if (source is Chainsawmancer chainsawmancer )
             {
+                // Todo: This x-y culling is pretty basic and almost redundant to the collision checks. For optimization, improve the 
+                // collisison detection with strategies such as spacial partiitoning.
                 float zone = chainsawmancer.Range * 1.5f;
                 float left = source.Position.X - zone;
                 float right = source.Position.X + zone;
@@ -209,7 +226,6 @@ public class LevelObjectManager
         {
             clanka.Draw(gameTime);
         }
-        
         foreach (Tower wizard in _activeTowers)
         {
             wizard.Draw(gameTime);

@@ -32,7 +32,7 @@ public abstract class Tower
     }
     
     
-    public virtual void Update(GameTime gameTime, IEnumerable<Enemy> enemies)
+    public virtual void Update(GameTime gameTime)
     {
         
     }

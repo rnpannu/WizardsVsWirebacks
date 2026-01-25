@@ -13,7 +13,8 @@ public class Clanker : Enemy
     public Clanker(TextureAtlas atlas, Vector2[] waypoints, Vector2 position) : base(atlas, waypoints, position)
     {
         _movementSpeed = 60;
-        _healthbar = new Healthbar(new Vector2(position.X, position.Y - _sprite.Origin.Y));
+        Health = 500;
+        _healthbar = new Healthbar(new Vector2(position.X, position.Y - _sprite.Origin.Y), Health);
     }
 
     public override void Initialize(TextureAtlas atlas)

@@ -12,34 +12,113 @@ namespace WizardsVsWirebacks.GameObjects;
 
 public class Chainsawmancer : Tower
 {
-    public int Range { get; protected set; }
-    protected Vector2 _currentTarget;
+    // Core
+    private Sprite _projectileSprite;
     
+    // Targeting
+    protected Vector2 _currentTarget;
+    protected float _shootCooldown;
+    protected float _shootTimer;
+    
+    protected float _snapTime;
     protected float _startingAngle;
     protected float _destinationAngle;
-    protected float _snapTime;
+    public int Range { get; protected set; }
+    public bool OnCooldown { get; protected set; }
     
-    protected float _shootDelay;
-    protected float _shootClock;
-    protected bool _shooting;
-
-    private Sprite _projectileSprite;
-    public List<Projectile> ActiveProjectiles { get; private set; }
-    public event Action<Tower, Sprite, Vector2, Vector2> OnShoot; // event keyword enforces that this is the only object that can invoke or null this Action/delegate
+    public Action<Vector2> OnTarget;
+    public Action<Tower, Sprite, Vector2, Vector2> Shoot; // event keyword enforces that this is the only object that can invoke or null this Action/delegate
     public Chainsawmancer(LevelObjectManager manager, TextureAtlas atlas, Vector2 position) : base(atlas, position)
     {
-        ActiveProjectiles = new List<Projectile>();
+        // ? Analyse if the tower owning its sprite/projectileSprite (and multiple chainsawmancers having different sprite instances) is problematic
         Sprite = atlas.CreateSprite("chainsawmancer-1");
         _projectileSprite = atlas.CreateSprite("magicball-1");
-        // Sprite.Scale = new Vector2(2.0f, 2.0f);
         Sprite.CenterOrigin();
         _projectileSprite.CenterOrigin();
-        Range = 100;
-        _snapTime = 500;
-        _shootDelay = 2000;
+        // Sprite.Scale = new Vector2(2.0f, 2.0f);
         Initialize();
     }
+
+    public void Initialize()
+    {
+        OnTarget += Target;
+        Range = 100;
+        _snapTime = 500;
+        _shootCooldown = 2000;
+    }
+
+    /// Updates the state of the projectile tower by targeting nearby enemies within range,
+    /// managing the shooting timer, and passing necessary updates to the base tower update logic.
+    /// <param name="gameTime">
+    /// The current game time, which provides timing data for the update logic.
+    /// </param>
+    /// <param name="enemies">
+    /// A collection of enemies currently active in the game, which are evaluated for being within range of the tower.
+    /// </param>
+    public override void Update(GameTime gameTime)
+    {
+        if (OnCooldown)
+        {
+            _shootTimer = Math.Min(_shootTimer + Core.DT * 1000, _shootCooldown);
+            if (_shootTimer >= _shootCooldown)
+            {
+                OnCooldown = false;
+            }
+        }
+        
+
+        /*if (_shootTimer >= _shootCooldown)
+        {
+            OnCooldown = false;
+            if (targetEnemy != null)
+            {
+                // TODO: implement a fast linear interpolation of the angle snap to the target to make it not look so jagged
+                // Shoot(Vector2.Normalize(new Vector2(adj, opp)));
+                // float.Lerp(startAngle, targetAngle, shootClock / (shootCooldown / 5));
+                
+                Target(targetEnemy.Position);
+                _shootTimer %= _shootCooldown;
+            }
+
+        }
+        else
+        {
+            OnCooldown = true;
+            _shootTimer = Math.Min(_shootTimer + Core.DT * 1000, _shootCooldown); 
+        }*/
+        
+        base.Update(gameTime);
+    }
     
+    public virtual void Target(Vector2 target)
+    {
+        _currentTarget.X = target.X;
+        _currentTarget.Y = target.Y;
+        
+        float adj = _currentTarget.X - Position.X;
+        float opp = _currentTarget.Y - Position.Y;
+        
+        /*// TODO: Implement a smoother angle snap for the tower
+        _startingAngle = Sprite.Rotation;
+        _destinationAngle =  (float) Math.Atan2(opp, adj) + MathHelper.PiOver2;*/
+        Sprite.Rotation = (float) Math.Atan2(opp, adj) + MathHelper.PiOver2; //Sprite is facing up not left
+        
+        Vector2 projectileDirection = Vector2.Normalize(new Vector2(adj, opp));
+        Vector2 projectilePosition = Position + (projectileDirection * 15);
+        
+        _shootTimer %= _shootCooldown;
+        OnCooldown = true;
+        
+        Shoot?.Invoke(this ,_projectileSprite, projectilePosition, projectileDirection);
+        
+    }
+    public override void Draw(GameTime gameTime)
+    {
+        if (Sprite != null)
+        {
+            Sprite.Draw(Core.SpriteBatch, Position);
+        }
+    }
     public Circle GetRange()
     {
             
@@ -52,75 +131,5 @@ public class Chainsawmancer : Tower
         return bounds;
     }
 
-    /// Updates the state of the projectile tower by targeting nearby enemies within range,
-    /// managing the shooting timer, and passing necessary updates to the base tower update logic.
-    /// <param name="gameTime">
-    /// The current game time, which provides timing data for the update logic.
-    /// </param>
-    /// <param name="enemies">
-    /// A collection of enemies currently active in the game, which are evaluated for being within range of the tower.
-    /// </param>
-    public override void Update(GameTime gameTime, IEnumerable<Enemy> enemies) // IEnumerable covers lists, queues, enumerable data structures
-    {
-        // LINQ filtering is apparently innefficient, replace with normal for loops and logic
-        Enemy targetEnemy = enemies
-            .Where(enemy => this.GetRange().Intersects(enemy.GetBounds()))
-            .FirstOrDefault();
-        // Might be better to use a state machine?
-        // If not shooting and targeting -> shoot (shooting = true) else if projectile despawned -> shooting = false
-
-        if (_shootClock >= _shootDelay) // current condition, replace with projectile despawn (!_activeProjectile)
-        {
-            if (targetEnemy != null)
-            {
-                Target(targetEnemy.GetBounds());
-                // TODO: implement a fast linear interpolation of the angle snap to the target to make it not look so jagged
-                // Shoot(Vector2.Normalize(new Vector2(adj, opp)));
-                // float.Lerp(startAngle, targetAngle, shootClock / (shootCooldown / 5));
-                _shooting = true;
-                _shootClock %= _shootDelay;
-            }
-            
-        }
-        else
-        {
-            _shootClock = Math.Min(_shootClock + Core.DT * 1000, _shootDelay); 
-        }
-        
-        base.Update(gameTime, enemies);
-    }
-    
-    public virtual void Target(Circle target)
-    {
-        Vector2 centeredPosition = Position + Sprite.Origin;
-        _currentTarget.X = target.X;
-        _currentTarget.Y = target.Y;
-        
-        float adj = _currentTarget.X - Position.X;
-        float opp = _currentTarget.Y - Position.Y;
-        
-        /*// TODO: Implement a smoother angle snap for the tower
-        _startingAngle = Sprite.Rotation;
-        _destinationAngle =  (float) Math.Atan2(opp, adj) + MathHelper.PiOver2;
-        Sprite.Rotation = (float) Math.Atan2(opp, adj) + MathHelper.PiOver2; //Sprite is facing up not left*/
-        
-
-        Vector2 projectileDirection = Vector2.Normalize(new Vector2(adj, opp));
-        Vector2 projectilePosition = Position + (projectileDirection * 15);
-        
-        OnShoot?.Invoke(this ,_projectileSprite, projectilePosition, projectileDirection);
-    }
-    public virtual void Shoot(Vector2 target)
-    {
-        // potentially move shooting logic into here
-    }
-
-    public override void Draw(GameTime gameTime)
-    {
-        if (Sprite != null)
-        {
-            Sprite.Draw(Core.SpriteBatch, Position);
-        }
-    }
     
 }

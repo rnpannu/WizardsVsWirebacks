@@ -12,22 +12,31 @@ namespace WizardsVsWirebacks.GameObjects.Enemies;
 
 public abstract class Enemy
 {
-    protected const int MOVEMENT_BUFFER = 15;
+    // protected const int MOVEMENT_BUFFER = 15;
+    protected int Health { get; set; }
+    
+    // Core
     protected AnimatedSprite _sprite;
     protected List<Animation> _animations;
-    protected int _movementSpeed;
+    
+    // Traversal
+    private Vector2 _position;
+    protected Vector2 _nextPosition;
+    
     protected Vector2[] _waypoints;
     protected int _currentWayPoint = 0;
-    public Vector2 Position { get; protected set; }
-    protected Vector2 _nextPosition;
-
-    public Vector2 Dir { get; protected set; }
-    protected int Health { get; set; }
+    
+    protected int _movementSpeed;
     protected bool _switchDir = false;
+    public Vector2 Dir { get; protected set; }
+    
+    public Vector2 Position
+    {
+        get => _position;
+        protected set => _position = value;
+    }
 
     
-    
-
     public Enemy(TextureAtlas atlas, Vector2[] waypoints, Vector2 position)
     {
         _waypoints = waypoints; // Apparently this is by reference instead of copy. Arrays are on the heap i guess
@@ -43,10 +52,11 @@ public abstract class Enemy
     public virtual void Initialize(TextureAtlas atlas)
     {
         LoadContent(atlas);
+        _sprite.Origin = new Vector2(_sprite.Width * 0.25f, _sprite.Height * 0.25f); // Centers it in a 16px tile!
     }
     public virtual void LoadContent(TextureAtlas atlas)
     {
-        _sprite.Origin = new Vector2(_sprite.Width * 0.25f, _sprite.Height * 0.25f); // Centers it in a 16px tile!
+        
     }
 
     private void UpdateSprite(GameTime gameTime)

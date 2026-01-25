@@ -34,8 +34,12 @@ public class Healthbar
         get => _healthPool;
         set
         {
-            _healthPool = Math.Max(0, Math.Min(MaxHealth, _healthPool += value));
+            _healthPool = Math.Max(0, Math.Min(MaxHealth, value));
             HealthChanged?.Invoke(value);
+            if (_healthPool == 0)
+            {
+                //OnDeath?.Invoke();
+            }
         }
     }
     
@@ -46,7 +50,8 @@ public class Healthbar
     }
 
 
-    private float PercentHealth => HealthPool / MaxHealth;
+    // Lowkey wrote myself into a corner here, only have 10 pixels to work with
+    private float PercentHealth => (float) HealthPool / MaxHealth;
 
     public Rectangle BoundingBox
     {
@@ -69,25 +74,23 @@ public class Healthbar
     public Action<int> HealthChanged;
 
 
-    public Healthbar(Vector2 position)
+    public Healthbar(Vector2 position, int maxHealth)
     {
         HealthChanged += OnHealthChanged;
-        MaxHealth = 500;
+        MaxHealth = maxHealth;
         HealthPool = MaxHealth;
         Position = position;
         
         
-        //HealthPool -= 50;
-        
         
         _boundingBox = new Rectangle((int)position.X, (int)position.Y, 10, 2);
-        _greenRectangle = new Rectangle(_boundingBox.X + (int) (_boundingBox.Width * 0.05),
-            _boundingBox.Y + (int) (_boundingBox.Height * 0.05),
-            (int) (_boundingBox.Width * PercentHealth * 0.95),
-            (int) (_boundingBox.Height * 0.95));
+        _greenRectangle = new Rectangle(_boundingBox.X ,
+            _boundingBox.Y,
+            (int) (_boundingBox.Width * PercentHealth ),
+            (int) (_boundingBox.Height));
 
         _redRectangle = new Rectangle(_greenRectangle.X + _greenRectangle.Width, _greenRectangle.Y,
-            (int) (_boundingBox.Width * (1 - PercentHealth) * 0.95), _greenRectangle.Height);
+            (int) (_boundingBox.Width * (1 - PercentHealth)), _greenRectangle.Height);
         // Want every healthbar to be 30 pixels?
         _pxToHealthCoefficent = 30 / MaxHealth;
     }
@@ -96,8 +99,8 @@ public class Healthbar
     {
         _boundingBox.X = (int) rootPosition.X;
         _boundingBox.Y = (int) rootPosition.Y;
-        _greenRectangle.X = _boundingBox.X + (int) (_boundingBox.Width * 0.05);
-        _greenRectangle.Y = _boundingBox.Y + (int) (_boundingBox.Height * 0.05);
+        _greenRectangle.X = _boundingBox.X;
+        _greenRectangle.Y = _boundingBox.Y;
         _redRectangle.X = _greenRectangle.X + _greenRectangle.Width;
         _redRectangle.Y = _greenRectangle.Y;
     }
@@ -108,7 +111,7 @@ public class Healthbar
     private void OnHealthChanged(int health)
     {
         _greenRectangle.Width = (int)((PercentHealth * _boundingBox.Width * 0.95));
-        _redRectangle.Width = (int)((1 - PercentHealth) * _boundingBox.Width * 0.95);
+        _redRectangle.Width = (int)((1 - PercentHealth) * _boundingBox.Width);
     }
 
     public void Draw(GameTime gameTime)
@@ -118,7 +121,7 @@ public class Healthbar
         pixelTexture.SetData(new[] { Color.White });
         Core.SpriteBatch.Draw(pixelTexture, _boundingBox, Color.Black * 0.9f);
         Core.SpriteBatch.Draw(pixelTexture, _greenRectangle, Color.Green * 0.9f);
-        //Core.SpriteBatch.Draw(pixelTexture, _redRectangle, Color.Red * 0.9f);
+        Core.SpriteBatch.Draw(pixelTexture, _redRectangle, Color.Red * 0.9f);
     }
     
 }

@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # Gum project settings
 WizardsVsWirebacks/Content/GumProject2/ProjectCodeSettings.codsj
+WizardsVsWirebacks.sln
+.idea/

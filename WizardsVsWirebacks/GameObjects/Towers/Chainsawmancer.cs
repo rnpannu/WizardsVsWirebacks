@@ -12,6 +12,7 @@ namespace WizardsVsWirebacks.GameObjects;
 
 public class Chainsawmancer : Tower
 {
+
     // Core
     private Sprite _projectileSprite;
     
@@ -65,28 +66,6 @@ public class Chainsawmancer : Tower
                 OnCooldown = false;
             }
         }
-        
-
-        /*if (_shootTimer >= _shootCooldown)
-        {
-            OnCooldown = false;
-            if (targetEnemy != null)
-            {
-                // TODO: implement a fast linear interpolation of the angle snap to the target to make it not look so jagged
-                // Shoot(Vector2.Normalize(new Vector2(adj, opp)));
-                // float.Lerp(startAngle, targetAngle, shootClock / (shootCooldown / 5));
-                
-                Target(targetEnemy.Position);
-                _shootTimer %= _shootCooldown;
-            }
-
-        }
-        else
-        {
-            OnCooldown = true;
-            _shootTimer = Math.Min(_shootTimer + Core.DT * 1000, _shootCooldown); 
-        }*/
-        
         base.Update(gameTime);
     }
     
@@ -110,7 +89,6 @@ public class Chainsawmancer : Tower
         OnCooldown = true;
         
         Shoot?.Invoke(this ,_projectileSprite, projectilePosition, projectileDirection);
-        
     }
     public override void Draw(GameTime gameTime)
     {

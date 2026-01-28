@@ -127,6 +127,7 @@ public class LevelObjectManager
     private void HandleCollision(Projectile proj, Enemy enemy)
     {
         DeleteProjectile(proj);
+        //enemy.Health -= 50;
     }
     
     /// <summary>

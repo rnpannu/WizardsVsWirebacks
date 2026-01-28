@@ -9,79 +9,27 @@ namespace WizardsVsWirebacks.UI;
 public class Healthbar
 {
     private Vector2 _position;
+    // Currently not in use - healthbar doesn't have a sprite
     private Sprite _sprite;
     
-    private int _healthPool;
+    private int _health;
     private int _maxHealth;
-    private float _pxToHealthCoefficent;
+    //private float _pxToHealthCoefficent;
     private Rectangle _boundingBox;
     private Rectangle _greenRectangle;
     private Rectangle _redRectangle;
-    public Vector2 Position
-    {
-        get => _position;
-        set => _position = value;
-    }
-
-    public Sprite Sprite
-    {
-        get => _sprite;
-        private set => _sprite = value;
-    }
-    
-    public int HealthPool
-    {
-        get => _healthPool;
-        set
-        {
-            _healthPool = Math.Max(0, Math.Min(MaxHealth, value));
-            HealthChanged?.Invoke(value);
-            if (_healthPool == 0)
-            {
-                //OnDeath?.Invoke();
-            }
-        }
-    }
-    
-    public int MaxHealth
-    {
-        get => _maxHealth;
-        private set => _maxHealth = value;
-    }
-
-
-    // Lowkey wrote myself into a corner here, only have 10 pixels to work with
-    private float PercentHealth => (float) HealthPool / MaxHealth;
-
-    public Rectangle BoundingBox
-    {
-        get => _boundingBox;
-        set => _boundingBox = value;
-    }
-
-    public Rectangle GreenRectangle
-    {
-        get => _greenRectangle;
-        set => _greenRectangle = value;
-    }
-
-    public Rectangle RedRectangle
-    {
-        get => _redRectangle;
-
-    }
 
     public Action<int> HealthChanged;
-
-
+    public Healthbar()
+    {
+        
+    }
     public Healthbar(Vector2 position, int maxHealth)
     {
         HealthChanged += OnHealthChanged;
-        MaxHealth = maxHealth;
-        HealthPool = MaxHealth;
-        Position = position;
-        
-        
+        _maxHealth = maxHealth;
+        _health = _maxHealth;
+        _position = position;
         
         _boundingBox = new Rectangle((int)position.X, (int)position.Y, 10, 2);
         _greenRectangle = new Rectangle(_boundingBox.X ,
@@ -92,9 +40,10 @@ public class Healthbar
         _redRectangle = new Rectangle(_greenRectangle.X + _greenRectangle.Width, _greenRectangle.Y,
             (int) (_boundingBox.Width * (1 - PercentHealth)), _greenRectangle.Height);
         // Want every healthbar to be 30 pixels?
-        _pxToHealthCoefficent = 30 / MaxHealth;
+        //_pxToHealthCoefficent = 30 / MaxHealth;
     }
-
+    // Lowkey wrote myself into a corner here, only have 10 pixels to work with
+    private float PercentHealth => (float) _health / _maxHealth;
     public void UpdateRectanglePositions(Vector2 rootPosition)
     {
         _boundingBox.X = (int) rootPosition.X;
@@ -110,6 +59,8 @@ public class Healthbar
     }
     private void OnHealthChanged(int health)
     {
+        _health = Math.Max(0, Math.Min(_maxHealth, health));
+        _health = health;
         _greenRectangle.Width = (int)((PercentHealth * _boundingBox.Width * 0.95));
         _redRectangle.Width = (int)((1 - PercentHealth) * _boundingBox.Width);
     }

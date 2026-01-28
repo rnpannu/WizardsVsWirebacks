@@ -9,12 +9,10 @@ namespace WizardsVsWirebacks.GameObjects.Enemies;
 
 public class Clanker : Enemy
 {
-    private Healthbar _healthbar;
     public Clanker(TextureAtlas atlas, Vector2[] waypoints, Vector2 position) : base(atlas, waypoints, position)
     {
         _movementSpeed = 60;
         Health = 500;
-        _healthbar = new Healthbar(new Vector2(position.X, position.Y - _sprite.Origin.Y), Health);
     }
 
     public override void Initialize(TextureAtlas atlas)
@@ -39,9 +37,6 @@ public class Clanker : Enemy
         _animations.Add(objectAtlas.GetAnimation("clanka-walk-right"));
         _sprite = objectAtlas.CreateAnimatedSprite("clanka-walk-down");
         
-        // ? Theoretical psuedocode
-        /// if (objectAtlas.Sprites.Exists("clankaSprite")){
-        ///     _sprite = objectAtlas
         base.LoadContent(objectAtlas);
     }
 
@@ -56,14 +51,12 @@ public class Clanker : Enemy
     }
     public override void Update(GameTime gameTime)
     {
-        _healthbar.Update(gameTime, new Vector2(Position.X + (_sprite.Origin.Y * 0.475f), Position.Y - (_sprite.Origin.Y * 0.6f)));
         base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime)
     {
         base.Draw(gameTime);
-        _healthbar.Draw(gameTime);
     }
 
 

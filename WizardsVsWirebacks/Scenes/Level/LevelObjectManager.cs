@@ -207,7 +207,7 @@ public class LevelObjectManager
                         {
                             if (proj.GetBounds().Intersects(clanka.GetBounds()))
                             {
-                                //proj.
+                                clanka.Health -= proj.Damage;
                                 proj.OnCollision?.Invoke(proj, clanka);
                                 Console.Out.WriteLine("Collision");
                             }

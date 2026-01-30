@@ -42,11 +42,10 @@ public abstract class Enemy
         Position = position;
         _nextPosition = waypoints[_currentWayPoint];
         Dir = Vector2.Normalize(_nextPosition - Position);
-        
+        _healthbar = new Healthbar(new Vector2(Position.X, Position.Y), Health);
         _animations = new List<Animation>();
 
         SwitchDir += OnSwitchDir;
-        Initialize(atlas);
     }
     public Vector2 Position
     {
@@ -80,7 +79,8 @@ public abstract class Enemy
         {
             if (value > 0 && value <= _maxHealth)
             {
-                _health += value;
+                //_health += value;
+                _health = value;
                 _healthbar.HealthChanged?.Invoke(_health);
             }
             else if (value <= 0)
@@ -92,14 +92,14 @@ public abstract class Enemy
 
     public virtual void Initialize(TextureAtlas atlas)
     {
+        Health = _maxHealth;
         LoadContent(atlas);
     }
     public virtual void LoadContent(TextureAtlas atlas)
     {
         _sprite.Origin = new Vector2(_sprite.Width * 0.25f, _sprite.Height * 0.25f); // Centers it in a 16px tile!
-        _healthbar = new Healthbar(new Vector2(Position.X, Position.Y - _sprite.Origin.Y), Health);
+        
     }
-
     private void OnSwitchDir()
     {
         _nextPosition = _waypoints[_currentWayPoint + 1];

@@ -59,6 +59,10 @@ public class Healthbar
     }
     private void OnHealthChanged(int health)
     {
+        if (_maxHealth == 0)
+        {
+            _maxHealth = health;
+        }
         _health = Math.Max(0, Math.Min(_maxHealth, health));
         _health = health;
         _greenRectangle.Width = (int)((PercentHealth * _boundingBox.Width * 0.95));

@@ -1,3 +1,19 @@
+/ -------------- 01 / 28
+
+           - On previous comment -
+We can use interfaces that define behavious, etc.. "IShootingTower" and "compose" our towers according to their behaviours
+by inheriting from those interfaces.
+
+Alternatively we follow "favor composition over inheritance" and compose the towers with different types of "shootingBehaviour"s
+    - Semantics? What extent does this favour composition. I imagine this would be executed as a strategy pattern where
+        * a tower might have a shooting behaviour, depending on the tower they instantiate a different type of shooting behaviour
+        * like a tower subclass might have a circular shooting behavior
+        * or support multiple types of shooting behaviours
+        * maybe this is the way
+     
+               --- To do ---
+Todo: Link collisions and healthbar updates    
+
 / ---------------10-22 -----------
    
     Tower heirarchy.

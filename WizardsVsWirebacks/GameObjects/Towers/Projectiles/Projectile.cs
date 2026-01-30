@@ -9,7 +9,8 @@ namespace WizardsVsWirebacks.GameObjects.Projectiles;
 
 public abstract class Projectile : IDisposable
 {
-    
+    protected TimeSpan _timeAlive;
+    public int Damage { get; set; }
     public Tower SourceTower { get; protected set; }
     public Sprite Sprite { get; protected set; }
     public Vector2 Position { get; protected set; }
@@ -18,7 +19,7 @@ public abstract class Projectile : IDisposable
     
     public TimeSpan LifeSpan { get; protected set; }
 
-    protected TimeSpan _timeAlive;
+
     
     // the event keyword means that only that object can invoke its events, a regular delegate can be invoked by anyone with a reference (i think)
     // events can also only be subscribed or unsubscribed += -= to outside its containing class
